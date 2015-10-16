@@ -36,7 +36,8 @@ geoip-database-extra \
 tor-geoipdb \
 gcc \
 wget \
-libpcre3-dev
+libpcre3-dev \
+python-setuptools
 
 #swig latest for broker python integration
 WORKDIR /tmp
