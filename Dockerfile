@@ -55,7 +55,7 @@ WORKDIR /tmp/rocksdb
 RUN export CFLAGS="$CFLAGS -fPIC" && export CXXFLAGS="$CXXFLAGS -fPIC" && make static_lib
 RUN export CFLAGS="$CFLAGS -fPIC" && export CXXFLAGS="$CXXFLAGS -fPIC" && make install
 
-# ipsumdump 
+# ipsumdump
 WORKDIR /tmp
 RUN git clone --recursive https://github.com/kohler/ipsumdump.git
 WORKDIR /tmp/ipsumdump
@@ -74,8 +74,8 @@ RUN make install
 # bro
 WORKDIR /tmp
 RUN  git clone --recursive git://git.bro.org/bro
-WORKDIR /tmp/bro 
-RUN ./configure --prefix=/nsm/bro --disable-broker
+WORKDIR /tmp/bro
+RUN ./configure --disable-broker
 RUN make
 RUN make install
 
@@ -106,8 +106,12 @@ RUN python setup.py install
 RUN apt-get clean
 RUN rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-ENV PATH /nsm/bro/bin:$PATH
+#set the path
+ENV PATH /usr/local/bro/bin:$PATH
 
+# add custom scripts
+ADD /custom /usr/local/bro/share/bro/custom
+RUN /bin/sh /usr/local/bro/share/bro/custom/update.sh
 
 ENTRYPOINT ["bro"]
 
