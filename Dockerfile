@@ -110,8 +110,8 @@ RUN rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 ENV PATH /usr/local/bro/bin:$PATH
 
 # add custom scripts
-ADD /custom /usr/local/bro/share/bro/custom
-RUN /bin/sh /usr/local/bro/share/bro/custom/update.sh
+ADD custom /usr/local/bro/share/bro/custom
+RUN /bin/sh /usr/local/bro/share/bro/custom/updateintel.sh
 
 ENTRYPOINT ["bro"]
 
