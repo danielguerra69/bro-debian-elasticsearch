@@ -1,0 +1,10 @@
+@load ./logs-to-elasticsearch
+@load base/frameworks/signatures/main
+@load base/frameworks/notice/actions/add-geodata 
+@load policy/misc/app-stats 
+@load ./intel
+@load ./scan
+@load ./tordetect
+@load policy/protocols/ssl/heartbleed
+@load policy/protocols/ssl/extract-certs-pem
+@load policy/protocols/ssl/validate-certs

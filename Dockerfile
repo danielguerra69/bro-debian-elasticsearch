@@ -111,8 +111,8 @@ ENV PATH /usr/local/bro/bin:$PATH
 
 # add custom scripts
 ADD /custom /usr/local/bro/share/bro/custom
-RUN /bin/sh /usr/local/bro/share/bro/custom/update.sh
-
+RUN /bin/sh /usr/local/bro/share/bro/custom/updateintel.sh
+RUN echo "@load custom" >> /usr/local/bro/share/bro/base/init-default.bro
 ENTRYPOINT ["bro"]
 
 CMD ["-h"]
