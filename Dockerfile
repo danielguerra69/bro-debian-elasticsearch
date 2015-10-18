@@ -37,7 +37,8 @@ tor-geoipdb \
 gcc \
 wget \
 libpcre3-dev \
-python-setuptools
+python-setuptools \
+openssh-server
 
 #swig latest for broker python integration
 WORKDIR /tmp
@@ -113,6 +114,14 @@ ENV PATH /usr/local/bro/bin:$PATH
 ADD /custom /usr/local/bro/share/bro/custom
 RUN /bin/sh /usr/local/bro/share/bro/custom/updateintel.sh
 RUN echo "@load custom" >> /usr/local/bro/share/bro/base/init-default.bro
-ENTRYPOINT ["bro"]
 
-CMD ["-h"]
+#prepare path
+RUN echo "export PATH=$PATH:/usr/local/bro/bin" > /root/.profile
+
+#set the expose ports
+EXPOSE 22
+EXPOSE 47761
+EXPOSE 47762
+
+#start sshd
+CMD ["exec","/usr/sbin/sshd","-D"]
