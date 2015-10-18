@@ -38,7 +38,11 @@ gcc \
 wget \
 libpcre3-dev \
 python-setuptools \
-openssh-server
+openssh-server \
+python-snappy \
+libsnappy-dev \
+libsnappy1 \
+devscripts --no-install-recommends
 
 #swig latest for broker python integration
 WORKDIR /tmp
