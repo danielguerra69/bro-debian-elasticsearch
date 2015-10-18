@@ -81,7 +81,7 @@ RUN make install
 WORKDIR /tmp
 RUN  git clone --recursive git://git.bro.org/bro
 WORKDIR /tmp/bro
-RUN ./configure --disable-broker
+RUN ./configure
 RUN make
 RUN make install
 
@@ -108,6 +108,7 @@ RUN tar xvfz Geohash-1.0.tar.gz
 WORKDIR /tmp/Geohash-1.0
 RUN python setup.py build
 RUN python setup.py install
+
 # clean up
 RUN apt-get clean
 RUN rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
