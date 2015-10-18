@@ -49,12 +49,13 @@ RUN ./configure
 RUN make
 RUN make install
 
+#BROKEN rocksdb is messing up the project
 #rocksdb gives
-WORKDIR /tmp
-RUN git clone --recursive https://github.com/facebook/rocksdb.git
-WORKDIR /tmp/rocksdb
-RUN export CFLAGS="$CFLAGS -fPIC" && export CXXFLAGS="$CXXFLAGS -fPIC" && make static_lib
-RUN export CFLAGS="$CFLAGS -fPIC" && export CXXFLAGS="$CXXFLAGS -fPIC" && make install
+#WORKDIR /tmp
+#RUN git clone --recursive https://github.com/facebook/rocksdb.git
+#WORKDIR /tmp/rocksdb
+#RUN export CFLAGS="$CFLAGS -fPIC" && export CXXFLAGS="$CXXFLAGS -fPIC" && make static_lib
+#RUN export CFLAGS="$CFLAGS -fPIC" && export CXXFLAGS="$CXXFLAGS -fPIC" && make install
 
 # ipsumdump
 WORKDIR /tmp
@@ -117,6 +118,9 @@ RUN echo "@load custom" >> /usr/local/bro/share/bro/base/init-default.bro
 
 #prepare path
 RUN echo "export PATH=$PATH:/usr/local/bro/bin" > /root/.profile
+
+#set sshd config for key based authentication for root
+RUN mkdir -p /var/run/sshd && sed -i "s/UsePrivilegeSeparation.*/UsePrivilegeSeparation no/g" /etc/ssh/sshd_config && sed -i "s/UsePAM.*/UsePAM no/g" /etc/ssh/sshd_config && sed -i "s/PermitRootLogin.*/PermitRootLogin yes/g" /etc/ssh/sshd_config && sed -i "s/#AuthorizedKeysFile/AuthorizedKeysFile/g" /etc/ssh/sshd_config
 
 #set the expose ports
 EXPOSE 22
