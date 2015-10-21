@@ -10,4 +10,5 @@ redef Intel::read_files += {
   "/usr/local/bro/share/bro/custom/compromised.intel",
   "/usr/local/bro/share/bro/custom/malips.intel",
   "/usr/local/bro/share/bro/custom/mayhemic.intel",
+  "/usr/local/bro/share/bro/custom/tor.intel"
 };

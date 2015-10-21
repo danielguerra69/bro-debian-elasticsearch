@@ -10,9 +10,21 @@ chmod +x /usr/sbin/policy-rc.d
 RUN \
 apt-get -qq update && \
 apt-get -qq upgrade && \
-apt-get install -yq libgoogle-perftools-dev \
+apt-get install -yq vim \
+php5-curl \
+sendmail \
+bison \
+flex \
+gawk \
+curl \
+geoip-database \
+geoip-database-extra \
+tor-geoipdb \
+wget \
+openssh-server \
 build-essential \
 ca-certificates \
+libgoogle-perftools-dev \
 libcurl3-dev \
 libgeoip-dev \
 libpcap-dev \
@@ -21,23 +33,16 @@ python-dev \
 zlib1g-dev \
 libedit-dev \
 doxygen \
-php5-curl \
 git-core \
-sendmail \
-bison \
 cmake \
-flex \
-gawk \
 make \
-curl \
 g++ \
-geoip-database \
-geoip-database-extra \
-tor-geoipdb \
 gcc \
-wget \
 libpcre3-dev \
-python-setuptools
+python-setuptools \
+libsnappy-dev \
+libbz2-dev \
+devscripts --no-install-recommends
 
 #swig latest for broker python integration
 WORKDIR /tmp
@@ -48,11 +53,11 @@ RUN ./configure
 RUN make
 RUN make install
 
-#rocksdb gives
+#rocksdb gives memory
 WORKDIR /tmp
 RUN git clone --recursive https://github.com/facebook/rocksdb.git
 WORKDIR /tmp/rocksdb
-RUN export CFLAGS="$CFLAGS -fPIC" && export CXXFLAGS="$CXXFLAGS -fPIC" && make static_lib
+RUN export CFLAGS="$CFLAGS -fPIC" && export CXXFLAGS="$CXXFLAGS -fPIC" && make shared_lib
 RUN export CFLAGS="$CFLAGS -fPIC" && export CXXFLAGS="$CXXFLAGS -fPIC" && make install
 
 # ipsumdump
@@ -75,7 +80,7 @@ RUN make install
 WORKDIR /tmp
 RUN  git clone --recursive git://git.bro.org/bro
 WORKDIR /tmp/bro
-RUN ./configure --disable-broker
+RUN ./configure
 RUN make
 RUN make install
 
@@ -102,17 +107,33 @@ RUN tar xvfz Geohash-1.0.tar.gz
 WORKDIR /tmp/Geohash-1.0
 RUN python setup.py build
 RUN python setup.py install
+WORKDIR /root
+
 # clean up
 RUN apt-get clean
 RUN rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 #set the path
 ENV PATH /usr/local/bro/bin:$PATH
+RUN echo "export PATH=$PATH:/usr/local/bro/bin" > /root/.profile
 
 # add custom scripts
+<<<<<<< HEAD
 ADD custom /usr/local/bro/share/bro/custom
 RUN /bin/sh /usr/local/bro/share/bro/custom/updateintel.sh
+=======
+ADD /custom /usr/local/bro/share/bro/custom
+RUN /bin/sh /usr/local/bro/share/bro/custom/updateintel.sh
+RUN echo "@load custom" >> /usr/local/bro/share/bro/base/init-default.bro
 
-ENTRYPOINT ["bro"]
+#set sshd config for key based authentication for root
+RUN mkdir -p /var/run/sshd && sed -i "s/UsePrivilegeSeparation.*/UsePrivilegeSeparation no/g" /etc/ssh/sshd_config && sed -i "s/UsePAM.*/UsePAM no/g" /etc/ssh/sshd_config && sed -i "s/PermitRootLogin.*/PermitRootLogin yes/g" /etc/ssh/sshd_config && sed -i "s/#AuthorizedKeysFile/AuthorizedKeysFile/g" /etc/ssh/sshd_config
+>>>>>>> master
 
-CMD ["-h"]
+#set the expose ports
+EXPOSE 22
+EXPOSE 47761
+EXPOSE 47762
+
+#start sshd
+CMD ["exec","/usr/sbin/sshd","-D"]
