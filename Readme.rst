@@ -29,5 +29,4 @@ delete indices
 curl -XDELETE 'http://elasticsearch:9200/bro-201304260900'
 
 TODO
-[] broker
 [] location in kibana
