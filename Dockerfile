@@ -10,9 +10,21 @@ chmod +x /usr/sbin/policy-rc.d
 RUN \
 apt-get -qq update && \
 apt-get -qq upgrade && \
-apt-get install -yq libgoogle-perftools-dev \
+apt-get install -yq vim \
+php5-curl \
+sendmail \
+bison \
+flex \
+gawk \
+curl \
+geoip-database \
+geoip-database-extra \
+tor-geoipdb \
+wget \
+openssh-server \
 build-essential \
 ca-certificates \
+libgoogle-perftools-dev \
 libcurl3-dev \
 libgeoip-dev \
 libpcap-dev \
@@ -21,25 +33,13 @@ python-dev \
 zlib1g-dev \
 libedit-dev \
 doxygen \
-php5-curl \
 git-core \
-sendmail \
-bison \
 cmake \
-flex \
-gawk \
 make \
-curl \
 g++ \
-geoip-database \
-geoip-database-extra \
-tor-geoipdb \
 gcc \
-wget \
 libpcre3-dev \
 python-setuptools \
-openssh-server \
-python-snappy \
 libsnappy-dev \
 libbz2-dev \
 devscripts --no-install-recommends
@@ -107,7 +107,7 @@ RUN tar xvfz Geohash-1.0.tar.gz
 WORKDIR /tmp/Geohash-1.0
 RUN python setup.py build
 RUN python setup.py install
-WORKDIR /
+WORKDIR /root
 
 # clean up
 RUN apt-get clean

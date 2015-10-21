@@ -1,7 +1,8 @@
 @load ./logs-to-elasticsearch
+@load ./cookie-log
 @load base/frameworks/signatures/main
-@load base/frameworks/notice/actions/add-geodata 
-@load policy/misc/app-stats 
+@load base/frameworks/notice/actions/add-geodata
+@load policy/misc/app-stats
 @load ./intel
 @load ./scan
 @load ./tordetect
