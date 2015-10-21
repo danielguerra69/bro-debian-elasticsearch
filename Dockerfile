@@ -85,10 +85,15 @@ RUN make
 RUN make install
 
 # ELK integration
-# Do some kibana changes timestamp and elastic configuration
-RUN sed -i "s/JSON::TS_MILLIS/JSON::TS_ISO8601/g" /tmp/bro/aux/plugins/elasticsearch/src/ElasticSearch.cc
+
+# Do some kibana changes for timestamp
+ADD ElasticSearch.cc.patch /tmp/ElasticSearch.cc.patch
+RUN patch /tmp/bro/aux/plugins/elasticsearch/src/ElasticSearch.cc  /tmp/ElasticSearch.cc.patch
+#set host to virtual host elasticsearch
 RUN sed -i "s/127.0.0.1/elasticsearch/g" /tmp/bro/aux/plugins/elasticsearch/scripts/init.bro
+# give more time to write
 RUN sed -i "s/2secs/60secs/g" /tmp/bro/aux/plugins/elasticsearch/scripts/init.bro
+#install the plugin
 WORKDIR /tmp/bro/aux/plugins/elasticsearch
 RUN ./configure
 RUN make
@@ -109,37 +114,29 @@ RUN python setup.py build
 RUN python setup.py install
 WORKDIR /root
 
+# removed for develop purposes
 # clean up
-RUN apt-get clean
-RUN rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+#RUN apt-get clean
+#RUN rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 #set the path
 ENV PATH /usr/local/bro/bin:$PATH
 RUN echo "export PATH=$PATH:/usr/local/bro/bin" > /root/.profile
 
 # add custom scripts
-<<<<<<< HEAD
 ADD /custom /usr/local/bro/share/bro/custom
-RUN /bin/sh /usr/local/bro/share/bro/custom/updateintel.sh
 RUN echo "@load custom" >> /usr/local/bro/share/bro/base/init-default.bro
+
+# fresh intel
+RUN /bin/sh /usr/local/bro/share/bro/custom/updateintel.sh
+
+#do some elasticsearch tweaks
+#socks version causes type conflict
+RUN sed -i "s/version:     count           \&log/socks_version:     count           \&log/g" /usr/local/bro/share/bro/base/protocols/socks/main.bro
+RUN sed -i "s/\$version=/\$socks_version=/g" /usr/local/bro/share/bro/base/protocols/socks/main.bro
 
 #set sshd config for key based authentication for root
 RUN mkdir -p /var/run/sshd && sed -i "s/UsePrivilegeSeparation.*/UsePrivilegeSeparation no/g" /etc/ssh/sshd_config && sed -i "s/UsePAM.*/UsePAM no/g" /etc/ssh/sshd_config && sed -i "s/PermitRootLogin.*/PermitRootLogin yes/g" /etc/ssh/sshd_config && sed -i "s/#AuthorizedKeysFile/AuthorizedKeysFile/g" /etc/ssh/sshd_config
-ADD custom /usr/local/bro/share/bro/custom
-RUN /bin/sh /usr/local/bro/share/bro/custom/updateintel.sh
-=======
-<<<<<<< HEAD
->>>>>>> full
-ADD custom /usr/local/bro/share/bro/custom
-RUN /bin/sh /usr/local/bro/share/bro/custom/updateintel.sh
-=======
-ADD /custom /usr/local/bro/share/bro/custom
-RUN /bin/sh /usr/local/bro/share/bro/custom/updateintel.sh
-RUN echo "@load custom" >> /usr/local/bro/share/bro/base/init-default.bro
-
-#set sshd config for key based authentication for root
-RUN mkdir -p /var/run/sshd && sed -i "s/UsePrivilegeSeparation.*/UsePrivilegeSeparation no/g" /etc/ssh/sshd_config && sed -i "s/UsePAM.*/UsePAM no/g" /etc/ssh/sshd_config && sed -i "s/PermitRootLogin.*/PermitRootLogin yes/g" /etc/ssh/sshd_config && sed -i "s/#AuthorizedKeysFile/AuthorizedKeysFile/g" /etc/ssh/sshd_config
->>>>>>> master
 
 #set the expose ports
 EXPOSE 22

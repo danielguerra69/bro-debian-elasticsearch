@@ -11,13 +11,11 @@ export {
   };
 }
 
-global title_set: set[string];
-
 event bro_init() &priority=5 {
   Log::create_stream(Cookie::LOG, [$columns=Info]);
 }
 
-event http_header(c: connection, is_orig: bool, name: string, value: string) &priority=2 {
+event http_header(c: connection, is_orig: bool, name: string, value: string) &priority=5 {
   if ( is_orig && name == "COOKIE") {
     local log_rec: Cookie::Info = [$ts=network_time(), $uid=c$uid, $id=c$id, $cookie=value];
     Log::write(Cookie::LOG, log_rec);

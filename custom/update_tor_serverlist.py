@@ -21,8 +21,7 @@ def write_server_list():
         sys.exit()
 
     sf = open(SERVERS_FILE, "w")
-    sf.write("#fields\ttor_host\n")
-
+    
     for server in servers:
         sf.write("%s\n" % server)
 
