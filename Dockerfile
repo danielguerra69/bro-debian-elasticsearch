@@ -118,6 +118,7 @@ ENV PATH /usr/local/bro/bin:$PATH
 RUN echo "export PATH=$PATH:/usr/local/bro/bin" > /root/.profile
 
 # add custom scripts
+<<<<<<< HEAD
 ADD /custom /usr/local/bro/share/bro/custom
 RUN /bin/sh /usr/local/bro/share/bro/custom/updateintel.sh
 RUN echo "@load custom" >> /usr/local/bro/share/bro/base/init-default.bro
@@ -126,8 +127,19 @@ RUN echo "@load custom" >> /usr/local/bro/share/bro/base/init-default.bro
 RUN mkdir -p /var/run/sshd && sed -i "s/UsePrivilegeSeparation.*/UsePrivilegeSeparation no/g" /etc/ssh/sshd_config && sed -i "s/UsePAM.*/UsePAM no/g" /etc/ssh/sshd_config && sed -i "s/PermitRootLogin.*/PermitRootLogin yes/g" /etc/ssh/sshd_config && sed -i "s/#AuthorizedKeysFile/AuthorizedKeysFile/g" /etc/ssh/sshd_config
 ADD custom /usr/local/bro/share/bro/custom
 RUN /bin/sh /usr/local/bro/share/bro/custom/updateintel.sh
+=======
+<<<<<<< HEAD
+>>>>>>> full
 ADD custom /usr/local/bro/share/bro/custom
 RUN /bin/sh /usr/local/bro/share/bro/custom/updateintel.sh
+=======
+ADD /custom /usr/local/bro/share/bro/custom
+RUN /bin/sh /usr/local/bro/share/bro/custom/updateintel.sh
+RUN echo "@load custom" >> /usr/local/bro/share/bro/base/init-default.bro
+
+#set sshd config for key based authentication for root
+RUN mkdir -p /var/run/sshd && sed -i "s/UsePrivilegeSeparation.*/UsePrivilegeSeparation no/g" /etc/ssh/sshd_config && sed -i "s/UsePAM.*/UsePAM no/g" /etc/ssh/sshd_config && sed -i "s/PermitRootLogin.*/PermitRootLogin yes/g" /etc/ssh/sshd_config && sed -i "s/#AuthorizedKeysFile/AuthorizedKeysFile/g" /etc/ssh/sshd_config
+>>>>>>> master
 
 #set the expose ports
 EXPOSE 22

@@ -15,7 +15,11 @@ def get_fields(fields, n_fields):
 def ppkt(p):
     rec = p.as_record()
     rec = ip.as_record()
+<<<<<<< HEAD
     fields = rec.fields()
+=======
+	fields = rec.fields()
+>>>>>>> full
     fields = [f for f in fields]
     print fields
 
