@@ -119,6 +119,7 @@ RUN echo "export PATH=$PATH:/usr/local/bro/bin" > /root/.profile
 
 # add custom scripts
 <<<<<<< HEAD
+<<<<<<< HEAD
 ADD /custom /usr/local/bro/share/bro/custom
 RUN /bin/sh /usr/local/bro/share/bro/custom/updateintel.sh
 RUN echo "@load custom" >> /usr/local/bro/share/bro/base/init-default.bro
@@ -129,6 +130,10 @@ RUN mkdir -p /var/run/sshd && sed -i "s/UsePrivilegeSeparation.*/UsePrivilegeSep
 ADD custom /usr/local/bro/share/bro/custom
 RUN /bin/sh /usr/local/bro/share/bro/custom/updateintel.sh
 >>>>>>> origin/full
+=======
+ADD custom /usr/local/bro/share/bro/custom
+RUN /bin/sh /usr/local/bro/share/bro/custom/updateintel.sh
+>>>>>>> full
 
 #set the expose ports
 EXPOSE 22
