@@ -363,7 +363,8 @@ curl -XPUT elasticsearch:9200/_template/fixstrings_bro -d '{
       "cookie" : {
         "properties" : {
           "cookie" : {
-            "type" : "string"
+            "type" : "string",
+            "index" : "not_analyzed"
           },
           "id.orig_h" : {
             "type" : "string"
@@ -498,6 +499,25 @@ curl -XPUT elasticsearch:9200/_template/fixstrings_bro -d '{
           },
           "tx_hosts" : {
             "type" : "string"
+          }
+        }
+      },
+      "location": {
+        "properties" : {
+          "uid" : {
+            "type" : "string",
+            "index" : "not_analyzed"
+          },
+          "ts" : {
+            "type" : "date",
+            "format" : "dateOptionalTime"
+          },
+          "origin" : {
+            "type" : "string",
+            "index" : "not_analyzed"
+          },
+          "ext_location" : {
+            "type" : "geo_point"
           }
         }
       },

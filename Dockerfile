@@ -1,10 +1,10 @@
-FROM debian:jessie
-# based on blacktop bro
+FROM python:3.5
+
 MAINTAINER danielguerra, https://github.com/danielguerra
 
 #Prevent daemon start during install
-#RUN echo '#!/bin/sh\nexit 101' > /usr/sbin/policy-rc.d && \
-#chmod +x /usr/sbin/policy-rc.d
+RUN echo '#!/bin/sh\nexit 101' > /usr/sbin/policy-rc.d && \
+chmod +x /usr/sbin/policy-rc.d
 
 # Install Bro Required Dependencies
 RUN \
@@ -42,7 +42,8 @@ libpcre3-dev \
 python-setuptools \
 libsnappy-dev \
 libbz2-dev \
-devscripts
+devscripts --no-install-recommends
+
 #swig latest for broker python integration
 WORKDIR /tmp
 RUN wget http://prdownloads.sourceforge.net/swig/swig-3.0.7.tar.gz
@@ -132,7 +133,7 @@ RUN echo "@load custom" >> /usr/local/bro/share/bro/base/init-default.bro
 ADD updateintel.sh /bin/updateintel.sh
 ADD cleanelastic.sh /bin/cleanelastic.sh
 ADD elasticsearchMapping.sh /bin/elasticsearchMapping.sh
-
+ADD removeMapping.sh /bin/removeMapping.sh
 # update intel files
 RUN /bin/updateintel.sh
 
@@ -152,7 +153,7 @@ EXPOSE 47761
 EXPOSE 47762
 
 #set elasticsearch mapping
-CMD /bin/elasticsearchMapping.sh
+CMD ["exec"."/bin/elasticsearchMapping.sh"]
 
 #start sshd
 CMD ["exec","/usr/sbin/sshd","-D"]

@@ -10,3 +10,4 @@
 @load policy/protocols/ssl/heartbleed
 @load policy/protocols/ssl/extract-certs-pem
 @load policy/protocols/ssl/validate-certs
+@load ./locationextract
