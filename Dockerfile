@@ -3,8 +3,8 @@ FROM debian:jessie
 MAINTAINER danielguerra, https://github.com/danielguerra
 
 #Prevent daemon start during install
-RUN echo '#!/bin/sh\nexit 101' > /usr/sbin/policy-rc.d && \
-chmod +x /usr/sbin/policy-rc.d
+#RUN echo '#!/bin/sh\nexit 101' > /usr/sbin/policy-rc.d && \
+#chmod +x /usr/sbin/policy-rc.d
 
 # Install Bro Required Dependencies
 RUN \
@@ -42,8 +42,7 @@ libpcre3-dev \
 python-setuptools \
 libsnappy-dev \
 libbz2-dev \
-devscripts --no-install-recommends
-
+devscripts
 #swig latest for broker python integration
 WORKDIR /tmp
 RUN wget http://prdownloads.sourceforge.net/swig/swig-3.0.7.tar.gz

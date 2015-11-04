@@ -524,7 +524,10 @@ curl -XPUT elasticsearch:9200/_template/fixstrings_bro -d '{
           "id.resp_p" : {
             "type" : "long"
           },
-          "geo_location" : {
+          "orig_location" : {
+            "type" : "geo_point"
+          },
+          "resp_location" : {
             "type" : "geo_point"
           },
           "missed_bytes" : {
