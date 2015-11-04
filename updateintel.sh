@@ -1,6 +1,7 @@
 #!/bin/bash
 cd /tmp
-mal-dnssearch -M mayhemic -p | mal-dns2bro -n true -T dns -s mayhemic-mallware > /usr/local/bro/share/bro/custom/mayhemic.intel
+# mayhemic is offline ??
+# mal-dnssearch -M mayhemic -p | mal-dns2bro -n true -T dns -s mayhemic-mallware > /usr/local/bro/share/bro/custom/mayhemic.intel
 mal-dnssearch -M ciarmy -p | mal-dns2bro -n true -T ip -s ciarmy-badguys > /usr/local/bro/share/bro/custom/ciarmy.intel
 mal-dnssearch -M malips -p | mal-dns2bro -n true -T ip -s malips > /usr/local/bro/share/bro/custom/malips.intel
 mal-dnssearch -M botcc -p | mal-dns2bro -n true -T ip -s botcc-troyan > /usr/local/bro/share/bro/custom/botcc.intel

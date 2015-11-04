@@ -17,7 +17,7 @@ export {
 	const send_logs: set[Log::ID] &redef;
 }
 
-event bro_init() &priority=0
+event bro_init() &priority=-5
 	{
 	if ( server_host == "" )
 		return;

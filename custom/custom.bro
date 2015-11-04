@@ -1,4 +1,5 @@
 @load ./logs-to-elasticsearch
+@load ./geoip
 @load ./cookie-log
 @load base/frameworks/signatures/main
 @load base/frameworks/notice/actions/add-geodata
