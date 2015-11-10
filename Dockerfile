@@ -55,7 +55,6 @@ gawk \
 curl \
 geoip-database \
 geoip-database-extra \
-tor-geoipdb \
 wget \
 ca-certificates \
 openssh-server \
@@ -120,6 +119,9 @@ RUN sed -i "s/\$version=/\$socks_version=/g" /usr/local/bro/share/bro/base/proto
 
 #set sshd config for key based authentication for root
 RUN mkdir -p /var/run/sshd && sed -i "s/UsePrivilegeSeparation.*/UsePrivilegeSeparation no/g" /etc/ssh/sshd_config && sed -i "s/UsePAM.*/UsePAM no/g" /etc/ssh/sshd_config && sed -i "s/PermitRootLogin.*/PermitRootLogin yes/g" /etc/ssh/sshd_config && sed -i "s/#AuthorizedKeysFile/AuthorizedKeysFile/g" /etc/ssh/sshd_config
+
+# city v6 fix
+ADD GeoIPCityv6.dat /usr/share/GeoIP/GeoIPCityv6.dat
 
 #set the expose ports
 EXPOSE 22

@@ -1,32 +1,25 @@
-BRO ELK docker
+### BRO ELK docker integration
 
-( docker-machine -D create -d virtualbox docker)
-(docker-machine ssh docker)
+### elastic data
+volume with mapping and kibana vieuws
 
-elasticsearch
-(data is the dir you store the data)
+docker create -v /usr/share/elasticsearch/data --name elastic-data danielguerra/bro-elasticsearch-kibana-volume /bin/true
 
-docker run -d -p 9200:9200 -p 9300:9300 -v data:/usr/share/elasticsearch/data --hostname=elasticsearch  --name elasticsearch elasticsearch
+### elasticsearch
 
+docker run -d -p 9200:9200 -p 9300:9300 --volumes-from elastic-data --hostname=elasticsearch  --name elasticsearch elasticsearch:1.7
 
-kibana
-(cutting edge with map)
+### kibana
+
 docker run -d -p 5601:5601 --link=elasticsearch:elasticsearch --hostname=kibana --name kibana million12/kibana4 --elasticsearch http://elasticsearch:9200
 
-(or without map)
-docker run -d -p 5601:5601 --link=elasticsearch:elasticsearch -e ELASTICSEARCH=http://elasticsearch:9200 --hostname=kibana --name kibana kibana
-
-bro
+### bro
 docker run -ti --link elasticsearch:elasticsearch -v /Users/data:/data --name bro-dev danielguerra/bro-debian-elasticsearch
 
-get indices from elasticsearch
-(in bro-dev bash)
+bro -r /pcap/mydump.pcap
 
-curl ‘elasticsearch:9200/_cat/indices?v'
-
-delete indices
-
-curl -XDELETE 'http://elasticsearch:9200/bro-201304260900'
-
-TODO
-[] location in kibana
+### useful scripts
+elasticsearchMapping.sh bro mapping for kibana including geo_point mapping
+removeMapping.sh remove the mapping
+cleanelastic.sh clean elasticsearch from bro data
+updateintel.sh update intel for bro
