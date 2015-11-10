@@ -5,7 +5,7 @@
 @load base/frameworks/notice/actions/add-geodata
 @load policy/misc/app-stats
 @load ./intel
-@load ./scan
+@load policy/misc/scan
 @load ./tordetect
 @load policy/protocols/ssl/heartbleed
 @load policy/protocols/ssl/extract-certs-pem

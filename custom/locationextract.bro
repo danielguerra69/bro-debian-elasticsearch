@@ -38,28 +38,16 @@ event http_request(c: connection, method: string, original_URI: string, unescape
       origin = "uri_name";
       location_extracted = cat(latitude[1],",",longitude[1]);
     }                		}
-    # look for dutch coordinate pairs
-    else if ( /5[2345][.][0-9]+[,][34567][.][0-9]+/ in unescaped_URI)
+    # look for coordinate pairs
+    else if ( /=[0-8]?[0-9][.][0-9]{3,}[,][1]?[0-9]?[0-9][.][0-9]{3,}/ in unescaped_URI)
     {
-    	local coordinatestring = find_last(unescaped_URI,/(5[2345][.][0-9]+[,][34567][.][0-9]+)/);
-    	local coordinate = split_string1(coordinatestring,/,/);
+    	local coordinatestring = find_last(unescaped_URI,/=([0-8]?[0-9][.][0-9]{3,}[,][1]?[0-9]?[0-9][.][0-9]{3,})/);
+      local cleanstring = split_string1(coordinatestring,/=/);
+    	local coordinate = split_string1(cleanstring[1],/,/);
     	if (1 in coordinate && to_double(coordinate[0]) != 0)
     	{
     		origin = "uri_pair";
     		location_extracted = cat(coordinate[0],",",coordinate[1]);
-    	}
-    }
-    # just look for a dutch coordinate at least 3 digit precision
-    else if ( /=5[2345][.][0-9]{3,}/ in unescaped_URI && /=[34567][.][0-9]{3,}/ in unescaped_URI)
-    {
-    	latstring = find_last(unescaped_URI,/=(5[2345][.][0-9]{3,})/);
-    	latitude = split_string1(latstring,/=/);
-    	longstring = find_last(unescaped_URI,/=([34567][.][0-9]{3,})/);
-    	longitude = split_string1(longstring,/=/);
-    	if ( 1 in latitude && 1 in longitude  && to_double(latitude[1]) != 0)
-    	{
-    		origin = "uri_digi";
-    		location_extracted = cat(latitude[1],",",longitude[1]);
     	}
     }
     if (location_extracted != "") {

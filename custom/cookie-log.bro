@@ -8,6 +8,7 @@ export {
     uid:    string &log;
     id:     conn_id  &log;
     cookie: string &log;
+    cookie_unesc: string &log;
   };
 }
 
@@ -17,7 +18,8 @@ event bro_init() &priority=5 {
 
 event http_header(c: connection, is_orig: bool, name: string, value: string) &priority=5 {
   if ( is_orig && name == "COOKIE") {
-    local log_rec: Cookie::Info = [$ts=network_time(), $uid=c$uid, $id=c$id, $cookie=value];
+    local unesc_cookie = unescape_URI(value);
+    local log_rec: Cookie::Info = [$ts=network_time(), $uid=c$uid, $id=c$id, $cookie=value, $cookie_unesc=unesc_cookie];
     Log::write(Cookie::LOG, log_rec);
   }
 }

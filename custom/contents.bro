@@ -1,5 +1,5 @@
 ##! This script can be used to extract either the originator's data or the 
-##! responders data or both.  By default nothing is extracted, and in order 
+##! responders data or both.  By default nothing is extracted, and in order
 ##! to actually extract data the ``c$extract_orig`` and/or the
 ##! ``c$extract_resp`` variable must be set to ``T``.  One way to achieve this
 ##! would be to handle the :bro:id:`connection_established` event elsewhere
@@ -18,22 +18,22 @@ module Conn;
 export {
 	## The prefix given to files containing extracted connections as they
 	## are opened on disk.
-	
+
 	const extraction_prefix = "contents" &redef;
-	
+
 	## If this variable is set to ``T``, then all contents of all
 	## connections will be extracted.
 	const default_extract = T;
-	
+
 	const extraction_dir = "./extract_files/";
 
 }
 
 function generate_extraction_filename2(dir: string, prefix: string, c: connection, suffix: string): string
 	{
-	local conn_info = fmt("%s:%d-%s:%d", 
+	local conn_info = fmt("%s:%d-%s:%d",
 	                      c$id$orig_h, c$id$orig_p, c$id$resp_h, c$id$resp_p);
-	
+
 	if ( prefix != "" )
 		conn_info = fmt("%s_%s", prefix, conn_info);
 	if ( suffix != "" )
@@ -89,7 +89,7 @@ redef record connection += {
 
 event connection_established(c: connection) &priority=-5
 	{
-	
+
 	if ( c$extract_orig )
 		{
 		local orig_file =  fmt("%s/%s.%s", extraction_dir, c$uid, "orig.dat");
@@ -97,7 +97,7 @@ event connection_established(c: connection) &priority=-5
 		local orig_f = open(orig_file);
 		set_contents_file(c$id, CONTENTS_ORIG, orig_f);
 		}
-		
+
 	if ( c$extract_resp )
 		{
 		local resp_file = fmt("%s/%s.%s", extraction_dir, c$uid, "resp.dat");

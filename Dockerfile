@@ -1,5 +1,5 @@
-FROM python:3.5
-
+FROM debian:jessie
+# based on blacktop bro
 MAINTAINER danielguerra, https://github.com/danielguerra
 
 #Prevent daemon start during install
@@ -92,7 +92,7 @@ RUN patch /tmp/bro/aux/plugins/elasticsearch/src/ElasticSearch.cc  /tmp/ElasticS
 #set host to virtual host elasticsearch
 RUN sed -i "s/127.0.0.1/elasticsearch/g" /tmp/bro/aux/plugins/elasticsearch/scripts/init.bro
 # give more time to write
-RUN sed -i "s/2secs/10secs/g" /tmp/bro/aux/plugins/elasticsearch/scripts/init.bro
+RUN sed -i "s/2secs/60secs/g" /tmp/bro/aux/plugins/elasticsearch/scripts/init.bro
 # smaller batches for bro file read eg 1 having flush problems
 RUN sed -i "s/const max_batch_size = 1000/const max_batch_size = 1/g" /tmp/bro/aux/plugins/elasticsearch/scripts/init.bro
 #install the plugin

@@ -366,6 +366,9 @@ curl -XPUT elasticsearch:9200/_template/fixstrings_bro -d '{
             "type" : "string",
             "index" : "not_analyzed"
           },
+          "cookie_vars" : {
+            "type" : "string"
+          },
           "id.orig_h" : {
             "type" : "string"
           },
