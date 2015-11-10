@@ -42,7 +42,8 @@ libpcre3-dev \
 python-setuptools \
 libsnappy-dev \
 libbz2-dev \
-devscripts --no-install-recommends
+devscripts \
+autoconf --no-install-recommends
 
 #swig latest for broker python integration
 WORKDIR /tmp
