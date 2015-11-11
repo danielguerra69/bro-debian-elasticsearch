@@ -47,6 +47,7 @@ devscripts ' \
 && apt-get -qq upgrade \
 && apt-get install -yq $buildDeps \
 vim \
+xinetd \
 php5-curl \
 sendmail \
 bison \
@@ -123,13 +124,20 @@ RUN mkdir -p /var/run/sshd && sed -i "s/UsePrivilegeSeparation.*/UsePrivilegeSep
 # city v6 fix
 ADD GeoLiteCityv6.dat /usr/share/GeoIP/GeoIPCityv6.dat
 
+# bro pcap service
+ADD bro /etc/xinetd.d/bro
+RUN echo "bro             1969/tcp                        # bro pcap feed" >> /etc/services
+
 #set the expose ports
 EXPOSE 22
+EXPOSE 1969
 EXPOSE 47761
 EXPOSE 47762
 
 #set elasticsearch mapping
-CMD ["exec"."/bin/elasticsearchMapping.sh"]
+#CMD ["exec","/bin/elasticsearchMapping.sh"]
 
+#start xinetd
+CMD ["exec","/usr/sbin/xinetd","-d"]
 #start sshd
 CMD ["exec","/usr/sbin/sshd","-D"]
