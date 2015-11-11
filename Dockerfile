@@ -65,7 +65,7 @@ openssh-server \
 && cd /tmp/ipsumdump \
 && /bin/bash ./configure --enable-all-elements ;make; make install \
 && cd /tmp \
-&& wget http://prdownloads.sourceforge.net/swig/swig-3.0.7.tar.gz \
+&& wget http://downloads.sourceforge.net/project/swig/swig/swig-3.0.7/swig-3.0.7.tar.gz \
 && tar xvfz swig-3.0.7.tar.gz \
 && cd /tmp/swig-3.0.7 \
 && ./configure \
