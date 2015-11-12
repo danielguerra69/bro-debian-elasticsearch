@@ -138,6 +138,6 @@ EXPOSE 47762
 #CMD ["exec","/bin/elasticsearchMapping.sh"]
 
 #start xinetd
-CMD ["exec","/usr/sbin/xinetd","-d"]
+CMD ["/usr/sbin/xinetd","-d"]
 #start sshd
-CMD ["exec","/usr/sbin/sshd","-D"]
+CMD ["/usr/sbin/sshd","-D"]
