@@ -134,10 +134,6 @@ EXPOSE 1969
 EXPOSE 47761
 EXPOSE 47762
 
-#set elasticsearch mapping
-#CMD ["exec","/bin/elasticsearchMapping.sh"]
-
-#start xinetd
-CMD ["/usr/sbin/xinetd","-d"]
-#start sshd
-CMD ["/usr/sbin/sshd","-D"]
+#start xinetd sshd
+ENTRYPOINT ["/usr/sbin/xinetd","-d"]
+ENTRYPOINT ["/usr/sbin/sshd","-D"]
