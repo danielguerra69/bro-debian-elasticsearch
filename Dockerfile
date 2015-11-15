@@ -3,8 +3,8 @@ FROM debian:jessie
 MAINTAINER danielguerra, https://github.com/danielguerra
 
 #Prevent daemon start during install
-RUN echo '#!/bin/sh\nexit 101' > /usr/sbin/policy-rc.d && \
-chmod +x /usr/sbin/policy-rc.d
+#RUN echo '#!/bin/sh\nexit 101' > /usr/sbin/policy-rc.d && \
+#chmod +x /usr/sbin/policy-rc.d
 
 ADD ElasticSearch.cc.patch /tmp/ElasticSearch.cc.patch
 
@@ -18,6 +18,9 @@ ADD cleanelastic.sh /bin/cleanelastic.sh
 ADD elasticsearchMapping.sh /bin/elasticsearchMapping.sh
 ADD removeMapping.sh /bin/removeMapping.sh
 
+# prepare locale settings
+#RUN echo -e 'LANG="en_US.UTF-8"\nLANGUAGE="en_US:en"\n' > /etc/default/locale
+#RUN echo "UTC" > /etc/timezone
 # Install Bro Required Dependencies
 RUN buildDeps='build-essential \
 autoconf \
@@ -46,6 +49,7 @@ devscripts ' \
 && apt-get -qq update \
 && apt-get -qq upgrade \
 && apt-get install -yq $buildDeps \
+locales \
 vim \
 xinetd \
 php5-curl \
@@ -58,8 +62,12 @@ geoip-database \
 geoip-database-extra \
 wget \
 ca-certificates \
-openssh-server \
---no-install-recommends \
+openssh-server --no-install-recommends \
+&& export LANGUAGE="en_US:en" \
+&& export LANG="en_US.UTF-8" \
+&& locale-gen "en_US.UTF-8" \
+&& sed -i -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen \
+&& dpkg-reconfigure -f noninteractive locales \
 && cd /tmp \
 && git clone --recursive https://github.com/kohler/ipsumdump.git \
 && cd /tmp/ipsumdump \
@@ -127,13 +135,12 @@ ADD GeoLiteCityv6.dat /usr/share/GeoIP/GeoIPCityv6.dat
 # bro pcap service
 ADD bro /etc/xinetd.d/bro
 RUN echo "bro             1969/tcp                        # bro pcap feed" >> /etc/services
-
+WORKDIR /tmp
 #set the expose ports
 EXPOSE 22
 EXPOSE 1969
 EXPOSE 47761
 EXPOSE 47762
 
-#start xinetd sshd
-ENTRYPOINT ["/usr/sbin/xinetd","-d"]
-ENTRYPOINT ["/usr/sbin/sshd","-D"]
+#start sshd
+CMD ["/usr/sbin/sshd","-D"]
