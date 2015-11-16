@@ -249,7 +249,8 @@ curl -XPUT elasticsearch:9200/_template/fixstrings_bro -d '{
             "type" : "long"
           },
           "answers" : {
-            "type" : "string"
+            "type" : "string",
+            "index" : "not_analyzed"
           },
           "id.orig_h" : {
             "type" : "string"
@@ -279,7 +280,8 @@ curl -XPUT elasticsearch:9200/_template/fixstrings_bro -d '{
             "type" : "string"
           },
           "query" : {
-            "type" : "string"
+            "type" : "string",
+            "index" : "not_analyzed"
           },
           "rcode" : {
             "type" : "long"

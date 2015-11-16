@@ -1,4 +1,4 @@
-### BRO ELK docker integration
+#### BRO ELK docker integration
 
 ### elastic data
 volume with mapping and kibana vieuws
@@ -13,22 +13,19 @@ docker run -d -p 9200:9200 -p 9300:9300 --volumes-from elastic-data --hostname=e
 
 docker run -d -p 5601:5601 --link=elasticsearch:elasticsearch --hostname=kibana --name kibana million12/kibana4 --elasticsearch http://elasticsearch:9200
 
-### bro
-##start bro on the commandline
-docker run -ti --link elasticsearch:elasticsearch -v /Users/data:/data --name bro-dev danielguerra/bro-debian-elasticsearch /bin/bash
-
-##readfiles from bro-dev commandline
+### start bro on the commandline
+docker run -ti --link elasticsearch:elasticsearch -v /Users/PCAP:/pcap --name bro-dev danielguerra/bro-debian-elasticsearch /bin/bash
+readfiles from bro-dev commandline
 bro -r /pcap/mydump.pcap
 
-##bro xinetd service
-docker run -d -p 1969:1969 --link elasticsearch:elasticsearch --volumes-from ssh-container -v /Users/PCAP:/pcap --name bro-xinetd --hostname bro-x
-inetd danielguerra/bro-debian-elasticsearch /usr/sbin/xinetd -dontfork
-tcpdump to your container from a remote host
+### bro xinetd service
+docker run -d -p 1969:1969 --link elasticsearch:elasticsearch --volumes-from ssh-container -v /Users/PCAP:/pcap --name bro-xinetd --hostname bro-xinetd danielguerra/bro-debian-elasticsearch /usr/sbin/xinetd -dontfork
+tcpdump to your container from a remote host, replace dockerhost with your ip
 tcpdump -i eth0 -s 0 -w /dev/stdout | nc dockerhost 1969
 or read a file file to your container
 nc dockerhost 1969 < mydump.pcap
 
-##bro ssh
+###bro ssh server
 for bro nodes or just remote key based authentication
 create an empty ssh volume
 docker create -v /root/.ssh --name ssh-container danielguerra/ssh-container /bin/true
