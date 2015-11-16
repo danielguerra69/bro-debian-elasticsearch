@@ -7,7 +7,7 @@ docker create -v /usr/share/elasticsearch/data --name elastic-data danielguerra/
 
 ### elasticsearch
 
-docker run -d -p 9200:9200 -p 9300:9300 --volumes-from elastic-data --hostname=elasticsearch  --name elasticsearch elasticsearch:1.7
+docker run -d -p 9200:9200 -p 9300:9300 --volumes-from elastic-data -v /Users/elastic-logs:/usr/share/elasticsearch/logs --hostname=elasticsearch  --name elasticsearch elasticsearch:1.7
 
 ### kibana
 
@@ -25,7 +25,7 @@ tcpdump -i eth0 -s 0 -w /dev/stdout | nc dockerhost 1969
 or read a file file to your container
 nc dockerhost 1969 < mydump.pcap
 
-###bro ssh server
+### bro ssh server
 for bro nodes or just remote key based authentication
 create an empty ssh volume
 docker create -v /root/.ssh --name ssh-container danielguerra/ssh-container /bin/true

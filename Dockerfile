@@ -14,7 +14,7 @@ ADD cleanelastic.sh /bin/cleanelastic.sh
 ADD elasticsearchMapping.sh /bin/elasticsearchMapping.sh
 ADD removeMapping.sh /bin/removeMapping.sh
 
-# Install Bro Required Dependencies
+# Install Bro + Required Dependencies
 RUN buildDeps='build-essential \
 autoconf \
 install-info \
@@ -115,10 +115,11 @@ RUN echo "@load custom" >> /usr/local/bro/share/bro/base/init-default.bro
 #socks version causes type conflict
 RUN sed -i "s/version:     count           \&log/socks_version:     count           \&log/g" /usr/local/bro/share/bro/base/protocols/socks/main.bro
 RUN sed -i "s/\$version=/\$socks_version=/g" /usr/local/bro/share/bro/base/protocols/socks/main.bro
+
 #ssh version conflict
 # todo
 
-# stop local logging to keep clean
+# stop local logging to keep container clean
 RUN sed -i "s/default_writer = WRITER_ASCII/default_writer = WRITER_NONE/g" /usr/local/bro/share/bro/base/frameworks/logging/main.bro
 
 # city v6 fix
@@ -127,7 +128,7 @@ ADD GeoLiteCityv6.dat /usr/share/GeoIP/GeoIPCityv6.dat
 # bro pcap service
 ADD bro /etc/xinetd.d/bro
 RUN echo "bro             1969/tcp                        # bro pcap feed" >> /etc/services
-WORKDIR /tmp
+
 #set the expose ports
 EXPOSE 22
 EXPOSE 1969
@@ -137,11 +138,14 @@ EXPOSE 47762
 #add custom bro files
 ADD /custom /usr/local/bro/share/bro/custom
 RUN echo "@load custom" >> /usr/local/bro/share/bro/base/init-default.bro
+
 # update intel files
 RUN /bin/updateintel.sh
 
 # sshd Needs
 #set sshd config for key based authentication for root
 RUN mkdir -p /var/run/sshd && sed -i "s/UsePrivilegeSeparation.*/UsePrivilegeSeparation no/g" /etc/ssh/sshd_config && sed -i "s/UsePAM.*/UsePAM no/g" /etc/ssh/sshd_config && sed -i "s/PermitRootLogin.*/PermitRootLogin yes/g" /etc/ssh/sshd_config && sed -i "s/#AuthorizedKeysFile/AuthorizedKeysFile/g" /etc/ssh/sshd_config
+#set default dir
+WORKDIR /tmp
 #start sshd
 CMD ["/usr/sbin/sshd","-D"]
