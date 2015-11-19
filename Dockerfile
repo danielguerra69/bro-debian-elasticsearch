@@ -3,6 +3,8 @@ FROM debian:jessie
 MAINTAINER danielguerra, https://github.com/danielguerra
 
 ADD ElasticSearch.cc.patch /tmp/ElasticSearch.cc.patch
+ADD JSON.h.patch /tmp/JSON.h.patch
+ADD JSON.cc.patch /tmp/JSON.cc.patch
 
 #set the path
 ENV PATH /usr/local/bro/bin:$PATH
@@ -87,11 +89,13 @@ openssh-server --no-install-recommends \
 && make install \
 && cd /tmp \
 && git clone --recursive git://git.bro.org/bro \
+&& patch /tmp/bro/aux/plugins/elasticsearch/src/ElasticSearch.cc  /tmp/ElasticSearch.cc.patch \
+&& patch /tmp/bro/src/threading/formatters/JSON.h /tmp/JSON.h.patch \
+&& patch /tmp/bro/src/threading/formatters/JSON.cc /tmp/JSON.cc.patch \
 && cd /tmp/bro \
 && ./configure \
 && make \
 && make install \
-&& patch /tmp/bro/aux/plugins/elasticsearch/src/ElasticSearch.cc  /tmp/ElasticSearch.cc.patch \
 && sed -i "s/127.0.0.1/elasticsearch/g" /tmp/bro/aux/plugins/elasticsearch/scripts/init.bro \
 && sed -i "s/2secs/60secs/g" /tmp/bro/aux/plugins/elasticsearch/scripts/init.bro \
 && sed -i "s/const max_batch_size = 1000/const max_batch_size = 1/g" /tmp/bro/aux/plugins/elasticsearch/scripts/init.bro \

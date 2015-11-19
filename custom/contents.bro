@@ -1,4 +1,4 @@
-##! This script can be used to extract either the originator's data or the 
+##! This script can be used to extract either the originator's data or the
 ##! responders data or both.  By default nothing is extracted, and in order
 ##! to actually extract data the ``c$extract_orig`` and/or the
 ##! ``c$extract_resp`` variable must be set to ``T``.  One way to achieve this
