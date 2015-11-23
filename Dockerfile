@@ -114,8 +114,8 @@ RUN echo "@load bro-extra" >> /usr/local/bro/share/bro/site/local.bro
 
 # add botflex
 RUN cd /usr/local/bro/share/bro/site/  \
-&& git clone --recursive https://github.com/sheharbano/botflex.git botflex\
-&& echo "@load botflex/detection/correlation/correlation.bro" >> local.bro
+&& git clone --recursive https://github.com/sheharbano/botflex.git botflex
+# && echo "@load botflex/detection/correlation/correlation.bro" >> local.bro
 
 # add dr watson
 RUN cd /usr/local/bro/share/bro/site/  \
