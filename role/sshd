@@ -1,0 +1,7 @@
+/scripts/updateintel.sh \
+&& mkdir -p /var/run/sshd \
+&& sed -i "s/UsePrivilegeSeparation.*/UsePrivilegeSeparation no/g" /etc/ssh/sshd_config \
+&& sed -i "s/UsePAM.*/UsePAM no/g" /etc/ssh/sshd_config \
+&& sed -i "s/PermitRootLogin.*/PermitRootLogin yes/g" /etc/ssh/sshd_config \
+&& sed -i "s/#AuthorizedKeysFile/AuthorizedKeysFile/g" /etc/ssh/sshd_config \
+&& /usr/sbin/sshd -D
