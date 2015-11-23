@@ -8,7 +8,7 @@ ENV PATH /usr/local/bro/bin:/scripts:$PATH
 RUN echo "export PATH=$PATH:/usr/local/bro/bin:/scripts" > /root/.profile
 
 # add patches for bro to work with elasticsearch 2.0 (remove . set correct time)
-ADD /bro-patch /tmp/bro-patch
+ADD /bro-patch /bro-patch
 
 # Install Bro + Required Dependencies
 RUN buildDeps='build-essential \
@@ -82,10 +82,10 @@ openssh-server --no-install-recommends \
 && make \
 && make install \
 && cd /tmp \
-&& git clone --recursive git://git.bro.org/bro \
-&& patch /tmp/bro/aux/plugins/elasticsearch/src/ElasticSearch.cc  /tmp/bro-patch/ElasticSearch.cc.patch \
-&& patch /tmp/bro/src/threading/formatters/JSON.h /tmp/bro-patch/JSON.h.patch \
-&& patch /tmp/bro/src/threading/formatters/JSON.cc /tmp/bro-patch/JSON.cc.patch \
+&& git clone --recursive https://git.bro.org/bro bro\
+&& patch /tmp/bro/aux/plugins/elasticsearch/src/ElasticSearch.cc  /bro-patch/ElasticSearch.cc.patch \
+&& patch /tmp/bro/src/threading/formatters/JSON.h /bro-patch/JSON.h.patch \
+&& patch /tmp/bro/src/threading/formatters/JSON.cc /bro-patch/JSON.cc.patch \
 && cd /tmp/bro \
 && ./configure \
 && make \
@@ -109,36 +109,36 @@ openssh-server --no-install-recommends \
 ADD /scripts /scripts
 
 #add extra bro files
-ADD /bro-extra /usr/local/bro/share/bro/site/bro-extra
-RUN echo "@load bro-extra" >> /usr/local/bro/share/bro/site/local.bro
+ADD /bro-extra /usr/local/bro/share/bro/bro-extra
+RUN echo "@load bro-extra" >> /usr/local/bro/share/bro/base/init-default.bro
 
 # add botflex
-RUN cd /usr/local/bro/share/bro/site/  \
+RUN cd /usr/local/bro/share/bro/  \
 && git clone --recursive https://github.com/sheharbano/botflex.git botflex
-# && echo "@load botflex/detection/correlation/correlation.bro" >> local.bro
+# && echo "@load botflex/detection/correlation/correlation.bro" >> base/init-default.bro
 
 # add dr watson
-RUN cd /usr/local/bro/share/bro/site/  \
-&& git clone --recursive https://github.com/broala/bro-drwatson.git drwatson \
-&& echo "@load drwatson" >> local.bro
+RUN cd /usr/local/bro/share/bro/  \
+&& git clone --recursive https://github.com/broala/bro-drwatson.git drwatson
+#&& echo "@load drwatson" >> base/init-default.bro
 
 # add shellshock
-RUN cd /usr/local/bro/share/bro/site/  \
+RUN cd /usr/local/bro/share/bro/  \
 && git clone --recursive https://github.com/broala/bro-shellshock.git shellshock \
-&& echo "@load shellshock" >> local.bro
+&& echo "@load shellshock" >> base/init-default.bro
 
 # add bro-scripts
-RUN cd /usr/local/bro/share/bro/site/  \
-&& git clone --recursive https://github.com/reservoirlabs/bro-scripts.git bro-scripts \
+RUN cd /usr/local/bro/share/bro/  \
+&& git clone --recursive https://github.com/reservoirlabs/bro-scripts.git bro-scripts
 # && echo "@load bro-scripts/clickbot" >> local.bro \
-&& echo "@load bro-scripts/supercomputing/producer-consumer-ratio" >> local.bro \
-&& echo "@load bro-scripts/supercomputing/protocol-stats" >> local.bro \
+#&& echo "@load bro-scripts/supercomputing/producer-consumer-ratio" >> local.bro \
+#&& echo "@load bro-scripts/supercomputing/protocol-stats" >> local.bro \
 #&& echo "@load bro-scripts/supercomputing/http-exe-bad-attributes" >> local.bro \
-&& echo "@load bro-scripts/supercomputing/smtp-url" >> local.bro \
-&& echo "@load bro-scripts/supercomputing/top-metrics" >> local.bro \
-&& echo "@load bro-scripts/supercomputing/unique-hosts" >> local.bro \
-&& echo "@load bro-scripts/supercomputing/unique-macs" >> local.bro \
-&& echo "@load bro-scripts/track-dhcp/track-dhcp" >> local.bro
+#&& echo "@load bro-scripts/supercomputing/smtp-url" >> local.bro \
+#&& echo "@load bro-scripts/supercomputing/top-metrics" >> base/init-default.bro \
+#&& echo "@load bro-scripts/supercomputing/unique-hosts" >> base/init-default.bro \
+#&& echo "@load bro-scripts/supercomputing/unique-macs" >> base/init-default.bro\
+#&& echo "@load bro-scripts/track-dhcp/track-dhcp" >> base/init-default.bro
 
 # add role scripts
 ADD /role /role
