@@ -1,4 +1,4 @@
-/scripts/updateintel.sh \
+/scripts/update-intel.sh \
 && mkdir -p /var/run/sshd \
 && sed -i "s/UsePrivilegeSeparation.*/UsePrivilegeSeparation no/g" /etc/ssh/sshd_config \
 && sed -i "s/UsePAM.*/UsePAM no/g" /etc/ssh/sshd_config \

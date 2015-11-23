@@ -1,4 +1,4 @@
-
+# to be replaced by docker-compose
 docker create -v /usr/share/elasticsearch/data --name elastic-data-master danielguerra/empty-elastic-data /bin/true
 docker create -v /usr/share/elasticsearch/data --name elastic-data-node01 danielguerra/empty-elastic-data /bin/true
 docker create -v /usr/share/elasticsearch/data --name elastic-data-node02 danielguerra/empty-elastic-data /bin/true

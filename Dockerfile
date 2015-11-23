@@ -7,9 +7,6 @@ MAINTAINER danielguerra, https://github.com/danielguerra
 ENV PATH /usr/local/bro/bin:/scripts:$PATH
 RUN echo "export PATH=$PATH:/usr/local/bro/bin:/scripts" > /root/.profile
 
-# add maintance shell scripts
-ADD /scripts /scripts
-
 # add patches for bro to work with elasticsearch 2.0 (remove . set correct time)
 ADD /bro-patch /tmp/bro-patch
 
@@ -107,6 +104,9 @@ openssh-server --no-install-recommends \
 && apt-get remove -y $buildDeps \
 && apt-get clean \
 && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+# add maintance shell scripts
+ADD /scripts /scripts
 
 #add extra bro files
 ADD /bro-extra /usr/local/bro/share/bro/site/bro-extra

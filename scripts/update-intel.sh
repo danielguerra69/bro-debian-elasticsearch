@@ -11,4 +11,4 @@ mal-dnssearch -M snort -p | mal-dns2bro -n true -T ip -s snort-ip-filter > /usr/
 mal-dnssearch -M alienvault -p | mal-dns2bro -n true -T ip -s alienvault-scanhost > /usr/local/bro/share/bro/site/bro-extra/alienvault.intel
 mal-dnssearch -M et_ips -p | mal-dns2bro -T ip -n true -s et_ps_compromised > /usr/local/bro/share/bro/site/bro-extra/compromised.intel
 mal-dnssearch -M snort -p | mal-dns2bro -T ip -s snort-ip-filter > /usr/local/bro/share/bro/site/bro-extra/snort.intel
-/usr/bin/python /usr/local/bro/share/bro/bro-extra/update_tor_serverlist.py && mal-dns2bro -T ip -n true -f /tmp/tor_servers.txt -s tor-server > /usr/local/bro/share/bro/site/bro-extra/tor.intel
+/usr/bin/python /scripts/update_tor_serverlist.py && mal-dns2bro -T ip -n true -f /tmp/tor_servers.txt -s tor-server > /usr/local/bro/share/bro/site/bro-extra/tor.intel
