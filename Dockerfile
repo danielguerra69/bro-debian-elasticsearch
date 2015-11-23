@@ -149,6 +149,8 @@ ADD /xinetd/bro /etc/xinetd.d/bro
 # add bro service
 RUN echo "bro             1969/tcp                        # bro pcap feed" >> /etc/services
 
+#fresh intel
+RUN /scripts/update-intel.sh
 #set the expose ports
 EXPOSE 22
 EXPOSE 1969

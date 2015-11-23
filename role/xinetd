@@ -1,5 +1,5 @@
 #!/bin/bash
-/scripts/update-intel.sh \
-&& sed -i "s/const max_batch_size = 1/const max_batch_size = 1000/g" /tmp/bro/aux/plugins/elasticsearch/scripts/init.bro \
-&& sed -i "s/default_writer = WRITER_ASCII/default_writer = WRITER_NONE/g" /usr/local/bro/share/bro/base/frameworks/logging/main.bro \
-&& /usr/sbin/xinetd -dontfork
+
+sed -i "s/const max_batch_size = 1/const max_batch_size = 1000/g" /usr/local/bro/lib/bro/plugins/Bro_ElasticSearch/scripts/init.bro
+sed -i "s/default_writer = WRITER_ASCII/default_writer = WRITER_NONE/g" /usr/local/bro/share/bro/base/frameworks/logging/main.bro
+/usr/sbin/xinetd -dontfork
