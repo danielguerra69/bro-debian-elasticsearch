@@ -114,7 +114,7 @@ RUN echo "@load bro-extra" >> /usr/local/bro/share/bro/site/local.bro
 
 # add botflex
 RUN cd /usr/local/bro/share/bro/site/  \
-&& git clone --recursive https://github.com/sheharbano/BotFlex.git \
+&& git clone --recursive https://github.com/sheharbano/botflex.git botflex\
 && echo "@load botflex/detection/correlation/correlation.bro" >> local.bro
 
 # add dr watson
@@ -129,11 +129,11 @@ RUN cd /usr/local/bro/share/bro/site/  \
 
 # add bro-scripts
 RUN cd /usr/local/bro/share/bro/site/  \
-&& git clone --recursive https://github.com/reservoirlabs/bro-scripts.git \
-&& echo "@load bro-scripts/clickbot" >> local.bro \
+&& git clone --recursive https://github.com/reservoirlabs/bro-scripts.git bro-scripts \
+# && echo "@load bro-scripts/clickbot" >> local.bro \
 && echo "@load bro-scripts/supercomputing/producer-consumer-ratio" >> local.bro \
 && echo "@load bro-scripts/supercomputing/protocol-stats" >> local.bro \
-&& echo "@load bro-scripts/supercomputing/http-exe-bad-attributes" >> local.bro \
+#&& echo "@load bro-scripts/supercomputing/http-exe-bad-attributes" >> local.bro \
 && echo "@load bro-scripts/supercomputing/smtp-url" >> local.bro \
 && echo "@load bro-scripts/supercomputing/top-metrics" >> local.bro \
 && echo "@load bro-scripts/supercomputing/unique-hosts" >> local.bro \
