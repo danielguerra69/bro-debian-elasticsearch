@@ -1,14 +1,25 @@
 FROM debian:jessie
-
 # based on blacktop bro
 MAINTAINER danielguerra, https://github.com/danielguerra
 
-#set the path
-ENV PATH /usr/local/bro/bin:/scripts:$PATH
-RUN echo "export PATH=$PATH:/usr/local/bro/bin:/scripts" > /root/.profile
+ADD ElasticSearch.cc.patch /tmp/ElasticSearch.cc.patch
+ADD JSON.h.patch /tmp/JSON.h.patch
+ADD JSON.cc.patch /tmp/JSON.cc.patch
 
+#set the path
+ENV PATH /usr/local/bro/bin:$PATH
+RUN echo "export PATH=$PATH:/usr/local/bro/bin" > /root/.profile
+
+<<<<<<< HEAD
 # add patches for bro to work with elasticsearch 2.0 (remove . set correct time)
 ADD /bro-patch /tmp/bro-patch
+=======
+# add maintance shell scripts
+ADD updateintel.sh /bin/updateintel.sh
+ADD cleanelastic.sh /bin/cleanelastic.sh
+ADD elasticsearchMapping.sh /bin/elasticsearchMapping.sh
+ADD removeMapping.sh /bin/removeMapping.sh
+>>>>>>> parent of b465486... extra bro plugins
 
 # Install Bro + Required Dependencies
 RUN buildDeps='build-essential \
@@ -83,9 +94,9 @@ openssh-server --no-install-recommends \
 && make install \
 && cd /tmp \
 && git clone --recursive git://git.bro.org/bro \
-&& patch /tmp/bro/aux/plugins/elasticsearch/src/ElasticSearch.cc  /tmp/bro-patch/ElasticSearch.cc.patch \
-&& patch /tmp/bro/src/threading/formatters/JSON.h /tmp/bro-patch/JSON.h.patch \
-&& patch /tmp/bro/src/threading/formatters/JSON.cc /tmp/bro-patch/JSON.cc.patch \
+&& patch /tmp/bro/aux/plugins/elasticsearch/src/ElasticSearch.cc  /tmp/ElasticSearch.cc.patch \
+&& patch /tmp/bro/src/threading/formatters/JSON.h /tmp/JSON.h.patch \
+&& patch /tmp/bro/src/threading/formatters/JSON.cc /tmp/JSON.cc.patch \
 && cd /tmp/bro \
 && ./configure \
 && make \
@@ -105,6 +116,7 @@ openssh-server --no-install-recommends \
 && apt-get clean \
 && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
+<<<<<<< HEAD
 # add maintance shell scripts
 ADD /scripts /scripts
 
@@ -121,12 +133,21 @@ RUN cd /usr/local/bro/share/bro/site/  \
 RUN cd /usr/local/bro/share/bro/site/  \
 && git clone --recursive https://github.com/broala/bro-drwatson.git drwatson \
 && echo "@load drwatson" >> local.bro
+=======
+#add custom bro files
+ADD /custom /usr/local/bro/share/bro/custom
+RUN echo "@load custom" >> /usr/local/bro/share/bro/base/init-default.bro
 
-# add shellshock
-RUN cd /usr/local/bro/share/bro/site/  \
-&& git clone --recursive https://github.com/broala/bro-shellshock.git shellshock \
-&& echo "@load shellshock" >> local.bro
+#do some elasticsearch tweaks
+#socks version causes type conflict
+RUN sed -i "s/version:     count           \&log/socks_version:     count           \&log/g" /usr/local/bro/share/bro/base/protocols/socks/main.bro
+RUN sed -i "s/\$version=/\$socks_version=/g" /usr/local/bro/share/bro/base/protocols/socks/main.bro
+>>>>>>> parent of b465486... extra bro plugins
 
+#ssh version conflict
+# todo
+
+<<<<<<< HEAD
 # add bro-scripts
 RUN cd /usr/local/bro/share/bro/site/  \
 && git clone --recursive https://github.com/reservoirlabs/bro-scripts.git bro-scripts \
@@ -139,14 +160,16 @@ RUN cd /usr/local/bro/share/bro/site/  \
 && echo "@load bro-scripts/supercomputing/unique-hosts" >> local.bro \
 && echo "@load bro-scripts/supercomputing/unique-macs" >> local.bro \
 && echo "@load bro-scripts/track-dhcp/track-dhcp" >> local.bro
+=======
+# stop local logging to keep container clean
+RUN sed -i "s/default_writer = WRITER_ASCII/default_writer = WRITER_NONE/g" /usr/local/bro/share/bro/base/frameworks/logging/main.bro
+>>>>>>> parent of b465486... extra bro plugins
 
-# add role scripts
-ADD /role /role
+# city v6 fix
+ADD GeoLiteCityv6.dat /usr/share/GeoIP/GeoIPCityv6.dat
 
 # bro pcap service
-ADD /xinetd/bro /etc/xinetd.d/bro
-
-# add bro service
+ADD bro /etc/xinetd.d/bro
 RUN echo "bro             1969/tcp                        # bro pcap feed" >> /etc/services
 
 #set the expose ports
@@ -155,11 +178,17 @@ EXPOSE 1969
 EXPOSE 47761
 EXPOSE 47762
 
+#add custom bro files
+ADD /custom /usr/local/bro/share/bro/custom
+RUN echo "@load custom" >> /usr/local/bro/share/bro/base/init-default.bro
+
+# update intel files
+RUN /bin/updateintel.sh
+
+# sshd Needs
+#set sshd config for key based authentication for root
+RUN mkdir -p /var/run/sshd && sed -i "s/UsePrivilegeSeparation.*/UsePrivilegeSeparation no/g" /etc/ssh/sshd_config && sed -i "s/UsePAM.*/UsePAM no/g" /etc/ssh/sshd_config && sed -i "s/PermitRootLogin.*/PermitRootLogin yes/g" /etc/ssh/sshd_config && sed -i "s/#AuthorizedKeysFile/AuthorizedKeysFile/g" /etc/ssh/sshd_config
 #set default dir
 WORKDIR /tmp
 #start sshd
-#CMD ["/usr/sbin/sshd","-D"]
-#do some elasticsearch tweaks
-#socks version causes type conflict
-#RUN sed -i "s/version:     count           \&log/socks_version:     count           \&log/g" /usr/local/bro/share/bro/base/protocols/socks/main.bro
-#RUN sed -i "s/\$version=/\$socks_version=/g" /usr/local/bro/share/bro/base/protocols/socks/main.bro
+CMD ["/usr/sbin/sshd","-D"]

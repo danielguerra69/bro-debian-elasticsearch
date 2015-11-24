@@ -16,7 +16,7 @@ Bro doesn't write local logfiles and only logs to elasticsearch.
 
 ### Image Size
 
-* [![Latest](https://badge.imagelayers.io/danielguerra/bro-debian-elasticsearch.svg)](https://imagelayers.io/?images=danielguerra/bro-debian-elasticsearch:latest 'latest')
+[![Latest](https://badge.imagelayers.io/danielguerra/bro-debian-elasticsearch.svg)](https://imagelayers.io/?images=danielguerra/bro-debian-elasticsearch:latest 'latest')
 
 ### Elasticsearch Mapping (important)
 
