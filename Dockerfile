@@ -1,25 +1,14 @@
 FROM debian:jessie
+
 # based on blacktop bro
 MAINTAINER danielguerra, https://github.com/danielguerra
 
-ADD ElasticSearch.cc.patch /tmp/ElasticSearch.cc.patch
-ADD JSON.h.patch /tmp/JSON.h.patch
-ADD JSON.cc.patch /tmp/JSON.cc.patch
-
 #set the path
-ENV PATH /usr/local/bro/bin:$PATH
-RUN echo "export PATH=$PATH:/usr/local/bro/bin" > /root/.profile
+ENV PATH /usr/local/bro/bin:/scripts:$PATH
+RUN echo "export PATH=$PATH:/usr/local/bro/bin:/scripts" > /root/.profile
 
-<<<<<<< HEAD
 # add patches for bro to work with elasticsearch 2.0 (remove . set correct time)
-ADD /bro-patch /tmp/bro-patch
-=======
-# add maintance shell scripts
-ADD updateintel.sh /bin/updateintel.sh
-ADD cleanelastic.sh /bin/cleanelastic.sh
-ADD elasticsearchMapping.sh /bin/elasticsearchMapping.sh
-ADD removeMapping.sh /bin/removeMapping.sh
->>>>>>> parent of b465486... extra bro plugins
+ADD /bro-patch /bro-patch
 
 # Install Bro + Required Dependencies
 RUN buildDeps='build-essential \
@@ -94,9 +83,9 @@ openssh-server --no-install-recommends \
 && make install \
 && cd /tmp \
 && git clone --recursive git://git.bro.org/bro \
-&& patch /tmp/bro/aux/plugins/elasticsearch/src/ElasticSearch.cc  /tmp/ElasticSearch.cc.patch \
-&& patch /tmp/bro/src/threading/formatters/JSON.h /tmp/JSON.h.patch \
-&& patch /tmp/bro/src/threading/formatters/JSON.cc /tmp/JSON.cc.patch \
+&& patch /tmp/bro/aux/plugins/elasticsearch/src/ElasticSearch.cc  /bro-patch/ElasticSearch.cc.patch \
+&& patch /tmp/bro/src/threading/formatters/JSON.h /bro-patch/JSON.h.patch \
+&& patch /tmp/bro/src/threading/formatters/JSON.cc /bro-patch/JSON.cc.patch \
 && cd /tmp/bro \
 && ./configure \
 && make \
@@ -116,79 +105,69 @@ openssh-server --no-install-recommends \
 && apt-get clean \
 && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-<<<<<<< HEAD
 # add maintance shell scripts
 ADD /scripts /scripts
 
 #add extra bro files
-ADD /bro-extra /usr/local/bro/share/bro/site/bro-extra
-RUN echo "@load bro-extra" >> /usr/local/bro/share/bro/site/local.bro
+ADD /bro-extra /usr/local/bro/share/bro/bro-extra
+RUN echo "@load bro-extra" >> /usr/local/bro/share/bro/base/init-default.bro
 
 # add botflex
-RUN cd /usr/local/bro/share/bro/site/  \
-&& git clone --recursive https://github.com/sheharbano/botflex.git botflex\
-&& echo "@load botflex/detection/correlation/correlation.bro" >> local.bro
+RUN cd /usr/local/bro/share/bro/  \
+&& git clone --recursive https://github.com/sheharbano/botflex.git botflex
+# && echo "@load botflex/detection/correlation/correlation.bro" >> base/init-default.bro
 
 # add dr watson
-RUN cd /usr/local/bro/share/bro/site/  \
-&& git clone --recursive https://github.com/broala/bro-drwatson.git drwatson \
-&& echo "@load drwatson" >> local.bro
-=======
-#add custom bro files
-ADD /custom /usr/local/bro/share/bro/custom
-RUN echo "@load custom" >> /usr/local/bro/share/bro/base/init-default.bro
+RUN cd /usr/local/bro/share/bro/  \
+&& git clone --recursive https://github.com/broala/bro-drwatson.git drwatson
+#&& echo "@load drwatson" >> base/init-default.bro
 
-#do some elasticsearch tweaks
-#socks version causes type conflict
-RUN sed -i "s/version:     count           \&log/socks_version:     count           \&log/g" /usr/local/bro/share/bro/base/protocols/socks/main.bro
-RUN sed -i "s/\$version=/\$socks_version=/g" /usr/local/bro/share/bro/base/protocols/socks/main.bro
->>>>>>> parent of b465486... extra bro plugins
+# add shellshock
+RUN cd /usr/local/bro/share/bro/  \
+&& git clone --recursive https://github.com/broala/bro-shellshock.git shellshock \
+&& echo "@load shellshock" >> base/init-default.bro
 
-#ssh version conflict
-# todo
-
-<<<<<<< HEAD
 # add bro-scripts
-RUN cd /usr/local/bro/share/bro/site/  \
-&& git clone --recursive https://github.com/reservoirlabs/bro-scripts.git bro-scripts \
+RUN cd /usr/local/bro/share/bro/  \
+&& git clone --recursive https://github.com/reservoirlabs/bro-scripts.git bro-scripts
 # && echo "@load bro-scripts/clickbot" >> local.bro \
-&& echo "@load bro-scripts/supercomputing/producer-consumer-ratio" >> local.bro \
-&& echo "@load bro-scripts/supercomputing/protocol-stats" >> local.bro \
+#&& echo "@load bro-scripts/supercomputing/producer-consumer-ratio" >> local.bro \
+#&& echo "@load bro-scripts/supercomputing/protocol-stats" >> local.bro \
 #&& echo "@load bro-scripts/supercomputing/http-exe-bad-attributes" >> local.bro \
-&& echo "@load bro-scripts/supercomputing/smtp-url" >> local.bro \
-&& echo "@load bro-scripts/supercomputing/top-metrics" >> local.bro \
-&& echo "@load bro-scripts/supercomputing/unique-hosts" >> local.bro \
-&& echo "@load bro-scripts/supercomputing/unique-macs" >> local.bro \
-&& echo "@load bro-scripts/track-dhcp/track-dhcp" >> local.bro
-=======
-# stop local logging to keep container clean
-RUN sed -i "s/default_writer = WRITER_ASCII/default_writer = WRITER_NONE/g" /usr/local/bro/share/bro/base/frameworks/logging/main.bro
->>>>>>> parent of b465486... extra bro plugins
+#&& echo "@load bro-scripts/supercomputing/smtp-url" >> local.bro \
+#&& echo "@load bro-scripts/supercomputing/top-metrics" >> base/init-default.bro \
+#&& echo "@load bro-scripts/supercomputing/unique-hosts" >> base/init-default.bro \
+#&& echo "@load bro-scripts/supercomputing/unique-macs" >> base/init-default.bro\
+#&& echo "@load bro-scripts/track-dhcp/track-dhcp" >> base/init-default.bro
 
-# city v6 fix
-ADD GeoLiteCityv6.dat /usr/share/GeoIP/GeoIPCityv6.dat
+# add role scripts
+ADD /role /role
 
 # bro pcap service
-ADD bro /etc/xinetd.d/bro
+ADD /xinetd/bro /etc/xinetd.d/bro
+
+# add bro service
 RUN echo "bro             1969/tcp                        # bro pcap feed" >> /etc/services
 
+#fresh intel
+RUN /scripts/update-intel.sh
 #set the expose ports
 EXPOSE 22
 EXPOSE 1969
 EXPOSE 47761
 EXPOSE 47762
 
-#add custom bro files
-ADD /custom /usr/local/bro/share/bro/custom
-RUN echo "@load custom" >> /usr/local/bro/share/bro/base/init-default.bro
-
-# update intel files
-RUN /bin/updateintel.sh
-
-# sshd Needs
-#set sshd config for key based authentication for root
-RUN mkdir -p /var/run/sshd && sed -i "s/UsePrivilegeSeparation.*/UsePrivilegeSeparation no/g" /etc/ssh/sshd_config && sed -i "s/UsePAM.*/UsePAM no/g" /etc/ssh/sshd_config && sed -i "s/PermitRootLogin.*/PermitRootLogin yes/g" /etc/ssh/sshd_config && sed -i "s/#AuthorizedKeysFile/AuthorizedKeysFile/g" /etc/ssh/sshd_config
 #set default dir
 WORKDIR /tmp
+
+#Add geolitecityv6
+RUN wget http://geolite.maxmind.com/download/geoip/database/GeoLiteCityv6-beta/GeoLiteCityv6.dat.gz
+RUN gunzip GeoLiteCityv6.dat.gz
+RUN mv GeoLiteCityv6.dat /usr/share/GeoIP/GeoLiteCityv6.dat
+RUN ln -s /usr/share/GeoIP/GeoLiteCityv6.dat /usr/share/GeoIP/GeoIPCityv6.dat
 #start sshd
-CMD ["/usr/sbin/sshd","-D"]
+#CMD ["/usr/sbin/sshd","-D"]
+#do some elasticsearch tweaks
+#socks version causes type conflict
+#RUN sed -i "s/version:     count           \&log/socks_version:     count           \&log/g" /usr/local/bro/share/bro/base/protocols/socks/main.bro
+#RUN sed -i "s/\$version=/\$socks_version=/g" /usr/local/bro/share/bro/base/protocols/socks/main.bro
