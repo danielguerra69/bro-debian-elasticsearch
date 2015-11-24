@@ -159,6 +159,12 @@ EXPOSE 47762
 
 #set default dir
 WORKDIR /tmp
+
+#Add geolitecityv6
+RUN wget http://geolite.maxmind.com/download/geoip/database/GeoLiteCityv6-beta/GeoLiteCityv6.dat.gz
+RUN gunzip GeoLiteCityv6.dat.gz
+RUN mv GeoLiteCityv6.dat /usr/share/GeoIP/GeoLiteCityv6.dat
+RUN ln -s /usr/share/GeoIP/GeoLiteCityv6.dat /usr/share/GeoIP/GeoIPCityv6.dat
 #start sshd
 #CMD ["/usr/sbin/sshd","-D"]
 #do some elasticsearch tweaks
