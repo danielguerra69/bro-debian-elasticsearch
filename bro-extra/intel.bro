@@ -2,7 +2,7 @@
 
 redef Intel::read_files += {
   "/usr/local/bro/share/bro/bro-extra/alienvault.intel",
-  "/usr/local/bro/share/bro/bro-extra/sciarmy.intel",
+  "/usr/local/bro/share/bro/bro-extra/ciarmy.intel",
   "/usr/local/bro/share/bro/bro-extra/malhosts.intel",
   "/usr/local/bro/share/bro/bro-extra/mandiant.intel",
   "/usr/local/bro/share/bro/bro-extra/snort.intel",
