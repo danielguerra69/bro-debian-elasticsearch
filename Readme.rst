@@ -65,7 +65,7 @@ $ bro -r /pcap/mydump.pcap
 ### bro xinetd service
 
 ```bash
-$ docker run -d -p 1969:1969 --link elasticsearch-master:elasticsearch --name bro-xinetd --hostname bro-xinetd danielguerra/bro-debian-elasticsearch /usr/sbin/xinetd -dontfork
+$ docker run -d -p 1969:1969 --link elasticsearch-master:elasticsearch --name bro-xinetd --hostname bro-xinetd danielguerra/bro-debian-elasticsearch /role/xinetd
 ```
 tcpdump to your container from a remote host, replace dockerhost with your ip
 ```bash
@@ -95,7 +95,7 @@ $ docker run --volumes-from ssh-container -v $(pwd):/backup debian:jessie cp -R 
 ```
 start bro as deamon
 ```bash
-$ docker run -d -p 1922:22 --link elasticsearch:elasticsearch --name bro-dev danielguerra/bro-debian-elasticsearch
+$ docker run -d -p 1922:22 --link elasticsearch:elasticsearch --name bro-dev danielguerra/bro-debian-elasticsearch /role/sshd
 $ ssh -p 1922 -i id_rsa root@dockerhost
 ```
 

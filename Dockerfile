@@ -165,9 +165,8 @@ RUN wget http://geolite.maxmind.com/download/geoip/database/GeoLiteCityv6-beta/G
 RUN gunzip GeoLiteCityv6.dat.gz
 RUN mv GeoLiteCityv6.dat /usr/share/GeoIP/GeoLiteCityv6.dat
 RUN ln -s /usr/share/GeoIP/GeoLiteCityv6.dat /usr/share/GeoIP/GeoIPCityv6.dat
-#start sshd
-#CMD ["/usr/sbin/sshd","-D"]
+
 #do some elasticsearch tweaks
 #socks version causes type conflict
-#RUN sed -i "s/version:     count           \&log/socks_version:     count           \&log/g" /usr/local/bro/share/bro/base/protocols/socks/main.bro
-#RUN sed -i "s/\$version=/\$socks_version=/g" /usr/local/bro/share/bro/base/protocols/socks/main.bro
+RUN sed -i "s/version:     count           \&log/socks_version:     count           \&log/g" /usr/local/bro/share/bro/base/protocols/socks/main.bro
+RUN sed -i "s/\$version=/\$socks_version=/g" /usr/local/bro/share/bro/base/protocols/socks/main.bro
