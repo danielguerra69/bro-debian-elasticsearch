@@ -16,7 +16,7 @@ Bro doesn't write local logfiles and only logs to elasticsearch.
 
 ### Image Size
 
-[![Latest](https://badge.imagelayers.io/danielguerra/bro-debian-elasticsearch.svg)](https://imagelayers.io/?images=danielguerra/bro-debian-elasticsearch:latest 'latest')
+* [![Latest](https://badge.imagelayers.io/danielguerra/bro-debian-elasticsearch.svg)](https://imagelayers.io/?images=danielguerra/bro-debian-elasticsearch:latest 'latest')
 
 ### Elasticsearch Mapping (important)
 
@@ -65,7 +65,7 @@ $ bro -r /pcap/mydump.pcap
 ### bro xinetd service
 
 ```bash
-$ docker run -d -p 1969:1969 --link elasticsearch-master:elasticsearch --name bro-xinetd --hostname bro-xinetd danielguerra/bro-debian-elasticsearch /role/xinetd
+$ docker run -d -p 1969:1969 --link elasticsearch-master:elasticsearch --name bro-xinetd --hostname bro-xinetd danielguerra/bro-debian-elasticsearch /usr/sbin/xinetd -dontfork
 ```
 tcpdump to your container from a remote host, replace dockerhost with your ip
 ```bash
@@ -95,7 +95,7 @@ $ docker run --volumes-from ssh-container -v $(pwd):/backup debian:jessie cp -R 
 ```
 start bro as deamon
 ```bash
-$ docker run -d -p 1922:22 --link elasticsearch:elasticsearch --name bro-dev danielguerra/bro-debian-elasticsearch /role/sshd
+$ docker run -d -p 1922:22 --link elasticsearch:elasticsearch --name bro-dev danielguerra/bro-debian-elasticsearch
 $ ssh -p 1922 -i id_rsa root@dockerhost
 ```
 
