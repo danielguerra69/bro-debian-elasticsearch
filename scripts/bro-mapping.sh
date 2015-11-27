@@ -40,6 +40,10 @@ curl -XPUT elasticsearch:9200/_template/fixstrings_bro -d '{
           "validation_status" : {
             "type" : "string",
             "index" : "not_analyzed"
+          },
+          "server_name" : {
+            "type" : "string",
+            "index" : "not_analyzed"
           }
         }
       },
