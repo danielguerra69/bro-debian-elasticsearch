@@ -55,6 +55,8 @@ Start the frond-end you can point your browser at http://<dockerhost>:5601/
 ```bash
 docker run -d -p 5601:5601 --link=elasticsearch-node02:elasticsearch --hostname=kibana --name kibana kibana
 ```
+ check my kabina config at
+ https://github.com/danielguerra69/bro-debian-elasticsearch/blob/master/scripts/kibana.json
 
 ### bro on the commandline
 
