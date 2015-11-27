@@ -1,5 +1,10 @@
+#!/bin/bash
 curl -XPUT elasticsearch:9200/_template/fixstrings_bro -d '{
   "template": "bro-*",
+    "index": {
+      "number_of_shards": 7,
+      "number_of_replicas": 2
+    },
     "mappings" : {
       "http" : {
         "properties" : {

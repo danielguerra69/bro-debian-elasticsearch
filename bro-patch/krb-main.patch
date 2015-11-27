@@ -1,0 +1,6 @@
+147c147,149
+< 	info$client = fmt("%s/%s", msg$client_name, msg$service_realm);
+---
+> 	if ( msg?$client_name && msg?$service_realm) {
+> 		info$client = fmt("%s/%s", msg$client_name, msg$service_realm);
+> 	}

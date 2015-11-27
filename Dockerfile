@@ -92,7 +92,7 @@ openssh-server --no-install-recommends \
 && make install \
 && sed -i "s/127.0.0.1/elasticsearch/g" /tmp/bro/aux/plugins/elasticsearch/scripts/init.bro \
 && sed -i "s/2secs/60secs/g" /tmp/bro/aux/plugins/elasticsearch/scripts/init.bro \
-&& sed -i "s/const max_batch_size = 1000/const max_batch_size = 1/g" /tmp/bro/aux/plugins/elasticsearch/scripts/init.bro \
+&& sed -i "s/const max_batch_size = 1000/const max_batch_size = 500/g" /tmp/bro/aux/plugins/elasticsearch/scripts/init.bro \
 && cd /tmp/bro/aux/plugins/elasticsearch \
 && ./configure \
 && make \
@@ -165,9 +165,17 @@ RUN wget http://geolite.maxmind.com/download/geoip/database/GeoLiteCityv6-beta/G
 RUN gunzip GeoLiteCityv6.dat.gz
 RUN mv GeoLiteCityv6.dat /usr/share/GeoIP/GeoLiteCityv6.dat
 RUN ln -s /usr/share/GeoIP/GeoLiteCityv6.dat /usr/share/GeoIP/GeoIPCityv6.dat
-#start sshd
-#CMD ["/usr/sbin/sshd","-D"]
-#do some elasticsearch tweaks
-#socks version causes type conflict
+
+# Do some elasticsearch tweaks (couldnt solve it with mapping :`( )
+# elastic is not happy about version, type change count/string
 RUN sed -i "s/version:     count           \&log/socks_version:     count           \&log/g" /usr/local/bro/share/bro/base/protocols/socks/main.bro
 RUN sed -i "s/\$version=/\$socks_version=/g" /usr/local/bro/share/bro/base/protocols/socks/main.bro
+RUN sed -i "s/version:          string \&log/ssl_version:     string \&log/g" /usr/local/bro/share/bro/base/protocols/ssl/main.bro
+RUN sed -i "s/\$version=/\$ssl_version=/g" /usr/local/bro/share/bro/base/protocols/ssl/main.bro
+RUN sed -i "s/version:         count        \&log/ssh_version:         count        \&log/g" /usr/local/bro/share/bro/base/protocols/ssh/main.bro
+RUN sed -i "s/\$version =/\$ssh_version =/g" /usr/local/bro/share/bro/base/protocols/ssh/main.bro
+RUN sed -i "s/version: string \&log/snmp_version: string \&log/g" /usr/local/bro/share/bro/base/protocols/snmp/main.bro
+RUN sed -i "s/\$version=/\$snmp_version=/g" /usr/local/bro/share/bro/base/protocols/snmp/main.bro
+# request_body_len type change string/count
+RUN sed -i "s/request_body_len:        string            \&log/request_body_len:        count            \&log/g" /usr/local/bro/share/bro/base/protocols/sip/main.bro
+RUN patch /usr/local/bro/share/bro/base/protocols/krb/main.bro /bro-patch/krb-main.patch
