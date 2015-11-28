@@ -1,0 +1,486 @@
+[
+  {
+    "_id": "intel",
+    "_type": "search",
+    "_source": {
+      "title": "intel",
+      "description": "",
+      "hits": 0,
+      "columns": [
+        "uid",
+        "sources",
+        "seen_indicator_type",
+        "seen_where"
+      ],
+      "sort": [
+        "ts",
+        "desc"
+      ],
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"bro-*\",\"query\":{\"query_string\":{\"query\":\"_type:intel\",\"analyze_wildcard\":true}},\"highlight\":{\"pre_tags\":[\"@kibana-highlighted-field@\"],\"post_tags\":[\"@/kibana-highlighted-field@\"],\"fields\":{\"*\":{}},\"fragment_size\":2147483647},\"filter\":[]}"
+      }
+    }
+  },
+  {
+    "_id": "reporter",
+    "_type": "search",
+    "_source": {
+      "title": "reporter",
+      "description": "",
+      "hits": 0,
+      "columns": [
+        "level",
+        "location",
+        "message"
+      ],
+      "sort": [
+        "ts",
+        "desc"
+      ],
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"bro-*\",\"query\":{\"query_string\":{\"query\":\"_type:reporter\",\"analyze_wildcard\":true}},\"highlight\":{\"pre_tags\":[\"@kibana-highlighted-field@\"],\"post_tags\":[\"@/kibana-highlighted-field@\"],\"fields\":{\"*\":{}},\"fragment_size\":2147483647},\"filter\":[]}"
+      }
+    }
+  },
+  {
+    "_id": "kerberos",
+    "_type": "search",
+    "_source": {
+      "title": "kerberos",
+      "description": "",
+      "hits": 0,
+      "columns": [
+        "uid",
+        "service",
+        "success",
+        "error_msg"
+      ],
+      "sort": [
+        "ts",
+        "desc"
+      ],
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"bro-*\",\"query\":{\"query_string\":{\"query\":\"_type:kerberos\",\"analyze_wildcard\":true}},\"highlight\":{\"pre_tags\":[\"@kibana-highlighted-field@\"],\"post_tags\":[\"@/kibana-highlighted-field@\"],\"fields\":{\"*\":{}},\"fragment_size\":2147483647},\"filter\":[]}"
+      }
+    }
+  },
+  {
+    "_id": "cookie",
+    "_type": "search",
+    "_source": {
+      "title": "cookie",
+      "description": "",
+      "hits": 0,
+      "columns": [
+        "uid",
+        "cookie_unesc"
+      ],
+      "sort": [
+        "ts",
+        "desc"
+      ],
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"bro-*\",\"highlight\":{\"pre_tags\":[\"@kibana-highlighted-field@\"],\"post_tags\":[\"@/kibana-highlighted-field@\"],\"fields\":{\"*\":{}},\"fragment_size\":2147483647},\"filter\":[],\"query\":{\"query_string\":{\"analyze_wildcard\":true,\"query\":\"_type:cookie\"}}}"
+      }
+    }
+  },
+  {
+    "_id": "notice",
+    "_type": "search",
+    "_source": {
+      "title": "notice",
+      "description": "",
+      "hits": 0,
+      "columns": [
+        "uid",
+        "note",
+        "msg"
+      ],
+      "sort": [
+        "ts",
+        "desc"
+      ],
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"bro-*\",\"query\":{\"query_string\":{\"query\":\"_type:notice\",\"analyze_wildcard\":true}},\"highlight\":{\"pre_tags\":[\"@kibana-highlighted-field@\"],\"post_tags\":[\"@/kibana-highlighted-field@\"],\"fields\":{\"*\":{}},\"fragment_size\":2147483647},\"filter\":[]}"
+      }
+    }
+  },
+  {
+    "_id": "weird",
+    "_type": "search",
+    "_source": {
+      "title": "weird",
+      "description": "",
+      "hits": 0,
+      "columns": [
+        "name"
+      ],
+      "sort": [
+        "ts",
+        "desc"
+      ],
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"bro-*\",\"query\":{\"query_string\":{\"query\":\"_type:weird\",\"analyze_wildcard\":true}},\"highlight\":{\"pre_tags\":[\"@kibana-highlighted-field@\"],\"post_tags\":[\"@/kibana-highlighted-field@\"],\"fields\":{\"*\":{}},\"fragment_size\":2147483647},\"filter\":[]}"
+      }
+    }
+  },
+  {
+    "_id": "all",
+    "_type": "search",
+    "_source": {
+      "title": "all",
+      "description": "",
+      "hits": 0,
+      "columns": [
+        "_source"
+      ],
+      "sort": [
+        "ts",
+        "desc"
+      ],
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"bro-*\",\"query\":{\"query_string\":{\"analyze_wildcard\":true,\"query\":\"*\"}},\"highlight\":{\"pre_tags\":[\"@kibana-highlighted-field@\"],\"post_tags\":[\"@/kibana-highlighted-field@\"],\"fields\":{\"*\":{}},\"fragment_size\":2147483647},\"filter\":[]}"
+      }
+    }
+  },
+  {
+    "_id": "http",
+    "_type": "search",
+    "_source": {
+      "title": "http",
+      "description": "",
+      "hits": 0,
+      "columns": [
+        "method",
+        "host",
+        "uri",
+        "user_agent"
+      ],
+      "sort": [
+        "ts",
+        "desc"
+      ],
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"bro-*\",\"query\":{\"query_string\":{\"analyze_wildcard\":true,\"query\":\"_type:http\"}},\"highlight\":{\"pre_tags\":[\"@kibana-highlighted-field@\"],\"post_tags\":[\"@/kibana-highlighted-field@\"],\"fields\":{\"*\":{}},\"fragment_size\":2147483647},\"filter\":[]}"
+      }
+    }
+  },
+  {
+    "_id": "connection",
+    "_type": "search",
+    "_source": {
+      "title": "connection",
+      "description": "",
+      "hits": 0,
+      "columns": [
+        "service",
+        "proto",
+        "id_orig_h",
+        "id_orig_p",
+        "id_resp_h",
+        "id_resp_p",
+        "orig_bytes",
+        "resp_bytes"
+      ],
+      "sort": [
+        "ts",
+        "desc"
+      ],
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"bro-*\",\"highlight\":{\"pre_tags\":[\"@kibana-highlighted-field@\"],\"post_tags\":[\"@/kibana-highlighted-field@\"],\"fields\":{\"*\":{}},\"fragment_size\":2147483647},\"filter\":[],\"query\":{\"query_string\":{\"analyze_wildcard\":true,\"query\":\"_type:conn\"}}}"
+      }
+    }
+  },
+  {
+    "_id": "undetected-connection",
+    "_type": "search",
+    "_source": {
+      "title": "undetected connection",
+      "description": "",
+      "hits": 0,
+      "columns": [
+        "id_orig_h",
+        "id_orig_p",
+        "id_resp_h",
+        "id_resp_p",
+        "duration",
+        "proto",
+        "orig_bytes",
+        "resp_bytes"
+      ],
+      "sort": [
+        "ts",
+        "desc"
+      ],
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"bro-*\",\"highlight\":{\"pre_tags\":[\"@kibana-highlighted-field@\"],\"post_tags\":[\"@/kibana-highlighted-field@\"],\"fields\":{\"*\":{}},\"fragment_size\":2147483647},\"filter\":[],\"query\":{\"query_string\":{\"query\":\"_type:conn AND NOT service:?*\",\"analyze_wildcard\":true}}}"
+      }
+    }
+  },
+  {
+    "_id": "dhcp",
+    "_type": "search",
+    "_source": {
+      "title": "dhcp",
+      "description": "",
+      "hits": 0,
+      "columns": [
+        "id_orig_h",
+        "id_resp_h",
+        "assigned_ip",
+        "lease_time",
+        "mac",
+        "trans_id"
+      ],
+      "sort": [
+        "ts",
+        "desc"
+      ],
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"bro-*\",\"query\":{\"query_string\":{\"query\":\"_type:dhcp\",\"analyze_wildcard\":true}},\"highlight\":{\"pre_tags\":[\"@kibana-highlighted-field@\"],\"post_tags\":[\"@/kibana-highlighted-field@\"],\"fields\":{\"*\":{}},\"fragment_size\":2147483647},\"filter\":[]}"
+      }
+    }
+  },
+  {
+    "_id": "sip",
+    "_type": "search",
+    "_source": {
+      "title": "sip",
+      "description": "",
+      "hits": 0,
+      "columns": [
+        "method",
+        "user_agent",
+        "call_id",
+        "request_from",
+        "request_to"
+      ],
+      "sort": [
+        "ts",
+        "desc"
+      ],
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"bro-*\",\"query\":{\"query_string\":{\"query\":\"_type:sip\",\"analyze_wildcard\":true}},\"highlight\":{\"pre_tags\":[\"@kibana-highlighted-field@\"],\"post_tags\":[\"@/kibana-highlighted-field@\"],\"fields\":{\"*\":{}},\"fragment_size\":2147483647},\"filter\":[]}"
+      }
+    }
+  },
+  {
+    "_id": "dpd",
+    "_type": "search",
+    "_source": {
+      "title": "dpd",
+      "description": "",
+      "hits": 0,
+      "columns": [
+        "uid",
+        "analyzer",
+        "failure_reason",
+        "id_orig_h",
+        "id_resp_h"
+      ],
+      "sort": [
+        "ts",
+        "desc"
+      ],
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"bro-*\",\"highlight\":{\"pre_tags\":[\"@kibana-highlighted-field@\"],\"post_tags\":[\"@/kibana-highlighted-field@\"],\"fields\":{\"*\":{}},\"fragment_size\":2147483647},\"filter\":[],\"query\":{\"query_string\":{\"query\":\"_type:dpd\",\"analyze_wildcard\":true}}}"
+      }
+    }
+  },
+  {
+    "_id": "ssh",
+    "_type": "search",
+    "_source": {
+      "title": "ssh",
+      "description": "",
+      "hits": 0,
+      "columns": [
+        "uid",
+        "auth_success",
+        "cipher_alg",
+        "host_key_alg",
+        "kex_alg",
+        "mac_alg",
+        "host_key",
+        "client",
+        "server"
+      ],
+      "sort": [
+        "ts",
+        "desc"
+      ],
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"bro-*\",\"query\":{\"query_string\":{\"query\":\"_type:ssh\",\"analyze_wildcard\":true}},\"highlight\":{\"pre_tags\":[\"@kibana-highlighted-field@\"],\"post_tags\":[\"@/kibana-highlighted-field@\"],\"fields\":{\"*\":{}},\"fragment_size\":2147483647},\"filter\":[]}"
+      }
+    }
+  },
+  {
+    "_id": "dns",
+    "_type": "search",
+    "_source": {
+      "title": "dns",
+      "description": "",
+      "hits": 0,
+      "columns": [
+        "id_resp_h",
+        "query",
+        "answers"
+      ],
+      "sort": [
+        "ts",
+        "desc"
+      ],
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"bro-*\",\"query\":{\"query_string\":{\"query\":\"_type:dns\",\"analyze_wildcard\":true}},\"highlight\":{\"pre_tags\":[\"@kibana-highlighted-field@\"],\"post_tags\":[\"@/kibana-highlighted-field@\"],\"fields\":{\"*\":{}},\"fragment_size\":2147483647},\"filter\":[]}"
+      }
+    }
+  },
+  {
+    "_id": "app-stats",
+    "_type": "search",
+    "_source": {
+      "title": "app stats",
+      "description": "",
+      "hits": 0,
+      "columns": [
+        "app",
+        "bytes",
+        "hits",
+        "ts_delta",
+        "uniq_hosts"
+      ],
+      "sort": [
+        "ts",
+        "desc"
+      ],
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"bro-*\",\"highlight\":{\"pre_tags\":[\"@kibana-highlighted-field@\"],\"post_tags\":[\"@/kibana-highlighted-field@\"],\"fields\":{\"*\":{}},\"fragment_size\":2147483647},\"filter\":[],\"query\":{\"query_string\":{\"query\":\"_type:app_stats\",\"analyze_wildcard\":true}}}"
+      }
+    }
+  },
+  {
+    "_id": "x509",
+    "_type": "search",
+    "_source": {
+      "title": "x509",
+      "description": "",
+      "hits": 0,
+      "columns": [
+        "_source"
+      ],
+      "sort": [
+        "ts",
+        "desc"
+      ],
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"bro-*\",\"query\":{\"query_string\":{\"query\":\"_type:x509\",\"analyze_wildcard\":true}},\"highlight\":{\"pre_tags\":[\"@kibana-highlighted-field@\"],\"post_tags\":[\"@/kibana-highlighted-field@\"],\"fields\":{\"*\":{}},\"fragment_size\":2147483647},\"filter\":[]}"
+      }
+    }
+  },
+  {
+    "_id": "location",
+    "_type": "search",
+    "_source": {
+      "title": "location",
+      "description": "",
+      "hits": 0,
+      "columns": [
+        "ext_location",
+        "origin",
+        "uid"
+      ],
+      "sort": [
+        "ts",
+        "desc"
+      ],
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"bro-*\",\"highlight\":{\"pre_tags\":[\"@kibana-highlighted-field@\"],\"post_tags\":[\"@/kibana-highlighted-field@\"],\"fields\":{\"*\":{}},\"fragment_size\":2147483647},\"filter\":[],\"query\":{\"query_string\":{\"query\":\"_type:location\",\"analyze_wildcard\":true}}}"
+      }
+    }
+  },
+  {
+    "_id": "dns-conn",
+    "_type": "search",
+    "_source": {
+      "title": "dns conn",
+      "description": "",
+      "hits": 0,
+      "columns": [
+        "id_resp_h",
+        "query",
+        "answers"
+      ],
+      "sort": [
+        "ts",
+        "desc"
+      ],
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"bro-*\",\"query\":{\"query_string\":{\"query\":\"(_type:dns OR _type:conn)\",\"analyze_wildcard\":true}},\"highlight\":{\"pre_tags\":[\"@kibana-highlighted-field@\"],\"post_tags\":[\"@/kibana-highlighted-field@\"],\"fields\":{\"*\":{}},\"require_field_match\":false,\"fragment_size\":2147483647},\"filter\":[]}"
+      }
+    }
+  },
+  {
+    "_id": "syslog",
+    "_type": "search",
+    "_source": {
+      "title": "syslog",
+      "description": "",
+      "hits": 0,
+      "columns": [
+        "id_orig_h",
+        "id_resp_h",
+        "message"
+      ],
+      "sort": [
+        "ts",
+        "desc"
+      ],
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"bro-*\",\"highlight\":{\"pre_tags\":[\"@kibana-highlighted-field@\"],\"post_tags\":[\"@/kibana-highlighted-field@\"],\"fields\":{\"*\":{}},\"require_field_match\":false,\"fragment_size\":2147483647},\"filter\":[],\"query\":{\"query_string\":{\"analyze_wildcard\":true,\"query\":\"_type:syslog\"}}}"
+      }
+    }
+  },
+  {
+    "_id": "ssl",
+    "_type": "search",
+    "_source": {
+      "title": "ssl",
+      "description": "",
+      "hits": 0,
+      "columns": [
+        "server_name",
+        "validation_status",
+        "subject",
+        "issuer"
+      ],
+      "sort": [
+        "ts",
+        "desc"
+      ],
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"bro-*\",\"query\":{\"query_string\":{\"query\":\"_type:ssl\",\"analyze_wildcard\":true}},\"highlight\":{\"pre_tags\":[\"@kibana-highlighted-field@\"],\"post_tags\":[\"@/kibana-highlighted-field@\"],\"fields\":{\"*\":{}},\"require_field_match\":false,\"fragment_size\":2147483647},\"filter\":[]}"
+      }
+    }
+  }
+]
