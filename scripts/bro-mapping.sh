@@ -35,6 +35,14 @@ curl -XPUT elasticsearch:9200/_template/fixstrings_bro -d '{
           }
         }
       },
+      "notice" : {
+        "properties" : {
+          "note" : {
+            "type" : "string",
+            "index" : "not_analyzed"
+          }
+        }
+      },
       "ssl" : {
         "properties" : {
           "validation_status" : {
