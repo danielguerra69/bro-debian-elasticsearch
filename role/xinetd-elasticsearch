@@ -1,0 +1,8 @@
+#!/bin/bash
+cp /xinetd/bro /etc/xinetd.d/bro
+# This script sets all logs to elasticsearch
+echo "@load ./logs-to-elasticsearch" >> /usr/local/bro/share/bro/bro-extra/custom.bro
+# stop local logging
+sed -i "s/default_writer = WRITER_ASCII/default_writer = WRITER_NONE/g" /usr/local/bro/share/bro/base/frameworks/logging/main.bro
+# start xinetd
+/usr/sbin/xinetd -dontfork

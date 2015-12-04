@@ -1,6 +1,3 @@
-# This script sets all logs to elasticsearch
-@load ./logs-to-elasticsearch
-
 # This script add lat long to ip numbers in orig_loc and dest_loc
 @load ./geoip
 

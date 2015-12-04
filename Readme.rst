@@ -72,7 +72,7 @@ bro -r /pcap/mydump.pcap
 ### bro xinetd service
 when role/xinetd is used no local logs are written
 ```bash
-docker run -d -p 1969:1969 --link elasticsearch-master:elasticsearch --name bro-xinetd --hostname bro-xinetd danielguerra/bro-debian-elasticsearch /role/xinetd
+docker run -d -p 1969:1969 --link elasticsearch-master:elasticsearch --name bro-xinetd --hostname bro-xinetd danielguerra/bro-debian-elasticsearch /role/xinetd-elasticsearch
 ```
 tcpdump to your container from a remote host, replace dockerhost with your ip
 ```bash
@@ -105,6 +105,31 @@ start bro as ssh daemon
 ```bash
 docker run -d -p 1922:22 --link elasticsearch:elasticsearch --name bro-dev danielguerra/bro-debian-elasticsearch /role/sshd
 ssh -p 1922 -i id_rsa root@dockerhost
+```
+
+### bro amqp
+
+Bro can be used with amqp in elasticsearch out or amqp output
+
+First we need an amqp, this case a rabbitmq
+```bash
+docker run -d -p 8080:15672 --name=rabbitmq --hostname=rabbitmq rabbitmq
+docker inspect rabbitmq (to get the ip)
+```
+
+Now we can start a bro xinetd service which outputs to rabbitmq
+```bash
+docker run -d -p 1970:1969 --name bro-xinetd-amqp --hostname bro-xinetd-amqp danielguerra/bro-debian-elasticsearch /role/xinetd-amqp
+
+```
+
+Or a bro that reads pcap files from amqp and outputs to amqp
+```bash
+docker run -d  --name=bro-amqp-amqp --hostname=bro-amqp-amqp danielguerra/bro-debian-elasticsearch /role/amqp-amqp <user> <pass> <ip> <queue> <user> <pass> <ip> <exchange>
+```
+And publish a pcap file from bro-dev commandline
+```bash
+cat <pcap-file> | amqp-publish   --url=amqp://<user>:<pass>@<amqp-ip> --exchange=<exchange>
 ```
 
 ### useful scripts

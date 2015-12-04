@@ -55,3 +55,41 @@ event http_request(c: connection, method: string, original_URI: string, unescape
     			Log::write(Location::LOG, log_rec);
     }
 }
+
+event http_header(c: connection, is_orig: bool, name: string, value: string) &priority=2
+{
+     local origin: string;
+     local location_extracted: string="";
+     if ( is_orig && name == "COOKIE")
+     {
+            local unesc_cookie = unescape_URI(value);
+            if ( /lati?t?u?d?e?=([0-9]{1,2}[.][0-9]+)/ in unesc_cookie && /lo?ngi?t?u?d?e?=([0-9]{1,3}[.][0-9]+)/ in unesc_cookie)
+            {
+                    local latstring = find_last(unesc_cookie,/lati?t?u?d?e?=([0-9]{1,2}[.][0-9]+)/);
+                    local latitude = split_string1(latstring,/=/);
+                    local longstring = find_last(unesc_cookie,/lo?ngi?t?u?d?e?=([0-9]{1,3}[.][0-9]+)/);
+                    local longitude = split_string1(longstring,/=/);
+                    if ( 1 in latitude && 1 in longitude  && to_double(latitude[1]) != 0)
+                    {
+                            origin = "cookie_name";
+                            location_extracted = cat(latitude[1],",",longitude[1]);
+                    }
+            }
+            else if ( /location=[1]?[0-9]?[0-9][.][0-9]{3,}[|][0-8]?[0-9][.][0-9]{3,}/ in unesc_cookie)
+            {
+                    local coordinatestring = find_last(unesc_cookie,/([1]?[0-9]?[0-9][.][0-9]{3,}[|][0-8]?[0-9][.][0-9]{3,})/);
+                    local coordinate = split_string1(coordinatestring,/[|]/);
+                    if (1 in coordinate && to_double(coordinate[0]) != 0)
+                    {
+                            origin = "cookie_pair";
+                            location_extracted = cat(coordinate[1],",",coordinate[0]);
+                    }
+
+            }
+    }
+
+    if (location_extracted != "") {
+            local log_rec: Location::Info = [$ts=network_time(), $uid=c$uid, $origin=origin , $ext_location=location_extracted];
+            Log::write(Location::LOG, log_rec);
+    }
+}

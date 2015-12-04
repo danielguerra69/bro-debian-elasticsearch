@@ -32,12 +32,16 @@ libpcre3-dev \
 python-setuptools \
 libsnappy-dev \
 libbz2-dev \
-devscripts ' \
+devscripts \
+libjemalloc-dev \
+libjemalloc1-dbg ' \
 && set -x \
 && echo "[INFO] Installing Dependancies..." \
 && apt-get -qq update \
 && apt-get -qq upgrade \
 && apt-get install -yq $buildDeps \
+libjemalloc1 \
+amqp-tools \
 locales \
 vim \
 xinetd \
@@ -140,12 +144,6 @@ RUN cd /usr/local/bro/share/bro/  \
 #&& echo "@load bro-scripts/supercomputing/unique-macs" >> base/init-default.bro\
 #&& echo "@load bro-scripts/track-dhcp/track-dhcp" >> base/init-default.bro
 
-# add role scripts
-ADD /role /role
-
-# bro pcap service
-ADD /xinetd/bro /etc/xinetd.d/bro
-
 # add bro service
 RUN echo "bro             1969/tcp                        # bro pcap feed" >> /etc/services
 
@@ -187,3 +185,11 @@ RUN sed -i "s/\$version=/\$snmp_version=/g" /usr/local/bro/share/bro/base/protoc
 
 # fix error in kerberos
 RUN patch /usr/local/bro/share/bro/base/protocols/krb/main.bro /bro-patch/krb-main.patch
+
+# bro pcap-in tcp services
+ADD /xinetd /xinetd
+
+# add role scripts
+ADD /role /role
+
+CMD ["/role/cmd-bare"]
