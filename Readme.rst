@@ -1,26 +1,46 @@
-BRO ELK docker integration
+##### BRO ELK AMQP docker integration
+
+![bro-logo](https://www.bro.org/images/bro-eyes.png)
+![elastic-logo](https://www.elastic.co/static/img/elastic-logo-200.png)
+![rabbitmq-logo](https://www.rabbitmq.com/img/rabbitmq_logo_strap.png)
 
 =====================
 
-This repository contains a **Dockerfile** of [Bro-IDS](http://www.bro.org/index.html) for [Docker](https://www.docker.io/)'s
+[Docker](https://www.docker.io/)
+[Bro-IDS](https://www.bro.org/index.html)
+[Elasticsearch/Kibana](https://www.elastic.co)
+[RabbitMQ](https://www.rabbitmq.com)
 
-Integrates Bro IDS 2.4-207 with Elasticsearch 2.0/2.1 & Kibana 4.2/4.3
-Bro was compiled with broker,rocksdb and pybroker (full featured).
-The bro scripts have been modified in order to satisfy elasticsearch.
+### About
+Integrates Bro IDS git with Elasticsearch 2.1 & Kibana 4.3 Bro was compiled with broker,rocksdb and pybroker (full featured).Bro can write directly into Elasticsearch without logstash. The bro scripts have been modified in order to satisfy elasticsearch.
 The example below uses 3 elasticsearch nodes. The container bro-xinetd
 writes to the master. Kibana reads from node02. The commandline bro uses
 node01.
+Added amqp (rabbitmq) consume/publish roles with the debian amqp-tools.
+Todo elasticsearch amqp consumer, amqpfs for extracted files.
 
 ### Dependencies
 
-* [![2.0.0](https://badge.imagelayers.io/debian.svg)](https://imagelayers.io/?images=debian:jessie 'jessie') debian:jessie
-* [![2.0.0](https://badge.imagelayers.io/elasticsearch.svg)](https://imagelayers.io/?images=elasticsearch:2.0.0 '2.0.0') elasticsearch 2.0.0
-* [![4.2.1](https://badge.imagelayers.io/kibana.svg)](https://imagelayers.io/?images=kibana:4.2.1 '4.2.1') kibana 4.2.1
+* [![jessie](https://badge.imagelayers.io/debian.svg)](https://imagelayers.io/?images=debian:jessie 'jessie') debian:jessie
+* [![2.1](https://badge.imagelayers.io/elasticsearch.svg)](https://imagelayers.io/?images=elasticsearch:2.1 '2.1') elasticsearch 2.1
+* [![4.3](https://badge.imagelayers.io/kibana.svg)](https://imagelayers.io/?images=kibana:4.3 '4.3') kibana 4.3
+* [![3.5.6-management](https://badge.imagelayers.io/rabbitmq.svg)](https://imagelayers.io/?images=rabbitmq:3.5.6-management '3.5.6-management') rabbitmq 3.5.6-management
+
 
 ### Image Size
 
 * [![Latest](https://badge.imagelayers.io/danielguerra/bro-debian-elasticsearch.svg)](https://imagelayers.io/?images=danielguerra/bro-debian-elasticsearch:latest 'latest')
 
+
+#### Instalation
+
+Before you begin I recommend to start with pulling fresh images.
+```bash
+docker pull danielguerra/bro-debian-elasticsearch
+docker pull elasticsearch:2.1 (or latest)
+docker pull kibana:4.3 (or latest)
+docker pull rabbitmq:3.5.6-management
+```
 ### elastic data
 
 Create empty elasticsearch data volumes
@@ -60,8 +80,14 @@ docker run -d -p 5601:5601 --link=elasticsearch-node02:elasticsearch --hostname=
 
 ### bro on the commandline
 
+commandline and local file log
 ```bash
-docker run -ti --link elasticsearch-node01:elasticsearch -v /Users/PCAP:/pcap --name bro-dev danielguerra/bro-debian-elasticsearch /bin/bash
+docker run -ti -v /Users/PCAP:/pcap --name bro-log danielguerra/bro-debian-elasticsearch
+```
+
+commandline and log to elasticsearch
+```bash
+docker run -ti --link elasticsearch-node01:elasticsearch -v /Users/PCAP:/pcap --name bro-dev danielguerra/bro-debian-elasticsearch /role/cmd-elasticsearch
 ```
 readfiles from bro-dev commandline
 
@@ -113,7 +139,7 @@ Bro can be used with amqp in elasticsearch out or amqp output
 
 First we need an amqp, this case a rabbitmq
 ```bash
-docker run -d -p 8080:15672 --name=rabbitmq --hostname=rabbitmq rabbitmq
+docker run -d -p 8080:15672 --name=rabbitmq --hostname=rabbitmq rabbitmq:3.5.6-management
 docker inspect rabbitmq (to get the ip)
 ```
 
