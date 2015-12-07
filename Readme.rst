@@ -1,17 +1,12 @@
 ##### BRO ELK AMQP docker integration
 
-![bro-logo](https://www.bro.org/images/bro-eyes.png)
-![elastic-logo](https://www.elastic.co/static/img/elastic-logo-200.png)
-![rabbitmq-logo](https://www.rabbitmq.com/img/rabbitmq_logo_strap.png)
-
-=====================
-
 [Docker](https://www.docker.io/)
-[Bro-IDS](https://www.bro.org/index.html)
-[Elasticsearch/Kibana](https://www.elastic.co)
-[RabbitMQ](https://www.rabbitmq.com)
+![bro-logo](https://www.bro.org/images/bro-eyes.png) [Bro-IDS](https://www.bro.org/index.html)
+![elastic-logo](https://www.elastic.co/static/img/elastic-logo-200.png) [Elasticsearch/Kibana](https://www.elastic.co)
+![rabbitmq-logo](https://www.rabbitmq.com/img/rabbitmq_logo_strap.png) [RabbitMQ](https://www.rabbitmq.com)
 
 ### About
+
 Integrates Bro IDS git with Elasticsearch 2.1 & Kibana 4.3 Bro was compiled with broker,rocksdb and pybroker (full featured).Bro can write directly into Elasticsearch without logstash. The bro scripts have been modified in order to satisfy elasticsearch.
 The example below uses 3 elasticsearch nodes. The container bro-xinetd
 writes to the master. Kibana reads from node02. The commandline bro uses
@@ -26,11 +21,9 @@ Todo elasticsearch amqp consumer, amqpfs for extracted files.
 * [![4.3](https://badge.imagelayers.io/kibana.svg)](https://imagelayers.io/?images=kibana:4.3 '4.3') kibana 4.3
 * [![3.5.6-management](https://badge.imagelayers.io/rabbitmq.svg)](https://imagelayers.io/?images=rabbitmq:3.5.6-management '3.5.6-management') rabbitmq 3.5.6-management
 
-
 ### Image Size
 
 * [![Latest](https://badge.imagelayers.io/danielguerra/bro-debian-elasticsearch.svg)](https://imagelayers.io/?images=danielguerra/bro-debian-elasticsearch:latest 'latest')
-
 
 #### Instalation
 
@@ -70,12 +63,15 @@ Then you are ready to go start reading data or dumping to the xinetd port
 
 ### kibana
 
-Start the frond-end you can point your browser at http://<dockerhost>:5601/
+(only do this when data was written to elasticsearch)
+Start the front-end you can point your browser at http://<dockerhost>:5601/
+Choose  Index contains time-based events .
+Use "bro-*" as index pattern and ts as timestamp.
 
 ```bash
 docker run -d -p 5601:5601 --link=elasticsearch-node02:elasticsearch --hostname=kibana --name kibana kibana
 ```
- check my kabina config at
+ check my kibana config at
  https://github.com/danielguerra69/bro-debian-elasticsearch/blob/master/scripts/kibana.json
 
 ### bro on the commandline
