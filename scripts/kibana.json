@@ -1,136 +1,5 @@
 [
   {
-    "_id": "intel",
-    "_type": "search",
-    "_source": {
-      "title": "intel",
-      "description": "",
-      "hits": 0,
-      "columns": [
-        "uid",
-        "sources",
-        "seen_indicator_type",
-        "seen_where"
-      ],
-      "sort": [
-        "ts",
-        "desc"
-      ],
-      "version": 1,
-      "kibanaSavedObjectMeta": {
-        "searchSourceJSON": "{\"index\":\"bro-*\",\"query\":{\"query_string\":{\"query\":\"_type:intel\",\"analyze_wildcard\":true}},\"highlight\":{\"pre_tags\":[\"@kibana-highlighted-field@\"],\"post_tags\":[\"@/kibana-highlighted-field@\"],\"fields\":{\"*\":{}},\"fragment_size\":2147483647},\"filter\":[]}"
-      }
-    }
-  },
-  {
-    "_id": "reporter",
-    "_type": "search",
-    "_source": {
-      "title": "reporter",
-      "description": "",
-      "hits": 0,
-      "columns": [
-        "level",
-        "location",
-        "message"
-      ],
-      "sort": [
-        "ts",
-        "desc"
-      ],
-      "version": 1,
-      "kibanaSavedObjectMeta": {
-        "searchSourceJSON": "{\"index\":\"bro-*\",\"query\":{\"query_string\":{\"query\":\"_type:reporter\",\"analyze_wildcard\":true}},\"highlight\":{\"pre_tags\":[\"@kibana-highlighted-field@\"],\"post_tags\":[\"@/kibana-highlighted-field@\"],\"fields\":{\"*\":{}},\"fragment_size\":2147483647},\"filter\":[]}"
-      }
-    }
-  },
-  {
-    "_id": "kerberos",
-    "_type": "search",
-    "_source": {
-      "title": "kerberos",
-      "description": "",
-      "hits": 0,
-      "columns": [
-        "uid",
-        "service",
-        "success",
-        "error_msg"
-      ],
-      "sort": [
-        "ts",
-        "desc"
-      ],
-      "version": 1,
-      "kibanaSavedObjectMeta": {
-        "searchSourceJSON": "{\"index\":\"bro-*\",\"query\":{\"query_string\":{\"query\":\"_type:kerberos\",\"analyze_wildcard\":true}},\"highlight\":{\"pre_tags\":[\"@kibana-highlighted-field@\"],\"post_tags\":[\"@/kibana-highlighted-field@\"],\"fields\":{\"*\":{}},\"fragment_size\":2147483647},\"filter\":[]}"
-      }
-    }
-  },
-  {
-    "_id": "cookie",
-    "_type": "search",
-    "_source": {
-      "title": "cookie",
-      "description": "",
-      "hits": 0,
-      "columns": [
-        "uid",
-        "cookie_unesc"
-      ],
-      "sort": [
-        "ts",
-        "desc"
-      ],
-      "version": 1,
-      "kibanaSavedObjectMeta": {
-        "searchSourceJSON": "{\"index\":\"bro-*\",\"highlight\":{\"pre_tags\":[\"@kibana-highlighted-field@\"],\"post_tags\":[\"@/kibana-highlighted-field@\"],\"fields\":{\"*\":{}},\"fragment_size\":2147483647},\"filter\":[],\"query\":{\"query_string\":{\"analyze_wildcard\":true,\"query\":\"_type:cookie\"}}}"
-      }
-    }
-  },
-  {
-    "_id": "notice",
-    "_type": "search",
-    "_source": {
-      "title": "notice",
-      "description": "",
-      "hits": 0,
-      "columns": [
-        "uid",
-        "note",
-        "msg"
-      ],
-      "sort": [
-        "ts",
-        "desc"
-      ],
-      "version": 1,
-      "kibanaSavedObjectMeta": {
-        "searchSourceJSON": "{\"index\":\"bro-*\",\"query\":{\"query_string\":{\"query\":\"_type:notice\",\"analyze_wildcard\":true}},\"highlight\":{\"pre_tags\":[\"@kibana-highlighted-field@\"],\"post_tags\":[\"@/kibana-highlighted-field@\"],\"fields\":{\"*\":{}},\"fragment_size\":2147483647},\"filter\":[]}"
-      }
-    }
-  },
-  {
-    "_id": "weird",
-    "_type": "search",
-    "_source": {
-      "title": "weird",
-      "description": "",
-      "hits": 0,
-      "columns": [
-        "name"
-      ],
-      "sort": [
-        "ts",
-        "desc"
-      ],
-      "version": 1,
-      "kibanaSavedObjectMeta": {
-        "searchSourceJSON": "{\"index\":\"bro-*\",\"query\":{\"query_string\":{\"query\":\"_type:weird\",\"analyze_wildcard\":true}},\"highlight\":{\"pre_tags\":[\"@kibana-highlighted-field@\"],\"post_tags\":[\"@/kibana-highlighted-field@\"],\"fields\":{\"*\":{}},\"fragment_size\":2147483647},\"filter\":[]}"
-      }
-    }
-  },
-  {
     "_id": "all",
     "_type": "search",
     "_source": {
@@ -375,6 +244,114 @@
     }
   },
   {
+    "_id": "weird",
+    "_type": "search",
+    "_source": {
+      "title": "weird",
+      "description": "",
+      "hits": 0,
+      "columns": [
+        "name"
+      ],
+      "sort": [
+        "ts",
+        "desc"
+      ],
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"bro-*\",\"query\":{\"query_string\":{\"query\":\"_type:weird\",\"analyze_wildcard\":true}},\"highlight\":{\"pre_tags\":[\"@kibana-highlighted-field@\"],\"post_tags\":[\"@/kibana-highlighted-field@\"],\"fields\":{\"*\":{}},\"fragment_size\":2147483647},\"filter\":[]}"
+      }
+    }
+  },
+  {
+    "_id": "intel",
+    "_type": "search",
+    "_source": {
+      "title": "intel",
+      "description": "",
+      "hits": 0,
+      "columns": [
+        "uid",
+        "sources",
+        "seen_indicator_type",
+        "seen_where"
+      ],
+      "sort": [
+        "ts",
+        "desc"
+      ],
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"bro-*\",\"query\":{\"query_string\":{\"query\":\"_type:intel\",\"analyze_wildcard\":true}},\"highlight\":{\"pre_tags\":[\"@kibana-highlighted-field@\"],\"post_tags\":[\"@/kibana-highlighted-field@\"],\"fields\":{\"*\":{}},\"fragment_size\":2147483647},\"filter\":[]}"
+      }
+    }
+  },
+  {
+    "_id": "reporter",
+    "_type": "search",
+    "_source": {
+      "title": "reporter",
+      "description": "",
+      "hits": 0,
+      "columns": [
+        "level",
+        "location",
+        "message"
+      ],
+      "sort": [
+        "ts",
+        "desc"
+      ],
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"bro-*\",\"query\":{\"query_string\":{\"query\":\"_type:reporter\",\"analyze_wildcard\":true}},\"highlight\":{\"pre_tags\":[\"@kibana-highlighted-field@\"],\"post_tags\":[\"@/kibana-highlighted-field@\"],\"fields\":{\"*\":{}},\"fragment_size\":2147483647},\"filter\":[]}"
+      }
+    }
+  },
+  {
+    "_id": "notice",
+    "_type": "search",
+    "_source": {
+      "title": "notice",
+      "description": "",
+      "hits": 0,
+      "columns": [
+        "uid",
+        "note",
+        "msg"
+      ],
+      "sort": [
+        "ts",
+        "desc"
+      ],
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"bro-*\",\"query\":{\"query_string\":{\"query\":\"_type:notice\",\"analyze_wildcard\":true}},\"highlight\":{\"pre_tags\":[\"@kibana-highlighted-field@\"],\"post_tags\":[\"@/kibana-highlighted-field@\"],\"fields\":{\"*\":{}},\"fragment_size\":2147483647},\"filter\":[]}"
+      }
+    }
+  },
+  {
+    "_id": "cookie",
+    "_type": "search",
+    "_source": {
+      "title": "cookie",
+      "description": "",
+      "hits": 0,
+      "columns": [
+        "uid",
+        "cookie_unesc"
+      ],
+      "sort": [
+        "ts",
+        "desc"
+      ],
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"bro-*\",\"highlight\":{\"pre_tags\":[\"@kibana-highlighted-field@\"],\"post_tags\":[\"@/kibana-highlighted-field@\"],\"fields\":{\"*\":{}},\"fragment_size\":2147483647},\"filter\":[],\"query\":{\"query_string\":{\"analyze_wildcard\":true,\"query\":\"_type:cookie\"}}}"
+      }
+    }
+  },
+  {
     "_id": "x509",
     "_type": "search",
     "_source": {
@@ -417,6 +394,28 @@
     }
   },
   {
+    "_id": "syslog",
+    "_type": "search",
+    "_source": {
+      "title": "syslog",
+      "description": "",
+      "hits": 0,
+      "columns": [
+        "id_orig_h",
+        "id_resp_h",
+        "message"
+      ],
+      "sort": [
+        "ts",
+        "desc"
+      ],
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"bro-*\",\"highlight\":{\"pre_tags\":[\"@kibana-highlighted-field@\"],\"post_tags\":[\"@/kibana-highlighted-field@\"],\"fields\":{\"*\":{}},\"require_field_match\":false,\"fragment_size\":2147483647},\"filter\":[],\"query\":{\"query_string\":{\"analyze_wildcard\":true,\"query\":\"_type:syslog\"}}}"
+      }
+    }
+  },
+  {
     "_id": "dns-conn",
     "_type": "search",
     "_source": {
@@ -439,16 +438,17 @@
     }
   },
   {
-    "_id": "syslog",
+    "_id": "kerberos",
     "_type": "search",
     "_source": {
-      "title": "syslog",
+      "title": "kerberos",
       "description": "",
       "hits": 0,
       "columns": [
-        "id_orig_h",
-        "id_resp_h",
-        "message"
+        "service",
+        "request_type",
+        "success",
+        "error_msg"
       ],
       "sort": [
         "ts",
@@ -456,7 +456,7 @@
       ],
       "version": 1,
       "kibanaSavedObjectMeta": {
-        "searchSourceJSON": "{\"index\":\"bro-*\",\"highlight\":{\"pre_tags\":[\"@kibana-highlighted-field@\"],\"post_tags\":[\"@/kibana-highlighted-field@\"],\"fields\":{\"*\":{}},\"require_field_match\":false,\"fragment_size\":2147483647},\"filter\":[],\"query\":{\"query_string\":{\"analyze_wildcard\":true,\"query\":\"_type:syslog\"}}}"
+        "searchSourceJSON": "{\"index\":\"bro-*\",\"query\":{\"query_string\":{\"query\":\"_type:kerberos\",\"analyze_wildcard\":true}},\"highlight\":{\"pre_tags\":[\"@kibana-highlighted-field@\"],\"post_tags\":[\"@/kibana-highlighted-field@\"],\"fields\":{\"*\":{}},\"require_field_match\":false,\"fragment_size\":2147483647},\"filter\":[]}"
       }
     }
   },
@@ -484,17 +484,24 @@
     }
   },
   {
-    "_id": "logs",
-    "_type": "visualization",
+    "_id": "mysql",
+    "_type": "search",
     "_source": {
-      "title": "logs",
-      "visState": "{\"type\":\"area\",\"params\":{\"shareYAxis\":true,\"addTooltip\":true,\"addLegend\":true,\"smoothLines\":true,\"scale\":\"linear\",\"interpolate\":\"linear\",\"mode\":\"stacked\",\"times\":[],\"addTimeMarker\":false,\"defaultYExtents\":false,\"setYExtents\":false,\"yAxis\":{}},\"aggs\":[{\"id\":\"1\",\"type\":\"count\",\"schema\":\"metric\",\"params\":{}},{\"id\":\"2\",\"type\":\"date_histogram\",\"schema\":\"segment\",\"params\":{\"field\":\"ts\",\"interval\":\"auto\",\"customInterval\":\"2h\",\"min_doc_count\":1,\"extended_bounds\":{}}},{\"id\":\"3\",\"type\":\"terms\",\"schema\":\"group\",\"params\":{\"field\":\"_type\",\"size\":50,\"order\":\"desc\",\"orderBy\":\"1\"}}],\"listeners\":{}}",
-      "uiStateJSON": "{}",
+      "title": "mysql",
       "description": "",
-      "savedSearchId": "all",
+      "hits": 0,
+      "columns": [
+        "cmd",
+        "arg",
+        "response"
+      ],
+      "sort": [
+        "ts",
+        "desc"
+      ],
       "version": 1,
       "kibanaSavedObjectMeta": {
-        "searchSourceJSON": "{\"filter\":[]}"
+        "searchSourceJSON": "{\"index\":\"bro-*\",\"query\":{\"query_string\":{\"query\":\"_type:mysql\",\"analyze_wildcard\":true}},\"highlight\":{\"pre_tags\":[\"@kibana-highlighted-field@\"],\"post_tags\":[\"@/kibana-highlighted-field@\"],\"fields\":{\"*\":{}},\"require_field_match\":false,\"fragment_size\":2147483647},\"filter\":[]}"
       }
     }
   },
@@ -529,14 +536,14 @@
     }
   },
   {
-    "_id": "http-status",
+    "_id": "logs",
     "_type": "visualization",
     "_source": {
-      "title": "http status",
-      "visState": "{\"type\":\"area\",\"params\":{\"shareYAxis\":true,\"addTooltip\":true,\"addLegend\":true,\"smoothLines\":true,\"scale\":\"linear\",\"interpolate\":\"linear\",\"mode\":\"stacked\",\"times\":[],\"addTimeMarker\":false,\"defaultYExtents\":false,\"setYExtents\":false,\"yAxis\":{}},\"aggs\":[{\"id\":\"1\",\"type\":\"count\",\"schema\":\"metric\",\"params\":{}},{\"id\":\"2\",\"type\":\"date_histogram\",\"schema\":\"segment\",\"params\":{\"field\":\"ts\",\"interval\":\"auto\",\"customInterval\":\"2h\",\"min_doc_count\":1,\"extended_bounds\":{}}},{\"id\":\"3\",\"type\":\"terms\",\"schema\":\"group\",\"params\":{\"field\":\"status_msg\",\"size\":20,\"order\":\"desc\",\"orderBy\":\"1\"}}],\"listeners\":{}}",
+      "title": "logs",
+      "visState": "{\"type\":\"area\",\"params\":{\"shareYAxis\":true,\"addTooltip\":true,\"addLegend\":true,\"smoothLines\":true,\"scale\":\"linear\",\"interpolate\":\"linear\",\"mode\":\"stacked\",\"times\":[],\"addTimeMarker\":false,\"defaultYExtents\":false,\"setYExtents\":false,\"yAxis\":{}},\"aggs\":[{\"id\":\"1\",\"type\":\"count\",\"schema\":\"metric\",\"params\":{}},{\"id\":\"2\",\"type\":\"date_histogram\",\"schema\":\"segment\",\"params\":{\"field\":\"ts\",\"interval\":\"auto\",\"customInterval\":\"2h\",\"min_doc_count\":1,\"extended_bounds\":{}}},{\"id\":\"3\",\"type\":\"terms\",\"schema\":\"group\",\"params\":{\"field\":\"_type\",\"size\":50,\"order\":\"desc\",\"orderBy\":\"1\"}}],\"listeners\":{}}",
       "uiStateJSON": "{}",
       "description": "",
-      "savedSearchId": "http",
+      "savedSearchId": "all",
       "version": 1,
       "kibanaSavedObjectMeta": {
         "searchSourceJSON": "{\"filter\":[]}"
@@ -552,6 +559,21 @@
       "uiStateJSON": "{}",
       "description": "",
       "savedSearchId": "connection",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"filter\":[]}"
+      }
+    }
+  },
+  {
+    "_id": "http-status",
+    "_type": "visualization",
+    "_source": {
+      "title": "http status",
+      "visState": "{\"type\":\"area\",\"params\":{\"shareYAxis\":true,\"addTooltip\":true,\"addLegend\":true,\"smoothLines\":true,\"scale\":\"linear\",\"interpolate\":\"linear\",\"mode\":\"stacked\",\"times\":[],\"addTimeMarker\":false,\"defaultYExtents\":false,\"setYExtents\":false,\"yAxis\":{}},\"aggs\":[{\"id\":\"1\",\"type\":\"count\",\"schema\":\"metric\",\"params\":{}},{\"id\":\"2\",\"type\":\"date_histogram\",\"schema\":\"segment\",\"params\":{\"field\":\"ts\",\"interval\":\"auto\",\"customInterval\":\"2h\",\"min_doc_count\":1,\"extended_bounds\":{}}},{\"id\":\"3\",\"type\":\"terms\",\"schema\":\"group\",\"params\":{\"field\":\"status_msg\",\"size\":20,\"order\":\"desc\",\"orderBy\":\"1\"}}],\"listeners\":{}}",
+      "uiStateJSON": "{}",
+      "description": "",
+      "savedSearchId": "http",
       "version": 1,
       "kibanaSavedObjectMeta": {
         "searchSourceJSON": "{\"filter\":[]}"
@@ -604,11 +626,26 @@
     }
   },
   {
-    "_id": "unknown-resp-host",
+    "_id": "dns-query",
     "_type": "visualization",
     "_source": {
-      "title": "unknown resp host",
-      "visState": "{\"type\":\"table\",\"params\":{\"perPage\":10,\"showPartialRows\":false,\"showMeticsAtAllLevels\":false},\"aggs\":[{\"id\":\"1\",\"type\":\"count\",\"schema\":\"metric\",\"params\":{}},{\"id\":\"2\",\"type\":\"terms\",\"schema\":\"bucket\",\"params\":{\"field\":\"id_resp_h\",\"size\":20,\"order\":\"desc\",\"orderBy\":\"1\"}}],\"listeners\":{}}",
+      "title": "dns query",
+      "visState": "{\"type\":\"table\",\"params\":{\"perPage\":10,\"showPartialRows\":false,\"showMeticsAtAllLevels\":false},\"aggs\":[{\"id\":\"1\",\"type\":\"count\",\"schema\":\"metric\",\"params\":{}},{\"id\":\"2\",\"type\":\"terms\",\"schema\":\"bucket\",\"params\":{\"field\":\"query\",\"size\":20,\"order\":\"desc\",\"orderBy\":\"1\"}}],\"listeners\":{}}",
+      "uiStateJSON": "{}",
+      "description": "",
+      "savedSearchId": "dns-conn",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"filter\":[]}"
+      }
+    }
+  },
+  {
+    "_id": "unknown-orig-host",
+    "_type": "visualization",
+    "_source": {
+      "title": "unknown orig host",
+      "visState": "{\"type\":\"table\",\"params\":{\"perPage\":10,\"showPartialRows\":false,\"showMeticsAtAllLevels\":false},\"aggs\":[{\"id\":\"1\",\"type\":\"count\",\"schema\":\"metric\",\"params\":{}},{\"id\":\"2\",\"type\":\"terms\",\"schema\":\"bucket\",\"params\":{\"field\":\"id_orig_h\",\"size\":20,\"order\":\"desc\",\"orderBy\":\"1\"}}],\"listeners\":{}}",
       "uiStateJSON": "{}",
       "description": "",
       "savedSearchId": "undetected-connection",
@@ -619,14 +656,89 @@
     }
   },
   {
-    "_id": "weird",
+    "_id": "resp-geoip",
     "_type": "visualization",
     "_source": {
-      "title": "weird name",
-      "visState": "{\"type\":\"area\",\"params\":{\"addLegend\":true,\"addTimeMarker\":false,\"addTooltip\":true,\"defaultYExtents\":false,\"interpolate\":\"linear\",\"mode\":\"stacked\",\"scale\":\"linear\",\"setYExtents\":false,\"shareYAxis\":true,\"smoothLines\":true,\"times\":[],\"yAxis\":{}},\"aggs\":[{\"id\":\"1\",\"type\":\"count\",\"schema\":\"metric\",\"params\":{}},{\"id\":\"2\",\"type\":\"date_histogram\",\"schema\":\"segment\",\"params\":{\"field\":\"ts\",\"interval\":\"auto\",\"customInterval\":\"2h\",\"min_doc_count\":1,\"extended_bounds\":{}}},{\"id\":\"3\",\"type\":\"terms\",\"schema\":\"group\",\"params\":{\"field\":\"name\",\"size\":5,\"order\":\"desc\",\"orderBy\":\"1\"}}],\"listeners\":{}}",
+      "title": "resp geoip",
+      "visState": "{\"type\":\"tile_map\",\"params\":{\"addTooltip\":true,\"heatBlur\":15,\"heatMaxZoom\":16,\"heatMinOpacity\":\"0.51\",\"heatNormalizeData\":true,\"heatRadius\":25,\"isDesaturated\":true,\"mapType\":\"Heatmap\",\"wms\":{\"enabled\":false,\"url\":\"https://basemap.nationalmap.gov/arcgis/services/USGSTopo/MapServer/WMSServer\",\"options\":{\"version\":\"1.3.0\",\"layers\":\"0\",\"format\":\"image/png\",\"transparent\":true,\"attribution\":\"Maps provided by USGS\",\"styles\":\"\"}}},\"aggs\":[{\"id\":\"1\",\"type\":\"count\",\"schema\":\"metric\",\"params\":{}},{\"id\":\"2\",\"type\":\"geohash_grid\",\"schema\":\"segment\",\"params\":{\"field\":\"resp_location\",\"autoPrecision\":true,\"mapZoom\":2,\"mapCenter\":[14.944784875088372,4.921875],\"precision\":2}}],\"listeners\":{}}",
       "uiStateJSON": "{}",
       "description": "",
-      "savedSearchId": "weird",
+      "savedSearchId": "connection",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"filter\":[]}"
+      }
+    }
+  },
+  {
+    "_id": "dns-qtype",
+    "_type": "visualization",
+    "_source": {
+      "title": "dns qtype",
+      "visState": "{\"type\":\"area\",\"params\":{\"addLegend\":true,\"addTimeMarker\":false,\"addTooltip\":true,\"defaultYExtents\":false,\"interpolate\":\"linear\",\"mode\":\"stacked\",\"scale\":\"linear\",\"setYExtents\":false,\"shareYAxis\":true,\"smoothLines\":true,\"times\":[],\"yAxis\":{}},\"aggs\":[{\"id\":\"1\",\"type\":\"count\",\"schema\":\"metric\",\"params\":{}},{\"id\":\"2\",\"type\":\"date_histogram\",\"schema\":\"segment\",\"params\":{\"field\":\"ts\",\"interval\":\"auto\",\"customInterval\":\"2h\",\"min_doc_count\":1,\"extended_bounds\":{}}},{\"id\":\"3\",\"type\":\"terms\",\"schema\":\"group\",\"params\":{\"field\":\"qtype_name\",\"size\":5,\"order\":\"desc\",\"orderBy\":\"1\"}}],\"listeners\":{}}",
+      "uiStateJSON": "{}",
+      "description": "",
+      "savedSearchId": "dns",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"filter\":[]}"
+      }
+    }
+  },
+  {
+    "_id": "unknown-conn-state",
+    "_type": "visualization",
+    "_source": {
+      "title": "unknown conn state",
+      "visState": "{\"type\":\"table\",\"params\":{\"perPage\":10,\"showPartialRows\":false,\"showMeticsAtAllLevels\":false},\"aggs\":[{\"id\":\"1\",\"type\":\"count\",\"schema\":\"metric\",\"params\":{}},{\"id\":\"2\",\"type\":\"terms\",\"schema\":\"bucket\",\"params\":{\"field\":\"conn_state\",\"size\":20,\"order\":\"desc\",\"orderBy\":\"1\"}}],\"listeners\":{}}",
+      "uiStateJSON": "{}",
+      "description": "",
+      "savedSearchId": "undetected-connection",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"filter\":[]}"
+      }
+    }
+  },
+  {
+    "_id": "extracted-location",
+    "_type": "visualization",
+    "_source": {
+      "title": "extracted location",
+      "visState": "{\"type\":\"tile_map\",\"params\":{\"mapType\":\"Scaled Circle Markers\",\"isDesaturated\":true,\"addTooltip\":true,\"heatMaxZoom\":16,\"heatMinOpacity\":0.1,\"heatRadius\":25,\"heatBlur\":15,\"heatNormalizeData\":true,\"wms\":{\"enabled\":false,\"url\":\"https://basemap.nationalmap.gov/arcgis/services/USGSTopo/MapServer/WMSServer\",\"options\":{\"version\":\"1.3.0\",\"layers\":\"0\",\"format\":\"image/png\",\"transparent\":true,\"attribution\":\"Maps provided by USGS\",\"styles\":\"\"}}},\"aggs\":[{\"id\":\"1\",\"type\":\"count\",\"schema\":\"metric\",\"params\":{}},{\"id\":\"2\",\"type\":\"geohash_grid\",\"schema\":\"segment\",\"params\":{\"field\":\"ext_location\",\"autoPrecision\":true,\"precision\":2}}],\"listeners\":{}}",
+      "uiStateJSON": "{}",
+      "description": "",
+      "savedSearchId": "location",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"filter\":[]}"
+      }
+    }
+  },
+  {
+    "_id": "notice-note",
+    "_type": "visualization",
+    "_source": {
+      "title": "notice note",
+      "visState": "{\"aggs\":[{\"id\":\"1\",\"params\":{},\"schema\":\"metric\",\"type\":\"count\"},{\"id\":\"2\",\"params\":{\"customInterval\":\"2h\",\"extended_bounds\":{},\"field\":\"ts\",\"interval\":\"auto\",\"min_doc_count\":1},\"schema\":\"segment\",\"type\":\"date_histogram\"},{\"id\":\"3\",\"params\":{\"field\":\"note\",\"order\":\"desc\",\"orderBy\":\"1\",\"size\":5},\"schema\":\"group\",\"type\":\"terms\"}],\"listeners\":{},\"params\":{\"addLegend\":true,\"addTimeMarker\":false,\"addTooltip\":true,\"defaultYExtents\":false,\"interpolate\":\"linear\",\"mode\":\"stacked\",\"scale\":\"linear\",\"setYExtents\":false,\"shareYAxis\":true,\"smoothLines\":true,\"times\":[],\"yAxis\":{}},\"type\":\"area\"}",
+      "uiStateJSON": "{}",
+      "description": "",
+      "savedSearchId": "notice",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"filter\":[]}"
+      }
+    }
+  },
+  {
+    "_id": "unknown-resp-host",
+    "_type": "visualization",
+    "_source": {
+      "title": "unknown resp host",
+      "visState": "{\"type\":\"table\",\"params\":{\"perPage\":10,\"showPartialRows\":false,\"showMeticsAtAllLevels\":false},\"aggs\":[{\"id\":\"1\",\"type\":\"count\",\"schema\":\"metric\",\"params\":{}},{\"id\":\"2\",\"type\":\"terms\",\"schema\":\"bucket\",\"params\":{\"field\":\"id_resp_h\",\"size\":20,\"order\":\"desc\",\"orderBy\":\"1\"}}],\"listeners\":{}}",
+      "uiStateJSON": "{}",
+      "description": "",
+      "savedSearchId": "undetected-connection",
       "version": 1,
       "kibanaSavedObjectMeta": {
         "searchSourceJSON": "{\"filter\":[]}"
@@ -694,21 +806,6 @@
     }
   },
   {
-    "_id": "sum-resp-ip-bytes",
-    "_type": "visualization",
-    "_source": {
-      "title": "sum resp ip bytes",
-      "visState": "{\"aggs\":[{\"id\":\"1\",\"params\":{\"field\":\"resp_ip_bytes\"},\"schema\":\"metric\",\"type\":\"sum\"}],\"listeners\":{},\"params\":{\"fontSize\":\"24\"},\"type\":\"metric\"}",
-      "uiStateJSON": "{}",
-      "description": "",
-      "savedSearchId": "connection",
-      "version": 1,
-      "kibanaSavedObjectMeta": {
-        "searchSourceJSON": "{\"filter\":[]}"
-      }
-    }
-  },
-  {
     "_id": "unknown-service-proto-bytes",
     "_type": "visualization",
     "_source": {
@@ -717,6 +814,21 @@
       "uiStateJSON": "{}",
       "description": "",
       "savedSearchId": "undetected-connection",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"filter\":[]}"
+      }
+    }
+  },
+  {
+    "_id": "sum-resp-ip-bytes",
+    "_type": "visualization",
+    "_source": {
+      "title": "sum resp ip bytes",
+      "visState": "{\"aggs\":[{\"id\":\"1\",\"params\":{\"field\":\"resp_ip_bytes\"},\"schema\":\"metric\",\"type\":\"sum\"}],\"listeners\":{},\"params\":{\"fontSize\":\"24\"},\"type\":\"metric\"}",
+      "uiStateJSON": "{}",
+      "description": "",
+      "savedSearchId": "connection",
       "version": 1,
       "kibanaSavedObjectMeta": {
         "searchSourceJSON": "{\"filter\":[]}"
@@ -744,66 +856,6 @@
     "_source": {
       "title": "ip port table",
       "visState": "{\"type\":\"table\",\"params\":{\"perPage\":10,\"showMeticsAtAllLevels\":false,\"showPartialRows\":false},\"aggs\":[{\"id\":\"1\",\"type\":\"count\",\"schema\":\"metric\",\"params\":{}},{\"id\":\"3\",\"type\":\"terms\",\"schema\":\"bucket\",\"params\":{\"field\":\"id_orig_h\",\"size\":100,\"order\":\"desc\",\"orderBy\":\"1\"}},{\"id\":\"4\",\"type\":\"terms\",\"schema\":\"bucket\",\"params\":{\"field\":\"id_orig_p\",\"size\":65500,\"order\":\"desc\",\"orderBy\":\"1\"}}],\"listeners\":{}}",
-      "uiStateJSON": "{}",
-      "description": "",
-      "savedSearchId": "connection",
-      "version": 1,
-      "kibanaSavedObjectMeta": {
-        "searchSourceJSON": "{\"filter\":[]}"
-      }
-    }
-  },
-  {
-    "_id": "unknown-orig-host",
-    "_type": "visualization",
-    "_source": {
-      "title": "unknown orig host",
-      "visState": "{\"type\":\"table\",\"params\":{\"perPage\":10,\"showPartialRows\":false,\"showMeticsAtAllLevels\":false},\"aggs\":[{\"id\":\"1\",\"type\":\"count\",\"schema\":\"metric\",\"params\":{}},{\"id\":\"2\",\"type\":\"terms\",\"schema\":\"bucket\",\"params\":{\"field\":\"id_orig_h\",\"size\":20,\"order\":\"desc\",\"orderBy\":\"1\"}}],\"listeners\":{}}",
-      "uiStateJSON": "{}",
-      "description": "",
-      "savedSearchId": "undetected-connection",
-      "version": 1,
-      "kibanaSavedObjectMeta": {
-        "searchSourceJSON": "{\"filter\":[]}"
-      }
-    }
-  },
-  {
-    "_id": "dns-query",
-    "_type": "visualization",
-    "_source": {
-      "title": "dns query",
-      "visState": "{\"type\":\"table\",\"params\":{\"perPage\":10,\"showPartialRows\":false,\"showMeticsAtAllLevels\":false},\"aggs\":[{\"id\":\"1\",\"type\":\"count\",\"schema\":\"metric\",\"params\":{}},{\"id\":\"2\",\"type\":\"terms\",\"schema\":\"bucket\",\"params\":{\"field\":\"query\",\"size\":20,\"order\":\"desc\",\"orderBy\":\"1\"}}],\"listeners\":{}}",
-      "uiStateJSON": "{}",
-      "description": "",
-      "savedSearchId": "dns-conn",
-      "version": 1,
-      "kibanaSavedObjectMeta": {
-        "searchSourceJSON": "{\"filter\":[]}"
-      }
-    }
-  },
-  {
-    "_id": "dns-qtype",
-    "_type": "visualization",
-    "_source": {
-      "title": "dns qtype",
-      "visState": "{\"type\":\"area\",\"params\":{\"addLegend\":true,\"addTimeMarker\":false,\"addTooltip\":true,\"defaultYExtents\":false,\"interpolate\":\"linear\",\"mode\":\"stacked\",\"scale\":\"linear\",\"setYExtents\":false,\"shareYAxis\":true,\"smoothLines\":true,\"times\":[],\"yAxis\":{}},\"aggs\":[{\"id\":\"1\",\"type\":\"count\",\"schema\":\"metric\",\"params\":{}},{\"id\":\"2\",\"type\":\"date_histogram\",\"schema\":\"segment\",\"params\":{\"field\":\"ts\",\"interval\":\"auto\",\"customInterval\":\"2h\",\"min_doc_count\":1,\"extended_bounds\":{}}},{\"id\":\"3\",\"type\":\"terms\",\"schema\":\"group\",\"params\":{\"field\":\"qtype_name\",\"size\":5,\"order\":\"desc\",\"orderBy\":\"1\"}}],\"listeners\":{}}",
-      "uiStateJSON": "{}",
-      "description": "",
-      "savedSearchId": "dns",
-      "version": 1,
-      "kibanaSavedObjectMeta": {
-        "searchSourceJSON": "{\"filter\":[]}"
-      }
-    }
-  },
-  {
-    "_id": "resp-geoip",
-    "_type": "visualization",
-    "_source": {
-      "title": "resp geoip",
-      "visState": "{\"type\":\"tile_map\",\"params\":{\"addTooltip\":true,\"heatBlur\":15,\"heatMaxZoom\":16,\"heatMinOpacity\":\"0.51\",\"heatNormalizeData\":true,\"heatRadius\":25,\"isDesaturated\":true,\"mapType\":\"Heatmap\",\"wms\":{\"enabled\":false,\"url\":\"https://basemap.nationalmap.gov/arcgis/services/USGSTopo/MapServer/WMSServer\",\"options\":{\"version\":\"1.3.0\",\"layers\":\"0\",\"format\":\"image/png\",\"transparent\":true,\"attribution\":\"Maps provided by USGS\",\"styles\":\"\"}}},\"aggs\":[{\"id\":\"1\",\"type\":\"count\",\"schema\":\"metric\",\"params\":{}},{\"id\":\"2\",\"type\":\"geohash_grid\",\"schema\":\"segment\",\"params\":{\"field\":\"resp_location\",\"autoPrecision\":true,\"mapZoom\":2,\"mapCenter\":[14.944784875088372,4.921875],\"precision\":2}}],\"listeners\":{}}",
       "uiStateJSON": "{}",
       "description": "",
       "savedSearchId": "connection",
@@ -844,14 +896,14 @@
     }
   },
   {
-    "_id": "unknown-conn-state",
+    "_id": "ssl-server-name",
     "_type": "visualization",
     "_source": {
-      "title": "unknown conn state",
-      "visState": "{\"type\":\"table\",\"params\":{\"perPage\":10,\"showPartialRows\":false,\"showMeticsAtAllLevels\":false},\"aggs\":[{\"id\":\"1\",\"type\":\"count\",\"schema\":\"metric\",\"params\":{}},{\"id\":\"2\",\"type\":\"terms\",\"schema\":\"bucket\",\"params\":{\"field\":\"conn_state\",\"size\":20,\"order\":\"desc\",\"orderBy\":\"1\"}}],\"listeners\":{}}",
+      "title": "ssl server name",
+      "visState": "{\"type\":\"area\",\"params\":{\"shareYAxis\":true,\"addTooltip\":true,\"addLegend\":true,\"smoothLines\":true,\"scale\":\"linear\",\"interpolate\":\"linear\",\"mode\":\"stacked\",\"times\":[],\"addTimeMarker\":false,\"defaultYExtents\":false,\"setYExtents\":false,\"yAxis\":{}},\"aggs\":[{\"id\":\"1\",\"type\":\"count\",\"schema\":\"metric\",\"params\":{}},{\"id\":\"2\",\"type\":\"date_histogram\",\"schema\":\"segment\",\"params\":{\"field\":\"ts\",\"interval\":\"auto\",\"customInterval\":\"2h\",\"min_doc_count\":1,\"extended_bounds\":{}}},{\"id\":\"3\",\"type\":\"terms\",\"schema\":\"group\",\"params\":{\"field\":\"server_name\",\"size\":20,\"order\":\"desc\",\"orderBy\":\"1\"}}],\"listeners\":{}}",
       "uiStateJSON": "{}",
       "description": "",
-      "savedSearchId": "undetected-connection",
+      "savedSearchId": "ssl",
       "version": 1,
       "kibanaSavedObjectMeta": {
         "searchSourceJSON": "{\"filter\":[]}"
@@ -874,14 +926,14 @@
     }
   },
   {
-    "_id": "extracted-location",
+    "_id": "connection-state",
     "_type": "visualization",
     "_source": {
-      "title": "extracted location",
-      "visState": "{\"type\":\"tile_map\",\"params\":{\"mapType\":\"Scaled Circle Markers\",\"isDesaturated\":true,\"addTooltip\":true,\"heatMaxZoom\":16,\"heatMinOpacity\":0.1,\"heatRadius\":25,\"heatBlur\":15,\"heatNormalizeData\":true,\"wms\":{\"enabled\":false,\"url\":\"https://basemap.nationalmap.gov/arcgis/services/USGSTopo/MapServer/WMSServer\",\"options\":{\"version\":\"1.3.0\",\"layers\":\"0\",\"format\":\"image/png\",\"transparent\":true,\"attribution\":\"Maps provided by USGS\",\"styles\":\"\"}}},\"aggs\":[{\"id\":\"1\",\"type\":\"count\",\"schema\":\"metric\",\"params\":{}},{\"id\":\"2\",\"type\":\"geohash_grid\",\"schema\":\"segment\",\"params\":{\"field\":\"ext_location\",\"autoPrecision\":true,\"precision\":2}}],\"listeners\":{}}",
+      "title": "connection state",
+      "visState": "{\"type\":\"area\",\"params\":{\"shareYAxis\":true,\"addTooltip\":true,\"addLegend\":true,\"smoothLines\":true,\"scale\":\"linear\",\"interpolate\":\"linear\",\"mode\":\"stacked\",\"times\":[],\"addTimeMarker\":false,\"defaultYExtents\":false,\"setYExtents\":false,\"yAxis\":{}},\"aggs\":[{\"id\":\"1\",\"type\":\"count\",\"schema\":\"metric\",\"params\":{}},{\"id\":\"2\",\"type\":\"date_histogram\",\"schema\":\"segment\",\"params\":{\"field\":\"ts\",\"interval\":\"auto\",\"customInterval\":\"2h\",\"min_doc_count\":1,\"extended_bounds\":{}}},{\"id\":\"3\",\"type\":\"terms\",\"schema\":\"group\",\"params\":{\"field\":\"conn_state\",\"size\":10,\"order\":\"desc\",\"orderBy\":\"1\"}}],\"listeners\":{}}",
       "uiStateJSON": "{}",
       "description": "",
-      "savedSearchId": "location",
+      "savedSearchId": "connection",
       "version": 1,
       "kibanaSavedObjectMeta": {
         "searchSourceJSON": "{\"filter\":[]}"
@@ -889,14 +941,14 @@
     }
   },
   {
-    "_id": "ssl-server-name",
+    "_id": "intel-indicator-type",
     "_type": "visualization",
     "_source": {
-      "title": "ssl server name",
-      "visState": "{\"type\":\"area\",\"params\":{\"shareYAxis\":true,\"addTooltip\":true,\"addLegend\":true,\"smoothLines\":true,\"scale\":\"linear\",\"interpolate\":\"linear\",\"mode\":\"stacked\",\"times\":[],\"addTimeMarker\":false,\"defaultYExtents\":false,\"setYExtents\":false,\"yAxis\":{}},\"aggs\":[{\"id\":\"1\",\"type\":\"count\",\"schema\":\"metric\",\"params\":{}},{\"id\":\"2\",\"type\":\"date_histogram\",\"schema\":\"segment\",\"params\":{\"field\":\"ts\",\"interval\":\"auto\",\"customInterval\":\"2h\",\"min_doc_count\":1,\"extended_bounds\":{}}},{\"id\":\"3\",\"type\":\"terms\",\"schema\":\"group\",\"params\":{\"field\":\"server_name\",\"size\":20,\"order\":\"desc\",\"orderBy\":\"1\"}}],\"listeners\":{}}",
+      "title": "intel indicator type",
+      "visState": "{\"type\":\"area\",\"params\":{\"addLegend\":true,\"addTimeMarker\":false,\"addTooltip\":true,\"defaultYExtents\":false,\"interpolate\":\"linear\",\"mode\":\"stacked\",\"scale\":\"linear\",\"setYExtents\":false,\"shareYAxis\":true,\"smoothLines\":false,\"times\":[],\"yAxis\":{}},\"aggs\":[{\"id\":\"1\",\"type\":\"count\",\"schema\":\"metric\",\"params\":{}},{\"id\":\"2\",\"type\":\"date_histogram\",\"schema\":\"segment\",\"params\":{\"field\":\"ts\",\"interval\":\"auto\",\"customInterval\":\"2h\",\"min_doc_count\":1,\"extended_bounds\":{}}},{\"id\":\"3\",\"type\":\"terms\",\"schema\":\"group\",\"params\":{\"field\":\"seen_indicator_type\",\"size\":5,\"order\":\"desc\",\"orderBy\":\"1\"}}],\"listeners\":{}}",
       "uiStateJSON": "{}",
       "description": "",
-      "savedSearchId": "ssl",
+      "savedSearchId": "intel",
       "version": 1,
       "kibanaSavedObjectMeta": {
         "searchSourceJSON": "{\"filter\":[]}"
@@ -904,14 +956,44 @@
     }
   },
   {
-    "_id": "http-method",
+    "_id": "intel-seen-where",
     "_type": "visualization",
     "_source": {
-      "title": "http method",
-      "visState": "{\"type\":\"area\",\"params\":{\"shareYAxis\":true,\"addTooltip\":true,\"addLegend\":true,\"smoothLines\":true,\"scale\":\"linear\",\"interpolate\":\"linear\",\"mode\":\"stacked\",\"times\":[],\"addTimeMarker\":false,\"defaultYExtents\":false,\"setYExtents\":false,\"yAxis\":{}},\"aggs\":[{\"id\":\"1\",\"type\":\"count\",\"schema\":\"metric\",\"params\":{}},{\"id\":\"2\",\"type\":\"date_histogram\",\"schema\":\"segment\",\"params\":{\"field\":\"ts\",\"interval\":\"auto\",\"customInterval\":\"2h\",\"min_doc_count\":1,\"extended_bounds\":{}}},{\"id\":\"3\",\"type\":\"terms\",\"schema\":\"group\",\"params\":{\"field\":\"method\",\"size\":5,\"order\":\"desc\",\"orderBy\":\"1\"}}],\"listeners\":{}}",
+      "title": "intel seen where",
+      "visState": "{\"type\":\"area\",\"params\":{\"addLegend\":true,\"addTimeMarker\":false,\"addTooltip\":true,\"defaultYExtents\":false,\"interpolate\":\"linear\",\"mode\":\"stacked\",\"scale\":\"linear\",\"setYExtents\":false,\"shareYAxis\":true,\"smoothLines\":true,\"times\":[],\"yAxis\":{}},\"aggs\":[{\"id\":\"1\",\"type\":\"count\",\"schema\":\"metric\",\"params\":{}},{\"id\":\"2\",\"type\":\"date_histogram\",\"schema\":\"segment\",\"params\":{\"field\":\"ts\",\"interval\":\"auto\",\"customInterval\":\"2h\",\"min_doc_count\":1,\"extended_bounds\":{}}},{\"id\":\"3\",\"type\":\"terms\",\"schema\":\"group\",\"params\":{\"field\":\"seen_where\",\"size\":5,\"order\":\"desc\",\"orderBy\":\"1\"}}],\"listeners\":{}}",
       "uiStateJSON": "{}",
       "description": "",
-      "savedSearchId": "http",
+      "savedSearchId": "intel",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"filter\":[]}"
+      }
+    }
+  },
+  {
+    "_id": "intel-sources",
+    "_type": "visualization",
+    "_source": {
+      "title": "intel sources",
+      "visState": "{\"type\":\"area\",\"params\":{\"addLegend\":true,\"addTimeMarker\":false,\"addTooltip\":true,\"defaultYExtents\":false,\"interpolate\":\"linear\",\"mode\":\"stacked\",\"scale\":\"linear\",\"setYExtents\":false,\"shareYAxis\":true,\"smoothLines\":false,\"times\":[],\"yAxis\":{}},\"aggs\":[{\"id\":\"1\",\"type\":\"count\",\"schema\":\"metric\",\"params\":{}},{\"id\":\"2\",\"type\":\"date_histogram\",\"schema\":\"segment\",\"params\":{\"field\":\"ts\",\"interval\":\"auto\",\"customInterval\":\"2h\",\"min_doc_count\":1,\"extended_bounds\":{}}},{\"id\":\"3\",\"type\":\"terms\",\"schema\":\"group\",\"params\":{\"field\":\"sources\",\"size\":5,\"order\":\"desc\",\"orderBy\":\"1\"}}],\"listeners\":{}}",
+      "uiStateJSON": "{}",
+      "description": "",
+      "savedSearchId": "intel",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"filter\":[]}"
+      }
+    }
+  },
+  {
+    "_id": "weird-name",
+    "_type": "visualization",
+    "_source": {
+      "title": "weird name",
+      "visState": "{\"type\":\"area\",\"params\":{\"shareYAxis\":true,\"addTooltip\":true,\"addLegend\":true,\"smoothLines\":true,\"scale\":\"linear\",\"interpolate\":\"linear\",\"mode\":\"stacked\",\"times\":[],\"addTimeMarker\":false,\"defaultYExtents\":false,\"setYExtents\":false,\"yAxis\":{}},\"aggs\":[{\"id\":\"1\",\"type\":\"count\",\"schema\":\"metric\",\"params\":{}},{\"id\":\"2\",\"type\":\"date_histogram\",\"schema\":\"segment\",\"params\":{\"field\":\"ts\",\"interval\":\"auto\",\"customInterval\":\"2h\",\"min_doc_count\":1,\"extended_bounds\":{}}},{\"id\":\"3\",\"type\":\"terms\",\"schema\":\"group\",\"params\":{\"field\":\"name\",\"size\":5,\"order\":\"desc\",\"orderBy\":\"1\"}}],\"listeners\":{}}",
+      "uiStateJSON": "{}",
+      "description": "",
+      "savedSearchId": "weird",
       "version": 1,
       "kibanaSavedObjectMeta": {
         "searchSourceJSON": "{\"filter\":[]}"
@@ -923,7 +1005,7 @@
     "_type": "visualization",
     "_source": {
       "title": "http host",
-      "visState": "{\"type\":\"area\",\"params\":{\"shareYAxis\":true,\"addTooltip\":true,\"addLegend\":true,\"smoothLines\":true,\"scale\":\"linear\",\"interpolate\":\"linear\",\"mode\":\"stacked\",\"times\":[],\"addTimeMarker\":false,\"defaultYExtents\":false,\"setYExtents\":false,\"yAxis\":{}},\"aggs\":[{\"id\":\"1\",\"type\":\"count\",\"schema\":\"metric\",\"params\":{}},{\"id\":\"2\",\"type\":\"date_histogram\",\"schema\":\"segment\",\"params\":{\"field\":\"ts\",\"interval\":\"auto\",\"customInterval\":\"2h\",\"min_doc_count\":1,\"extended_bounds\":{}}},{\"id\":\"3\",\"type\":\"terms\",\"schema\":\"group\",\"params\":{\"field\":\"host\",\"size\":20,\"order\":\"desc\",\"orderBy\":\"1\"}}],\"listeners\":{}}",
+      "visState": "{\"type\":\"table\",\"params\":{\"perPage\":10,\"showMeticsAtAllLevels\":false,\"showPartialRows\":false},\"aggs\":[{\"id\":\"1\",\"type\":\"count\",\"schema\":\"metric\",\"params\":{}},{\"id\":\"3\",\"type\":\"terms\",\"schema\":\"bucket\",\"params\":{\"field\":\"host\",\"size\":20,\"order\":\"desc\",\"orderBy\":\"1\"}}],\"listeners\":{}}",
       "uiStateJSON": "{}",
       "description": "",
       "savedSearchId": "http",
@@ -934,70 +1016,17 @@
     }
   },
   {
-    "_id": "connection",
-    "_type": "dashboard",
+    "_id": "http-uri",
+    "_type": "visualization",
     "_source": {
-      "title": "connection",
-      "hits": 0,
-      "description": "",
-      "panelsJSON": "[{\"col\":1,\"id\":\"service-bytes\",\"row\":1,\"size_x\":12,\"size_y\":3,\"type\":\"visualization\"},{\"col\":1,\"id\":\"proto-bytes\",\"row\":4,\"size_x\":12,\"size_y\":2,\"type\":\"visualization\"},{\"col\":1,\"id\":\"unknown-service-proto-bytes\",\"row\":6,\"size_x\":12,\"size_y\":2,\"type\":\"visualization\"},{\"col\":1,\"id\":\"service-duration\",\"row\":8,\"size_x\":12,\"size_y\":2,\"type\":\"visualization\"}]",
-      "optionsJSON": "{\"darkTheme\":true}",
+      "title": "http uri",
+      "visState": "{\"type\":\"table\",\"params\":{\"perPage\":10,\"showPartialRows\":false,\"showMeticsAtAllLevels\":false},\"aggs\":[{\"id\":\"1\",\"type\":\"count\",\"schema\":\"metric\",\"params\":{}},{\"id\":\"2\",\"type\":\"terms\",\"schema\":\"bucket\",\"params\":{\"field\":\"uri\",\"size\":20,\"order\":\"desc\",\"orderBy\":\"1\"}}],\"listeners\":{}}",
       "uiStateJSON": "{}",
-      "version": 1,
-      "timeRestore": false,
-      "kibanaSavedObjectMeta": {
-        "searchSourceJSON": "{\"filter\":[{\"query\":{\"query_string\":{\"analyze_wildcard\":true,\"query\":\"*\"}}}]}"
-      }
-    }
-  },
-  {
-    "_id": "geoip",
-    "_type": "dashboard",
-    "_source": {
-      "title": "geoip",
-      "hits": 0,
       "description": "",
-      "panelsJSON": "[{\"id\":\"resp-geoip\",\"type\":\"visualization\",\"size_x\":6,\"size_y\":6,\"col\":7,\"row\":1},{\"id\":\"orig-geoip\",\"type\":\"visualization\",\"size_x\":6,\"size_y\":6,\"col\":1,\"row\":1}]",
-      "optionsJSON": "{\"darkTheme\":true}",
-      "uiStateJSON": "{}",
+      "savedSearchId": "http",
       "version": 1,
-      "timeRestore": false,
       "kibanaSavedObjectMeta": {
-        "searchSourceJSON": "{\"filter\":[{\"query\":{\"query_string\":{\"analyze_wildcard\":true,\"query\":\"*\"}}}]}"
-      }
-    }
-  },
-  {
-    "_id": "weird",
-    "_type": "dashboard",
-    "_source": {
-      "title": "weird",
-      "hits": 0,
-      "description": "",
-      "panelsJSON": "[{\"id\":\"weird\",\"type\":\"visualization\",\"size_x\":12,\"size_y\":4,\"col\":1,\"row\":1},{\"id\":\"weird-orig-host\",\"type\":\"visualization\",\"size_x\":6,\"size_y\":2,\"col\":1,\"row\":5},{\"id\":\"weird-resp-host\",\"type\":\"visualization\",\"size_x\":6,\"size_y\":2,\"col\":7,\"row\":5}]",
-      "optionsJSON": "{\"darkTheme\":true}",
-      "uiStateJSON": "{}",
-      "version": 1,
-      "timeRestore": false,
-      "kibanaSavedObjectMeta": {
-        "searchSourceJSON": "{\"filter\":[{\"query\":{\"query_string\":{\"query\":\"*\",\"analyze_wildcard\":true}}}]}"
-      }
-    }
-  },
-  {
-    "_id": "dns",
-    "_type": "dashboard",
-    "_source": {
-      "title": "dns",
-      "hits": 0,
-      "description": "",
-      "panelsJSON": "[{\"id\":\"dns-query\",\"type\":\"visualization\",\"size_x\":6,\"size_y\":3,\"col\":1,\"row\":1},{\"id\":\"dns-answer\",\"type\":\"visualization\",\"size_x\":6,\"size_y\":3,\"col\":7,\"row\":1},{\"id\":\"dns-qtype\",\"type\":\"visualization\",\"size_x\":12,\"size_y\":3,\"col\":1,\"row\":4}]",
-      "optionsJSON": "{\"darkTheme\":true}",
-      "uiStateJSON": "{}",
-      "version": 1,
-      "timeRestore": false,
-      "kibanaSavedObjectMeta": {
-        "searchSourceJSON": "{\"filter\":[{\"query\":{\"query_string\":{\"query\":\"*\",\"analyze_wildcard\":true}}}]}"
+        "searchSourceJSON": "{\"filter\":[]}"
       }
     }
   },
@@ -1009,40 +1038,6 @@
       "hits": 0,
       "description": "",
       "panelsJSON": "[{\"col\":1,\"id\":\"unknown-service-proto-bytes\",\"row\":1,\"size_x\":6,\"size_y\":2,\"type\":\"visualization\"},{\"col\":7,\"id\":\"unknown-orig-host\",\"row\":1,\"size_x\":3,\"size_y\":2,\"type\":\"visualization\"},{\"col\":10,\"id\":\"unknown-resp-host\",\"row\":1,\"size_x\":3,\"size_y\":2,\"type\":\"visualization\"},{\"col\":1,\"id\":\"orig-geoip\",\"row\":3,\"size_x\":6,\"size_y\":4,\"type\":\"visualization\"},{\"col\":7,\"id\":\"resp-geoip\",\"row\":3,\"size_x\":6,\"size_y\":4,\"type\":\"visualization\"}]",
-      "optionsJSON": "{\"darkTheme\":true}",
-      "uiStateJSON": "{}",
-      "version": 1,
-      "timeRestore": false,
-      "kibanaSavedObjectMeta": {
-        "searchSourceJSON": "{\"filter\":[{\"query\":{\"query_string\":{\"analyze_wildcard\":true,\"query\":\"*\"}}}]}"
-      }
-    }
-  },
-  {
-    "_id": "log",
-    "_type": "dashboard",
-    "_source": {
-      "title": "log",
-      "hits": 0,
-      "description": "",
-      "panelsJSON": "[{\"col\":1,\"id\":\"logs\",\"row\":1,\"size_x\":12,\"size_y\":6,\"type\":\"visualization\"}]",
-      "optionsJSON": "{\"darkTheme\":true}",
-      "uiStateJSON": "{}",
-      "version": 1,
-      "timeRestore": false,
-      "kibanaSavedObjectMeta": {
-        "searchSourceJSON": "{\"filter\":[{\"query\":{\"query_string\":{\"analyze_wildcard\":true,\"query\":\"*\"}}}]}"
-      }
-    }
-  },
-  {
-    "_id": "http",
-    "_type": "dashboard",
-    "_source": {
-      "title": "http",
-      "hits": 0,
-      "description": "",
-      "panelsJSON": "[{\"col\":7,\"id\":\"http-user_agent\",\"panelIndex\":2,\"row\":1,\"size_x\":6,\"size_y\":3,\"type\":\"visualization\"},{\"col\":1,\"id\":\"http-status\",\"panelIndex\":4,\"row\":1,\"size_x\":6,\"size_y\":3,\"type\":\"visualization\"},{\"col\":1,\"id\":\"http-method\",\"panelIndex\":5,\"row\":4,\"size_x\":6,\"size_y\":3,\"type\":\"visualization\"},{\"col\":7,\"id\":\"http-host\",\"panelIndex\":6,\"row\":4,\"size_x\":6,\"size_y\":3,\"type\":\"visualization\"}]",
       "optionsJSON": "{\"darkTheme\":true}",
       "uiStateJSON": "{}",
       "version": 1,
@@ -1070,6 +1065,23 @@
     }
   },
   {
+    "_id": "connection",
+    "_type": "dashboard",
+    "_source": {
+      "title": "connection",
+      "hits": 0,
+      "description": "",
+      "panelsJSON": "[{\"col\":1,\"id\":\"service-bytes\",\"panelIndex\":1,\"row\":1,\"size_x\":12,\"size_y\":2,\"type\":\"visualization\"},{\"col\":1,\"id\":\"proto-bytes\",\"panelIndex\":2,\"row\":3,\"size_x\":12,\"size_y\":2,\"type\":\"visualization\"},{\"col\":1,\"id\":\"unknown-service-proto-bytes\",\"panelIndex\":3,\"row\":7,\"size_x\":12,\"size_y\":2,\"type\":\"visualization\"},{\"col\":1,\"id\":\"service-duration\",\"panelIndex\":4,\"row\":9,\"size_x\":12,\"size_y\":2,\"type\":\"visualization\"},{\"col\":1,\"id\":\"connection-state\",\"panelIndex\":5,\"row\":5,\"size_x\":12,\"size_y\":2,\"type\":\"visualization\"}]",
+      "optionsJSON": "{\"darkTheme\":true}",
+      "uiStateJSON": "{}",
+      "version": 1,
+      "timeRestore": false,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"filter\":[{\"query\":{\"query_string\":{\"analyze_wildcard\":true,\"query\":\"*\"}}}]}"
+      }
+    }
+  },
+  {
     "_id": "ssl",
     "_type": "dashboard",
     "_source": {
@@ -1083,6 +1095,125 @@
       "timeRestore": false,
       "kibanaSavedObjectMeta": {
         "searchSourceJSON": "{\"filter\":[{\"query\":{\"query_string\":{\"analyze_wildcard\":true,\"query\":\"*\"}}}]}"
+      }
+    }
+  },
+  {
+    "_id": "notice",
+    "_type": "dashboard",
+    "_source": {
+      "title": "notice",
+      "hits": 0,
+      "description": "",
+      "panelsJSON": "[{\"col\":1,\"id\":\"notice-note\",\"panelIndex\":1,\"row\":1,\"size_x\":12,\"size_y\":7,\"type\":\"visualization\"}]",
+      "optionsJSON": "{\"darkTheme\":true}",
+      "uiStateJSON": "{}",
+      "version": 1,
+      "timeRestore": false,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"filter\":[{\"query\":{\"query_string\":{\"analyze_wildcard\":true,\"query\":\"*\"}}}]}"
+      }
+    }
+  },
+  {
+    "_id": "geoip",
+    "_type": "dashboard",
+    "_source": {
+      "title": "geoip",
+      "hits": 0,
+      "description": "",
+      "panelsJSON": "[{\"id\":\"resp-geoip\",\"type\":\"visualization\",\"size_x\":6,\"size_y\":6,\"col\":7,\"row\":1},{\"id\":\"orig-geoip\",\"type\":\"visualization\",\"size_x\":6,\"size_y\":6,\"col\":1,\"row\":1}]",
+      "optionsJSON": "{\"darkTheme\":true}",
+      "uiStateJSON": "{}",
+      "version": 1,
+      "timeRestore": false,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"filter\":[{\"query\":{\"query_string\":{\"analyze_wildcard\":true,\"query\":\"*\"}}}]}"
+      }
+    }
+  },
+  {
+    "_id": "dns",
+    "_type": "dashboard",
+    "_source": {
+      "title": "dns",
+      "hits": 0,
+      "description": "",
+      "panelsJSON": "[{\"id\":\"dns-query\",\"type\":\"visualization\",\"size_x\":6,\"size_y\":3,\"col\":1,\"row\":1},{\"id\":\"dns-answer\",\"type\":\"visualization\",\"size_x\":6,\"size_y\":3,\"col\":7,\"row\":1},{\"id\":\"dns-qtype\",\"type\":\"visualization\",\"size_x\":12,\"size_y\":3,\"col\":1,\"row\":4}]",
+      "optionsJSON": "{\"darkTheme\":true}",
+      "uiStateJSON": "{}",
+      "version": 1,
+      "timeRestore": false,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"filter\":[{\"query\":{\"query_string\":{\"query\":\"*\",\"analyze_wildcard\":true}}}]}"
+      }
+    }
+  },
+  {
+    "_id": "log",
+    "_type": "dashboard",
+    "_source": {
+      "title": "log",
+      "hits": 0,
+      "description": "",
+      "panelsJSON": "[{\"col\":1,\"id\":\"logs\",\"row\":1,\"size_x\":12,\"size_y\":6,\"type\":\"visualization\",\"panelIndex\":1}]",
+      "optionsJSON": "{\"darkTheme\":true}",
+      "uiStateJSON": "{}",
+      "version": 1,
+      "timeRestore": false,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"filter\":[{\"query\":{\"query_string\":{\"query\":\"-_type:conn\",\"analyze_wildcard\":true}}}]}"
+      }
+    }
+  },
+  {
+    "_id": "http",
+    "_type": "dashboard",
+    "_source": {
+      "title": "http",
+      "hits": 0,
+      "description": "",
+      "panelsJSON": "[{\"col\":7,\"id\":\"http-user_agent\",\"panelIndex\":2,\"row\":1,\"size_x\":6,\"size_y\":3,\"type\":\"visualization\"},{\"col\":1,\"id\":\"http-status\",\"panelIndex\":4,\"row\":1,\"size_x\":6,\"size_y\":3,\"type\":\"visualization\"},{\"col\":7,\"id\":\"http-host\",\"panelIndex\":6,\"row\":4,\"size_x\":6,\"size_y\":3,\"type\":\"visualization\"},{\"id\":\"http-uri\",\"type\":\"visualization\",\"panelIndex\":7,\"size_x\":6,\"size_y\":3,\"col\":1,\"row\":4}]",
+      "optionsJSON": "{\"darkTheme\":true}",
+      "uiStateJSON": "{}",
+      "version": 1,
+      "timeRestore": false,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"filter\":[{\"query\":{\"query_string\":{\"analyze_wildcard\":true,\"query\":\"*\"}}}]}"
+      }
+    }
+  },
+  {
+    "_id": "weird",
+    "_type": "dashboard",
+    "_source": {
+      "title": "weird",
+      "hits": 0,
+      "description": "",
+      "panelsJSON": "[{\"col\":1,\"id\":\"weird-orig-host\",\"panelIndex\":2,\"row\":1,\"size_x\":6,\"size_y\":2,\"type\":\"visualization\"},{\"col\":7,\"id\":\"weird-resp-host\",\"panelIndex\":3,\"row\":1,\"size_x\":6,\"size_y\":2,\"type\":\"visualization\"},{\"id\":\"weird-name\",\"type\":\"visualization\",\"panelIndex\":4,\"size_x\":12,\"size_y\":4,\"col\":1,\"row\":3}]",
+      "optionsJSON": "{\"darkTheme\":true}",
+      "uiStateJSON": "{}",
+      "version": 1,
+      "timeRestore": false,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"filter\":[{\"query\":{\"query_string\":{\"analyze_wildcard\":true,\"query\":\"*\"}}}]}"
+      }
+    }
+  },
+  {
+    "_id": "intel",
+    "_type": "dashboard",
+    "_source": {
+      "title": "intel",
+      "hits": 0,
+      "description": "",
+      "panelsJSON": "[{\"id\":\"intel-seen-where\",\"type\":\"visualization\",\"panelIndex\":1,\"size_x\":12,\"size_y\":2,\"col\":1,\"row\":1},{\"id\":\"intel-indicator-type\",\"type\":\"visualization\",\"panelIndex\":2,\"size_x\":12,\"size_y\":2,\"col\":1,\"row\":3},{\"id\":\"intel-sources\",\"type\":\"visualization\",\"panelIndex\":3,\"size_x\":12,\"size_y\":2,\"col\":1,\"row\":5}]",
+      "optionsJSON": "{\"darkTheme\":true}",
+      "uiStateJSON": "{}",
+      "version": 1,
+      "timeRestore": false,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"filter\":[{\"query\":{\"query_string\":{\"query\":\"*\",\"analyze_wildcard\":true}}}]}"
       }
     }
   }

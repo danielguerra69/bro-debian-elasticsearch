@@ -15,6 +15,10 @@ curl -XPUT elasticsearch:9200/_template/fixstrings_bro -d '{
           "user_agent" : {
             "type" : "string",
             "index" : "not_analyzed"
+          },
+          "uri" : {
+            "type" : "string",
+            "index" : "not_analyzed"
           }
         }
       },
@@ -58,6 +62,34 @@ curl -XPUT elasticsearch:9200/_template/fixstrings_bro -d '{
       "dns" : {
         "properties" : {
           "answers" : {
+            "type" : "string",
+            "index" : "not_analyzed"
+          },
+          "query" : {
+            "type" : "string",
+            "index" : "not_analyzed"
+          }
+        }
+      },
+      "intel" : {
+        "properties" : {
+          "sources" : {
+            "type" : "string",
+            "index" : "not_analyzed"
+          },
+          "seen_indicator_type" : {
+            "type" : "string",
+            "index" : "not_analyzed"
+          },
+          "seen_where" : {
+            "type" : "string",
+            "index" : "not_analyzed"
+          }
+        }
+      },
+      "weird" : {
+        "properties" : {
+          "name" : {
             "type" : "string",
             "index" : "not_analyzed"
           },

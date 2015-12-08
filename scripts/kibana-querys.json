@@ -1,113 +1,5 @@
 [
   {
-    "_id": "intel",
-    "_type": "search",
-    "_source": {
-      "title": "intel",
-      "description": "",
-      "hits": 0,
-      "columns": [
-        "uid",
-        "sources",
-        "seen_indicator_type",
-        "seen_where"
-      ],
-      "sort": [
-        "ts",
-        "desc"
-      ],
-      "version": 1,
-      "kibanaSavedObjectMeta": {
-        "searchSourceJSON": "{\"index\":\"bro-*\",\"query\":{\"query_string\":{\"query\":\"_type:intel\",\"analyze_wildcard\":true}},\"highlight\":{\"pre_tags\":[\"@kibana-highlighted-field@\"],\"post_tags\":[\"@/kibana-highlighted-field@\"],\"fields\":{\"*\":{}},\"fragment_size\":2147483647},\"filter\":[]}"
-      }
-    }
-  },
-  {
-    "_id": "reporter",
-    "_type": "search",
-    "_source": {
-      "title": "reporter",
-      "description": "",
-      "hits": 0,
-      "columns": [
-        "level",
-        "location",
-        "message"
-      ],
-      "sort": [
-        "ts",
-        "desc"
-      ],
-      "version": 1,
-      "kibanaSavedObjectMeta": {
-        "searchSourceJSON": "{\"index\":\"bro-*\",\"query\":{\"query_string\":{\"query\":\"_type:reporter\",\"analyze_wildcard\":true}},\"highlight\":{\"pre_tags\":[\"@kibana-highlighted-field@\"],\"post_tags\":[\"@/kibana-highlighted-field@\"],\"fields\":{\"*\":{}},\"fragment_size\":2147483647},\"filter\":[]}"
-      }
-    }
-  },
-  {
-    "_id": "cookie",
-    "_type": "search",
-    "_source": {
-      "title": "cookie",
-      "description": "",
-      "hits": 0,
-      "columns": [
-        "uid",
-        "cookie_unesc"
-      ],
-      "sort": [
-        "ts",
-        "desc"
-      ],
-      "version": 1,
-      "kibanaSavedObjectMeta": {
-        "searchSourceJSON": "{\"index\":\"bro-*\",\"highlight\":{\"pre_tags\":[\"@kibana-highlighted-field@\"],\"post_tags\":[\"@/kibana-highlighted-field@\"],\"fields\":{\"*\":{}},\"fragment_size\":2147483647},\"filter\":[],\"query\":{\"query_string\":{\"analyze_wildcard\":true,\"query\":\"_type:cookie\"}}}"
-      }
-    }
-  },
-  {
-    "_id": "notice",
-    "_type": "search",
-    "_source": {
-      "title": "notice",
-      "description": "",
-      "hits": 0,
-      "columns": [
-        "uid",
-        "note",
-        "msg"
-      ],
-      "sort": [
-        "ts",
-        "desc"
-      ],
-      "version": 1,
-      "kibanaSavedObjectMeta": {
-        "searchSourceJSON": "{\"index\":\"bro-*\",\"query\":{\"query_string\":{\"query\":\"_type:notice\",\"analyze_wildcard\":true}},\"highlight\":{\"pre_tags\":[\"@kibana-highlighted-field@\"],\"post_tags\":[\"@/kibana-highlighted-field@\"],\"fields\":{\"*\":{}},\"fragment_size\":2147483647},\"filter\":[]}"
-      }
-    }
-  },
-  {
-    "_id": "weird",
-    "_type": "search",
-    "_source": {
-      "title": "weird",
-      "description": "",
-      "hits": 0,
-      "columns": [
-        "name"
-      ],
-      "sort": [
-        "ts",
-        "desc"
-      ],
-      "version": 1,
-      "kibanaSavedObjectMeta": {
-        "searchSourceJSON": "{\"index\":\"bro-*\",\"query\":{\"query_string\":{\"query\":\"_type:weird\",\"analyze_wildcard\":true}},\"highlight\":{\"pre_tags\":[\"@kibana-highlighted-field@\"],\"post_tags\":[\"@/kibana-highlighted-field@\"],\"fields\":{\"*\":{}},\"fragment_size\":2147483647},\"filter\":[]}"
-      }
-    }
-  },
-  {
     "_id": "all",
     "_type": "search",
     "_source": {
@@ -352,6 +244,114 @@
     }
   },
   {
+    "_id": "weird",
+    "_type": "search",
+    "_source": {
+      "title": "weird",
+      "description": "",
+      "hits": 0,
+      "columns": [
+        "name"
+      ],
+      "sort": [
+        "ts",
+        "desc"
+      ],
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"bro-*\",\"query\":{\"query_string\":{\"query\":\"_type:weird\",\"analyze_wildcard\":true}},\"highlight\":{\"pre_tags\":[\"@kibana-highlighted-field@\"],\"post_tags\":[\"@/kibana-highlighted-field@\"],\"fields\":{\"*\":{}},\"fragment_size\":2147483647},\"filter\":[]}"
+      }
+    }
+  },
+  {
+    "_id": "intel",
+    "_type": "search",
+    "_source": {
+      "title": "intel",
+      "description": "",
+      "hits": 0,
+      "columns": [
+        "uid",
+        "sources",
+        "seen_indicator_type",
+        "seen_where"
+      ],
+      "sort": [
+        "ts",
+        "desc"
+      ],
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"bro-*\",\"query\":{\"query_string\":{\"query\":\"_type:intel\",\"analyze_wildcard\":true}},\"highlight\":{\"pre_tags\":[\"@kibana-highlighted-field@\"],\"post_tags\":[\"@/kibana-highlighted-field@\"],\"fields\":{\"*\":{}},\"fragment_size\":2147483647},\"filter\":[]}"
+      }
+    }
+  },
+  {
+    "_id": "reporter",
+    "_type": "search",
+    "_source": {
+      "title": "reporter",
+      "description": "",
+      "hits": 0,
+      "columns": [
+        "level",
+        "location",
+        "message"
+      ],
+      "sort": [
+        "ts",
+        "desc"
+      ],
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"bro-*\",\"query\":{\"query_string\":{\"query\":\"_type:reporter\",\"analyze_wildcard\":true}},\"highlight\":{\"pre_tags\":[\"@kibana-highlighted-field@\"],\"post_tags\":[\"@/kibana-highlighted-field@\"],\"fields\":{\"*\":{}},\"fragment_size\":2147483647},\"filter\":[]}"
+      }
+    }
+  },
+  {
+    "_id": "notice",
+    "_type": "search",
+    "_source": {
+      "title": "notice",
+      "description": "",
+      "hits": 0,
+      "columns": [
+        "uid",
+        "note",
+        "msg"
+      ],
+      "sort": [
+        "ts",
+        "desc"
+      ],
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"bro-*\",\"query\":{\"query_string\":{\"query\":\"_type:notice\",\"analyze_wildcard\":true}},\"highlight\":{\"pre_tags\":[\"@kibana-highlighted-field@\"],\"post_tags\":[\"@/kibana-highlighted-field@\"],\"fields\":{\"*\":{}},\"fragment_size\":2147483647},\"filter\":[]}"
+      }
+    }
+  },
+  {
+    "_id": "cookie",
+    "_type": "search",
+    "_source": {
+      "title": "cookie",
+      "description": "",
+      "hits": 0,
+      "columns": [
+        "uid",
+        "cookie_unesc"
+      ],
+      "sort": [
+        "ts",
+        "desc"
+      ],
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"bro-*\",\"highlight\":{\"pre_tags\":[\"@kibana-highlighted-field@\"],\"post_tags\":[\"@/kibana-highlighted-field@\"],\"fields\":{\"*\":{}},\"fragment_size\":2147483647},\"filter\":[],\"query\":{\"query_string\":{\"analyze_wildcard\":true,\"query\":\"_type:cookie\"}}}"
+      }
+    }
+  },
+  {
     "_id": "x509",
     "_type": "search",
     "_source": {
@@ -394,28 +394,6 @@
     }
   },
   {
-    "_id": "dns-conn",
-    "_type": "search",
-    "_source": {
-      "title": "dns conn",
-      "description": "",
-      "hits": 0,
-      "columns": [
-        "id_resp_h",
-        "query",
-        "answers"
-      ],
-      "sort": [
-        "ts",
-        "desc"
-      ],
-      "version": 1,
-      "kibanaSavedObjectMeta": {
-        "searchSourceJSON": "{\"index\":\"bro-*\",\"query\":{\"query_string\":{\"query\":\"(_type:dns OR _type:conn)\",\"analyze_wildcard\":true}},\"highlight\":{\"pre_tags\":[\"@kibana-highlighted-field@\"],\"post_tags\":[\"@/kibana-highlighted-field@\"],\"fields\":{\"*\":{}},\"require_field_match\":false,\"fragment_size\":2147483647},\"filter\":[]}"
-      }
-    }
-  },
-  {
     "_id": "syslog",
     "_type": "search",
     "_source": {
@@ -438,17 +416,16 @@
     }
   },
   {
-    "_id": "ssl",
+    "_id": "dns-conn",
     "_type": "search",
     "_source": {
-      "title": "ssl",
+      "title": "dns conn",
       "description": "",
       "hits": 0,
       "columns": [
-        "server_name",
-        "validation_status",
-        "subject",
-        "issuer"
+        "id_resp_h",
+        "query",
+        "answers"
       ],
       "sort": [
         "ts",
@@ -456,7 +433,7 @@
       ],
       "version": 1,
       "kibanaSavedObjectMeta": {
-        "searchSourceJSON": "{\"index\":\"bro-*\",\"query\":{\"query_string\":{\"query\":\"_type:ssl\",\"analyze_wildcard\":true}},\"highlight\":{\"pre_tags\":[\"@kibana-highlighted-field@\"],\"post_tags\":[\"@/kibana-highlighted-field@\"],\"fields\":{\"*\":{}},\"require_field_match\":false,\"fragment_size\":2147483647},\"filter\":[]}"
+        "searchSourceJSON": "{\"index\":\"bro-*\",\"query\":{\"query_string\":{\"query\":\"(_type:dns OR _type:conn)\",\"analyze_wildcard\":true}},\"highlight\":{\"pre_tags\":[\"@kibana-highlighted-field@\"],\"post_tags\":[\"@/kibana-highlighted-field@\"],\"fields\":{\"*\":{}},\"require_field_match\":false,\"fragment_size\":2147483647},\"filter\":[]}"
       }
     }
   },
@@ -480,6 +457,29 @@
       "version": 1,
       "kibanaSavedObjectMeta": {
         "searchSourceJSON": "{\"index\":\"bro-*\",\"query\":{\"query_string\":{\"query\":\"_type:kerberos\",\"analyze_wildcard\":true}},\"highlight\":{\"pre_tags\":[\"@kibana-highlighted-field@\"],\"post_tags\":[\"@/kibana-highlighted-field@\"],\"fields\":{\"*\":{}},\"require_field_match\":false,\"fragment_size\":2147483647},\"filter\":[]}"
+      }
+    }
+  },
+  {
+    "_id": "ssl",
+    "_type": "search",
+    "_source": {
+      "title": "ssl",
+      "description": "",
+      "hits": 0,
+      "columns": [
+        "server_name",
+        "validation_status",
+        "subject",
+        "issuer"
+      ],
+      "sort": [
+        "ts",
+        "desc"
+      ],
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"bro-*\",\"query\":{\"query_string\":{\"query\":\"_type:ssl\",\"analyze_wildcard\":true}},\"highlight\":{\"pre_tags\":[\"@kibana-highlighted-field@\"],\"post_tags\":[\"@/kibana-highlighted-field@\"],\"fields\":{\"*\":{}},\"require_field_match\":false,\"fragment_size\":2147483647},\"filter\":[]}"
       }
     }
   },
