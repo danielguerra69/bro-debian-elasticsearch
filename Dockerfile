@@ -108,10 +108,7 @@ openssh-server --no-install-recommends \
 && cd /tmp \
 && git clone --recursive https://github.com/jonschipp/mal-dnssearch.git \
 && cd /tmp/mal-dnssearch \
-&& make \
-&& apt-get remove -y $buildDeps \
-&& apt-get clean \
-&& rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+&& make
 
 # add maintance shell scripts
 ADD /scripts /scripts
