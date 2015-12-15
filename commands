@@ -9,7 +9,7 @@ docker run -d  --env ES_HEAP_SIZE=30g --env MAX_OPEN_FILES=65535 --env MAX_LOCKE
 docker run -d  --env ES_HEAP_SIZE=30g --env MAX_OPEN_FILES=65535 --env MAX_LOCKED_MEMORY=unlimited --env ES_JAVA_OPTS=-server --volumes-from elastic-data-node02 --hostname=elasticsearch-node02  --name elasticsearch-node02  --link=elasticsearch-master:master elasticsearch -Des.network.bind_host=elasticsearch-node02 --cluster.name=bro --node.name=elasticsearch-node02 --discovery.zen.ping.unicast.hosts=master:9300  --network.host=elasticsearch-node02
 docker run -d  --env ES_HEAP_SIZE=30g --env MAX_OPEN_FILES=65535 --env MAX_LOCKED_MEMORY=unlimited --env ES_JAVA_OPTS=-server --volumes-from elastic-data-node03 --hostname=elasticsearch-node03  --name elasticsearch-node03  --link=elasticsearch-master:master elasticsearch -Des.network.bind_host=elasticsearch-node03 --cluster.name=bro --node.name=elasticsearch-node03 --discovery.zen.ping.unicast.hosts=master:9300  --network.host=elasticsearch-node03
 docker run -d  --env ES_HEAP_SIZE=30g --env MAX_OPEN_FILES=65535 --env MAX_LOCKED_MEMORY=unlimited --env ES_JAVA_OPTS=-server --volumes-from elastic-data-node04 --hostname=elasticsearch-node04  --name elasticsearch-node04  --link=elasticsearch-master:master elasticsearch -Des.network.bind_host=elasticsearch-node04 --cluster.name=bro --node.name=elasticsearch-node04 --discovery.zen.ping.unicast.hosts=master:9300  --network.host=elasticsearch-node04
-docker run -d -p 1969:1969 --link elasticsearch-master:elasticsearch --name bro-xinetd --hostname bro-xinetd danielguerra/bro-debian-elasticsearch /role/xinetd
+docker run -d -p 1969:1969 --link elasticsearch-master:elasticsearch --name bro-xinetd --hostname bro-xinetd danielguerra/bro-debian-elasticsearch /role/xinetd-elasticsearch
 
 docker run -d -p 1970:1969 --link rabbitmq:amqp --name bro-xinetd-amqp --hostname bro-xinetd-amqp danielguerra/bro-debian-elasticsearch /role/xinetd-amqp
 
@@ -17,8 +17,8 @@ docker run -d  --link=rabbitmq:amqp --name=bro-amqp-amqp --hostname=bro-amqp-amq
 
 docker run -d -p 5601:5601 --link=elasticsearch-node02:elasticsearch --hostname=kibana --name kibana kibana
 docker run -ti -v /Users/PCAP:/pcap --name bro-log danielguerra/bro-debian-elasticsearch
-docker run -ti --link elasticsearch-node01:elasticsearch -v /Users/PCAP:/pcap --name bro-dev danielguerra/bro-debian-elasticsearch /bin/bash
-
+docker run -ti --link elasticsearch-node01:elasticsearch -v /Users/PCAP:/pcap --name bro-dev danielguerra/bro-debian-elasticsearch /role/cmd-elasticsearch
+docker run -ti --link elasticsearch-node01:elasticsearch -v /Users/PCAP:/pcap --name bro-dev danielguerra/bro-debian-elasticsearch:develop /role/cmd-elasticsearch
 docker stop bro-dev elasticsearch-node01 elasticsearch-node02 elasticsearch-master elastic-data-node01 elastic-data-node02 elastic-data-master bro-xinetd kibana
 docker rm bro-dev elasticsearch-node01 elasticsearch-node02 elasticsearch-master elastic-data-node01 elastic-data-node02 elastic-data-master bro-xinetd kibana
 
