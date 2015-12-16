@@ -83,12 +83,17 @@ docker run -ti -v /Users/PCAP:/pcap --name bro-log danielguerra/bro-debian-elast
 
 commandline and log to elasticsearch
 ```bash
-docker run -ti --link elasticsearch-node01:elasticsearch -v /Users/PCAP:/pcap --name bro-dev danielguerra/bro-debian-elasticsearch /role/cmd-elasticsearch
+docker run -ti --link elasticsearch-node01:elasticsearch -v /Users/PCAP:/pcap --name bro danielguerra/bro-debian-elasticsearch /role/cmd-elasticsearch
 ```
 readfiles from bro-dev commandline
 
 ```bash
 bro -r /pcap/mydump.pcap
+```
+
+bro develop version (all sources are in /tmp)
+```
+docker run -ti --link elasticsearch-node01:elasticsearch -v /Users/PCAP:/pcap --name bro danielguerra/bro-debian-elasticsearch:develop /role/cmd-elasticsearch
 ```
 
 ### bro xinetd service
