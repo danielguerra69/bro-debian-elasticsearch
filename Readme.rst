@@ -25,6 +25,14 @@ Todo elasticsearch amqp consumer, amqpfs for extracted files.
 
 * [![Latest](https://badge.imagelayers.io/danielguerra/bro-debian-elasticsearch.svg)](https://imagelayers.io/?images=danielguerra/bro-debian-elasticsearch:latest 'latest')
 
+### Developers
+
+Full version with all tools and sources to build this project.
+Sources are in /tmp.
+```bash
+docker pull danielguerra/bro-debian-elasticsearch:develop
+```
+
 #### Instalation
 
 Before you begin I recommend to start with pulling fresh images.
@@ -157,6 +165,13 @@ docker run -d  --name=bro-amqp-amqp --hostname=bro-amqp-amqp danielguerra/bro-de
 And publish a pcap file from bro-dev commandline
 ```bash
 cat <pcap-file> | amqp-publish   --url=amqp://<user>:<pass>@<amqp-ip> --exchange=<exchange>
+```
+
+### tcpdump containers
+
+Start a bro-xinetd, do a (replace <container-to-dump> with your container name and <bro-xinetd-ip> with the bro xinetd ip)
+```bash
+docker run --rm  --net=container:<container-to-dump> crccheck/tcpdump -i eth0 -w - | nc <bro-xinetd-ip> 1969 &
 ```
 
 ### useful scripts
