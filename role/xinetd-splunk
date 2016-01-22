@@ -1,0 +1,13 @@
+#!/bin/bash
+# Usage /role/xinetd-splunk  HOST PORT
+cp /xinetd/bro-splunk /etc/xinetd.d/bro
+# set server args
+sed -i "s/server_args	    = SPLUNKCONF/server_args	    = $1 $2 /" /etc/xinetd.d/bro
+# set output to stdout
+sed -i "s/const output_to_stdout = F \&redef/const output_to_stdout = T \&redef/g" /usr/local/bro/share/bro/base/frameworks/logging/writers/ascii.bro
+# set output to json
+sed -i "s/const use_json = F \&redef/const use_json = T \&redef/g" /usr/local/bro/share/bro/base/frameworks/logging/writers/ascii.bro
+# set time to iso8601
+sed -i "s/const json_timestamps: JSON::TimestampFormat = JSON::TS_MILLIS \&redef/const json_timestamps: JSON::TimestampFormat = JSON::TS_ISO8601 \&redef/g" /usr/local/bro/share/bro/base/frameworks/logging/writers/ascii.bro
+#start xinetd
+/usr/sbin/xinetd -dontfork
