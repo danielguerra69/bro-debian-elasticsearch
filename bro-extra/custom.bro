@@ -1,5 +1,5 @@
 # This script loads tcprs reordering
-@load ./tcprs
+#@load ./tcprs
 # This script add lat long to ip numbers in orig_loc and dest_loc
 @load ./geoip
 
