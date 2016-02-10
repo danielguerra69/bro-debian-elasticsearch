@@ -1,0 +1,13 @@
+#!/bin/bash
+# Usage /role/xinetd-forensic base_url for extracted data (for example http://user:pass@host:port/uri)
+cp /xinetd/bro-forensic /etc/xinetd.d/bro
+# set the forensic config
+sed -i "s/server_args	    = FORENSICCONF/server_args	    = $1/" /etc/xinetd.d/bro
+# This script sets all logs to elasticsearch
+echo "@load ./logs-to-elasticsearch" >> /usr/local/bro/share/bro/bro-extra/custom.bro
+# This script sets file extraction from known protocols
+echo "@load policy/frameworks/files/extract-all-files" >> /usr/local/bro/share/bro/bro-extra/custom.bro
+# stop local logging
+sed -i "s/default_writer = WRITER_ASCII/default_writer = WRITER_NONE/g" /usr/local/bro/share/bro/base/frameworks/logging/main.bro
+# start xinetd
+/usr/sbin/xinetd -dontfork

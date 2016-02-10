@@ -1,0 +1,10 @@
+service bro
+{
+        socket_type     = stream
+        wait            = no
+        user            = root
+        group           = root
+        server          = /scripts/bro-amqp.sh
+        server_args	    = AMQPCONF
+        instances       = 300
+}
