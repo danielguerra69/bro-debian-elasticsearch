@@ -40,6 +40,10 @@ libjemalloc1-dbg ' \
 && apt-get -qq update \
 && apt-get -qq upgrade \
 && apt-get install -yq $buildDeps \
+tcpdump \
+php5-cli \
+php5-fpm \
+nginx \
 libjemalloc1 \
 amqp-tools \
 locales \
@@ -102,6 +106,10 @@ openssh-server --no-install-recommends \
 && make \
 && make install \
 && cd /tmp/bro/aux/plugins/tcprs \
+&& ./configure \
+&& make \
+&& make install \
+&& cd /tmp/bro/aux/plugins/kafka \
 && ./configure \
 && make \
 && make install \
@@ -192,5 +200,13 @@ ADD /xinetd /xinetd
 
 # add role scripts
 ADD /role /role
+
+# add php scripts
+ADD /php /php
+
+# add nginx config
+ADD /nginx /nginx
+
+RUN mkdir /bro /bro/pcap /bro/extract_files
 
 CMD ["/role/cmd-bare"]

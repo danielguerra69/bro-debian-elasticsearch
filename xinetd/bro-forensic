@@ -5,6 +5,6 @@ service bro
         user            = root
         group           = root
         server          = /scripts/bro-forensic.sh
-        server_args	    = AMQPCONF
+        server_args	    = FORENSICCONF
         instances       = 300
 }
