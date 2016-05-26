@@ -62,7 +62,7 @@ function on_add(f: fa_file, args: Files::AnalyzerArgs)
         f$info$extracted = args$extract_filename;
         f$info$uri = cat(webserver,"/extract_files/",args$extract_filename);
         args$extract_filename = build_path_compressed(prefix, args$extract_filename);
-        ## mkdir(prefix);
+        mkdir(prefix);
         }
 
   event bro_init() &priority=10
