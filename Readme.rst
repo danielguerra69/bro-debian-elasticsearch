@@ -93,7 +93,7 @@ commandline and log to elasticsearch
 ```bash
 docker run -ti --link elasticsearch-node01:elasticsearch -v /Users/PCAP:/pcap --name bro danielguerra/bro-debian-elasticsearch /role/cmd-elasticsearch
 ```
-readfiles from bro-dev commandline
+readfiles from bro commandline
 
 ```bash
 bro -r /pcap/mydump.pcap
