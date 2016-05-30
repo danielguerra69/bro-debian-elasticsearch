@@ -5,14 +5,14 @@ module FileExtract;
 
 export {
         ## The prefix where files are extracted to.
-        const prefix = "/bro/extract_files/" &redef;
+        const prefix = "/var/www/html/extract_files/" &redef;
 
         ## The default max size for extracted files (they won't exceed this
         ## number of bytes). A value of zero means unlimited.
         const default_limit = 0 &redef;
 
         ## The default web server
-        const webserver = "http://DOCKERHOST:6900" &redef;
+        const webserver = "http://DOCKERHOST" &redef;
 
         redef record Files::Info += {
                 ## Local filename of extracted file.
