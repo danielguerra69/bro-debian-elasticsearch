@@ -13,11 +13,7 @@ echo "@load policy/frameworks/files/extract-all-files"
 echo "@load base/files/extract" >> /usr/local/bro/share/bro/bro-extra/custom.bro
 # stop local logging
 sed -i "s/default_writer = WRITER_ASCII/default_writer = WRITER_NONE/g" /usr/local/bro/share/bro/base/frameworks/logging/main.bro
-#start php5-fpm for nginx
-php5-fpm &
-# set nginx config
-cp /nginx/default /etc/nginx/sites-available/
-# start nginx
-nginx &
+# start apache
+/etc/init.d/apache2 start
 # start xinetd
 /usr/sbin/xinetd -dontfork

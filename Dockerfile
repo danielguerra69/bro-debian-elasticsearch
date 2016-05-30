@@ -97,14 +97,6 @@ RUN sed -i "s/\$version =/\$ssh_version =/g" /usr/local/bro/share/bro/base/proto
 RUN sed -i "s/version: string \&log/snmp_version: string \&log/g" /usr/local/bro/share/bro/base/protocols/snmp/main.bro
 RUN sed -i "s/\$version=/\$snmp_version=/g" /usr/local/bro/share/bro/base/protocols/snmp/main.bro
 
-#no longer needed, thanks Seth commit 4e4dece70a114b6e6dc8e499bca694f8616eae2f
-# request_body_len type change for sip
-#RUN sed -i "s/request_body_len:        string            \&log/req_body_len:        string            \&log/g" /usr/local/bro/share/bro/base/protocols/sip/main.bro
-#RUN sed -i "s/\$request_body_len =/\$req_body_len =/g" /usr/local/bro/share/bro/base/protocols/sip/main.bro
-# response_body_len type change for sip
-#RUN sed -i "s/response_body_len:       string            \&log/resp_body_len:        string            \&log/g" /usr/local/bro/share/bro/base/protocols/sip/main.bro
-#RUN sed -i "s/\$response_body_len =/\$resp_body_len =/g" /usr/local/bro/share/bro/base/protocols/sip/main.bro
-
 # fix error in kerberos
 RUN patch /usr/local/bro/share/bro/base/protocols/krb/main.bro /bro-patch/krb-main.patch
 
@@ -115,11 +107,9 @@ ADD /xinetd /xinetd
 ADD /role /role
 
 # add php scripts
-ADD /php /php
+ADD /php/index.php /var/www/html/index.php
 
-# add nginx config
-ADD /nginx /nginx
-
-RUN mkdir /bro /bro/pcap /bro/extract_files
+#create output dirs
+RUN mkdir /bro /bro/pcap /var/www/html/extract_files
 
 CMD ["/role/cmd-bare"]
