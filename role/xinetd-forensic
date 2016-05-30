@@ -1,0 +1,23 @@
+#!/bin/bash
+# Usage /role/xinetd-forensic dockerhost
+cp /xinetd/bro-forensic /etc/xinetd.d/bro
+# set the forensic config ip of the dockerhost
+sed -i "s/server_args	    = FORENSICCONF/server_args	    = $1/" /etc/xinetd.d/bro
+# This script sets all logs to elasticsearch
+echo "@load ./logs-to-elasticsearch" >> /usr/local/bro/share/bro/bro-extra/custom.bro
+#This script adds pcap url per socket in conn logs
+echo "@load ./conn_pcap.bro" >>  /usr/local/bro/share/bro/bro-extra/custom.bro
+# enable extraction
+echo "@load policy/frameworks/files/extract-all-files"
+# This script sets file extraction from known protocols and adds an uri to the extracted files
+echo "@load base/files/extract" >> /usr/local/bro/share/bro/bro-extra/custom.bro
+# stop local logging
+sed -i "s/default_writer = WRITER_ASCII/default_writer = WRITER_NONE/g" /usr/local/bro/share/bro/base/frameworks/logging/main.bro
+#start php5-fpm for nginx
+php5-fpm &
+# set nginx config
+cp /nginx/default /etc/nginx/sites-available/
+# start nginx
+nginx &
+# start xinetd
+/usr/sbin/xinetd -dontfork

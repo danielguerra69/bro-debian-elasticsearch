@@ -93,7 +93,7 @@ commandline and log to elasticsearch
 ```bash
 docker run -ti --link elasticsearch-node01:elasticsearch -v /Users/PCAP:/pcap --name bro danielguerra/bro-debian-elasticsearch /role/cmd-elasticsearch
 ```
-readfiles from bro-dev commandline
+readfiles from bro commandline
 
 ```bash
 bro -r /pcap/mydump.pcap
@@ -111,7 +111,8 @@ docker run -d -p 1969:1969 --link elasticsearch-master:elasticsearch --name bro-
 ```
 tcpdump to your container from a remote host, replace dockerhost with your ip
 ```bash
-tcpdump -i eth0 -s 0 -w /dev/stdout | nc dockerhost 1969```
+tcpdump -i eth0 -s 0 -w /dev/stdout | nc dockerhost 1969
+```
 or read a file file to your container
 ```bash
 nc dockerhost 1969 < mydump.pcap
@@ -172,6 +173,8 @@ cat <pcap-file> | amqp-publish   --url=amqp://<user>:<pass>@<amqp-ip> --exchange
 Start a bro-xinetd, do a (replace <container-to-dump> with your container name and <bro-xinetd-ip> with the bro xinetd ip)
 ```bash
 docker run --rm  --net=container:<container-to-dump> crccheck/tcpdump -i eth0 -w - | nc <bro-xinetd-ip> 1969 &
+docker run --rm  --net=container:<container-to-dump> danielguerra/bro-debian-elasticsearch:develop dump-elasticsearch
+
 ```
 
 ### useful scripts

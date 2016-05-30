@@ -1,0 +1,6 @@
+#!/bin/bash
+
+# This script sets file extraction from known protocols
+echo "@load policy/frameworks/files/extract-all-files" >> /usr/local/bro/share/bro/bro-extra/custom.bro
+
+/bin/bash
