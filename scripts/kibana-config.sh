@@ -1,3 +1,4 @@
+#!/bin/bash
 until curl -XGET http://kibana:5601/; do
   >&2 echo "Kibana is unavailable - sleeping"
   sleep 5

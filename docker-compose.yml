@@ -64,7 +64,7 @@ kibana:
 #
 # BRO
 
-bro-xinitd:
+bro-xinitd-forensic:
  image: danielguerra/bro-debian-elasticsearch:test
  command: /role/xinetd-forensic ${DOCKERHOST}
  hostname: bro-xinetd-forensic
