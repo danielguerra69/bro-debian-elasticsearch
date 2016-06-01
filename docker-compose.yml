@@ -76,7 +76,7 @@ bro-xinitd:
 
 # mapping
 bro-mapping:
- image: danielguerra/bro-debian-elasticsearch
+ image: danielguerra/bro-debian-elasticsearch:test
  command: /scripts/bro-mapping.sh
  links:
   - "elasticsearch-master:elasticsearch"
