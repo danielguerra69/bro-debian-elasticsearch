@@ -1,0 +1,82 @@
+# Compose Bro-debian-elasicsearch cluster
+# set DOCKERHOST with export DOCKERHOST=192.168.1.2
+#
+# VOLUMES
+
+elastic-data-master:
+ image: tianon/true
+ volumes:
+    - /usr/share/elasticsearch/data
+
+elastic-data-node01:
+ image: tianon/true
+ volumes:
+    - /usr/share/elasticsearch/data
+
+elastic-data-node02:
+ image: tianon/true
+ volumes:
+    - /usr/share/elasticsearch/data
+#
+
+#
+# ELASTICSEARCH
+
+elasticsearch-master:
+ image: elasticsearch
+ command: -Des.network.bind_host=elasticsearch-master --cluster.name=bro --node.name=elasticsearch-master --discovery.zen.ping.multicast.enabled=false --network.host=elasticsearch-master
+ hostname: elasticsearch-master
+ volumes_from:
+   - "elastic-data-master"
+ ports:
+   - "9200:9200"
+   - "9300:9300"
+
+elasticsearch-node01:
+ image: elasticsearch
+ command: -Des.network.bind_host=elasticsearch-node01 --cluster.name=bro --node.name=elasticsearch-node01 --discovery.zen.ping.unicast.hosts=master:9300  --network.host=elasticsearch-node01
+ hostname: elasticsearch-node01
+ links:
+  - "elasticsearch-master:master"
+ volumes_from:
+   - "elastic-data-node01"
+
+elasticsearch-node02:
+ image: elasticsearch
+ command: -Des.network.bind_host=elasticsearch-node02 --cluster.name=bro --node.name=elasticsearch-node02 --discovery.zen.ping.unicast.hosts=master:9300  --network.host=elasticsearch-node02
+ hostname: elasticsearch-node02
+ links:
+  - "elasticsearch-master:master"
+ volumes_from:
+   - "elastic-data-node02"
+
+#
+# KIBANA
+
+kibana:
+ image: kibana
+ hostname: kibana
+ ports:
+  - "5601:5601"
+ links:
+  - "elasticsearch-master:elasticsearch"
+
+#
+# BRO
+
+bro-xinitd:
+ image: danielguerra/bro-debian-elasticsearch
+ command: /role/xinetd-forensic ${DOCKERHOST}
+ hostname: bro-xinetd-forensic
+ links:
+  - "elasticsearch-master:elasticsearch"
+ ports:
+  - "1969:1969"
+  - "80:80"
+
+# mapping
+bro-mapping:
+ image: danielguerra/bro-debian-elasticsearch
+ command: /scripts/bro-mapping.sh
+ links:
+  - "elasticsearch-master:elasticsearch"
