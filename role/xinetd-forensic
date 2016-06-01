@@ -8,11 +8,13 @@ echo "@load ./logs-to-elasticsearch" >> /usr/local/bro/share/bro/bro-extra/custo
 #This script adds pcap url per socket in conn logs
 echo "@load ./conn_pcap.bro" >>  /usr/local/bro/share/bro/bro-extra/custom.bro
 # enable extraction
-echo "@load policy/frameworks/files/extract-all-files"
+echo "@load policy/frameworks/files/extract-all-files" >>  /usr/local/bro/share/bro/bro-extra/custom.bro
 # This script sets file extraction from known protocols and adds an uri to the extracted files
 echo "@load base/files/extract" >> /usr/local/bro/share/bro/bro-extra/custom.bro
 # stop local logging
 sed -i "s/default_writer = WRITER_ASCII/default_writer = WRITER_NONE/g" /usr/local/bro/share/bro/base/frameworks/logging/main.bro
+sed -i "s/default_capture_password = F/default_capture_password = T/" /usr/local/bro/share/bro/base/protocols/ftp/info.bro
+sed -i "s/default_capture_password = F/default_capture_password = T/" /usr/local/bro/share/bro/base/protocols/http/main.bro
 # start apache
 /etc/init.d/apache2 start
 # start xinetd

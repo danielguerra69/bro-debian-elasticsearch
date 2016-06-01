@@ -11,5 +11,7 @@ export PCAPFILE=`tempfile -d /bro/pcap -p bro- -s .pcap`
 cp /usr/local/bro/share/bro/bro-extra/conn_pcap_template.bro /usr/local/bro/share/bro/bro-extra/conn_pcap.bro
 sed -i "s:PCAPFILE:${PCAPFILE}:" /usr/local/bro/share/bro/bro-extra/conn_pcap.bro
 sed -i "s:DOCKERHOST:${DOCKERHOST}:" /usr/local/bro/share/bro/bro-extra/conn_pcap.bro
+# set file permissions for apache
+chown www-data:www-data ${PCAPFILE}
 #cmd
-tee -a $PCAPFILE | bro -r -
+bro -r - -w ${PCAPFILE}
