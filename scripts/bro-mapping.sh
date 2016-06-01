@@ -1,4 +1,10 @@
 #!/bin/bash
+until curl -XGET elasticsearch:9200/; do
+  >&2 echo "Elasticsearch is unavailable - sleeping"
+  sleep 5
+done
+
+>&2 echo "Elasticsearch is up - executing command"
 curl -XPUT elasticsearch:9200/_template/fixstrings_bro -d '{
   "template": "bro-*",
     "index": {
@@ -31,6 +37,14 @@ curl -XPUT elasticsearch:9200/_template/fixstrings_bro -d '{
               "type" : "geo_point"
             }
           }
+      },
+      "files" : {
+        "properties" : {
+          "mime_type" : {
+            "type" : "string",
+            "index" : "not_analyzed"
+          }
+        }
       },
       "location": {
         "properties" : {

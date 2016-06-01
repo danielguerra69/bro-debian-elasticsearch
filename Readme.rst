@@ -1,9 +1,9 @@
 ##### BRO ELK AMQP docker integration
 
-[Docker](https://www.docker.io/)
-![bro-logo](https://www.bro.org/images/bro-eyes.png) [Bro-IDS](https://www.bro.org/index.html)
-![elastic-logo](https://www.elastic.co/static/img/elastic-logo-200.png) [Elasticsearch/Kibana](https://www.elastic.co)
-![rabbitmq-logo](https://www.rabbitmq.com/img/rabbitmq_logo_strap.png) [RabbitMQ](https://www.rabbitmq.com)
+|  Bro IDS   |  Elasticsearch + Kibana | RabbitMQ   |
+| :--- | :--- | :--- |
+| ![Bro IDS](https://www.bro.org/images/bro-eyes.png) | ![Elasticsearch](https://www.runabove.com/images/apps/elasticsearch-and-kibana.png) | ![RabbitMQ](https://www.rabbitmq.com/img/rabbitmq_logo_strap.png) |
+|  2.4.1   |  2.1.1 / 4.3.1  | 3.5.7  | 
 
 ### About
 
