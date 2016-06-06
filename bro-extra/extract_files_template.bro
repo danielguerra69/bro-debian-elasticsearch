@@ -17,7 +17,7 @@ export {
         redef record Files::Info += {
                 ## Local filename of extracted file.
                 extracted: string &optional &log;
-                uri: string &optional &log;
+                extract_uri: string &optional &log;
         };
 
         redef record Files::AnalyzerArgs += {
@@ -60,7 +60,7 @@ function on_add(f: fa_file, args: Files::AnalyzerArgs)
                 args$extract_filename = cat("extract-", f$last_active, "-", f$source,
                                             "-", f$id);
         f$info$extracted = args$extract_filename;
-        f$info$uri = cat(webserver,"/extract_files/",args$extract_filename);
+        f$info$extract_uri= cat(webserver,"/extract_files/",args$extract_filename);
         args$extract_filename = build_path_compressed(prefix, args$extract_filename);
         mkdir(prefix);
         }

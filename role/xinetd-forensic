@@ -15,7 +15,5 @@ echo "@load base/files/extract" >> /usr/local/bro/share/bro/bro-extra/custom.bro
 sed -i "s/default_writer = WRITER_ASCII/default_writer = WRITER_NONE/g" /usr/local/bro/share/bro/base/frameworks/logging/main.bro
 sed -i "s/default_capture_password = F/default_capture_password = T/" /usr/local/bro/share/bro/base/protocols/ftp/info.bro
 sed -i "s/default_capture_password = F/default_capture_password = T/" /usr/local/bro/share/bro/base/protocols/http/main.bro
-# start apache
-/etc/init.d/apache2 start
-# start xinetd
-/usr/sbin/xinetd -dontfork
+#start supervisor daemon
+/usr/bin/supervisord -c /etc/supervisor/conf.d/supervisord.conf

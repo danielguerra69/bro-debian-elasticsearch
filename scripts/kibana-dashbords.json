@@ -1,46 +1,12 @@
 [
   {
-    "_id": "unknown-traffic",
+    "_id": "geoip",
     "_type": "dashboard",
     "_source": {
-      "title": "unknown traffic",
+      "title": "geoip",
       "hits": 0,
       "description": "",
-      "panelsJSON": "[{\"col\":1,\"id\":\"unknown-service-proto-bytes\",\"row\":1,\"size_x\":6,\"size_y\":2,\"type\":\"visualization\"},{\"col\":7,\"id\":\"unknown-orig-host\",\"row\":1,\"size_x\":3,\"size_y\":2,\"type\":\"visualization\"},{\"col\":10,\"id\":\"unknown-resp-host\",\"row\":1,\"size_x\":3,\"size_y\":2,\"type\":\"visualization\"},{\"col\":1,\"id\":\"orig-geoip\",\"row\":3,\"size_x\":6,\"size_y\":4,\"type\":\"visualization\"},{\"col\":7,\"id\":\"resp-geoip\",\"row\":3,\"size_x\":6,\"size_y\":4,\"type\":\"visualization\"}]",
-      "optionsJSON": "{\"darkTheme\":true}",
-      "uiStateJSON": "{}",
-      "version": 1,
-      "timeRestore": false,
-      "kibanaSavedObjectMeta": {
-        "searchSourceJSON": "{\"filter\":[{\"query\":{\"query_string\":{\"analyze_wildcard\":true,\"query\":\"*\"}}}]}"
-      }
-    }
-  },
-  {
-    "_id": "extracted-location",
-    "_type": "dashboard",
-    "_source": {
-      "title": "extracted location",
-      "hits": 0,
-      "description": "",
-      "panelsJSON": "[{\"id\":\"extracted-location\",\"type\":\"visualization\",\"panelIndex\":1,\"size_x\":12,\"size_y\":6,\"col\":1,\"row\":1}]",
-      "optionsJSON": "{\"darkTheme\":true}",
-      "uiStateJSON": "{}",
-      "version": 1,
-      "timeRestore": false,
-      "kibanaSavedObjectMeta": {
-        "searchSourceJSON": "{\"filter\":[{\"query\":{\"query_string\":{\"analyze_wildcard\":true,\"query\":\"*\"}}}]}"
-      }
-    }
-  },
-  {
-    "_id": "connection",
-    "_type": "dashboard",
-    "_source": {
-      "title": "connection",
-      "hits": 0,
-      "description": "",
-      "panelsJSON": "[{\"col\":1,\"id\":\"service-bytes\",\"panelIndex\":1,\"row\":1,\"size_x\":12,\"size_y\":2,\"type\":\"visualization\"},{\"col\":1,\"id\":\"proto-bytes\",\"panelIndex\":2,\"row\":3,\"size_x\":12,\"size_y\":2,\"type\":\"visualization\"},{\"col\":1,\"id\":\"unknown-service-proto-bytes\",\"panelIndex\":3,\"row\":7,\"size_x\":12,\"size_y\":2,\"type\":\"visualization\"},{\"col\":1,\"id\":\"service-duration\",\"panelIndex\":4,\"row\":9,\"size_x\":12,\"size_y\":2,\"type\":\"visualization\"},{\"col\":1,\"id\":\"connection-state\",\"panelIndex\":5,\"row\":5,\"size_x\":12,\"size_y\":2,\"type\":\"visualization\"}]",
+      "panelsJSON": "[{\"id\":\"resp-geoip\",\"type\":\"visualization\",\"size_x\":6,\"size_y\":6,\"col\":7,\"row\":1},{\"id\":\"orig-geoip\",\"type\":\"visualization\",\"size_x\":6,\"size_y\":6,\"col\":1,\"row\":1}]",
       "optionsJSON": "{\"darkTheme\":true}",
       "uiStateJSON": "{}",
       "version": 1,
@@ -68,6 +34,23 @@
     }
   },
   {
+    "_id": "unknown-traffic",
+    "_type": "dashboard",
+    "_source": {
+      "title": "unknown traffic",
+      "hits": 0,
+      "description": "",
+      "panelsJSON": "[{\"col\":1,\"id\":\"unknown-service-proto-bytes\",\"row\":1,\"size_x\":6,\"size_y\":2,\"type\":\"visualization\"},{\"col\":7,\"id\":\"unknown-orig-host\",\"row\":1,\"size_x\":3,\"size_y\":2,\"type\":\"visualization\"},{\"col\":10,\"id\":\"unknown-resp-host\",\"row\":1,\"size_x\":3,\"size_y\":2,\"type\":\"visualization\"},{\"col\":1,\"id\":\"orig-geoip\",\"row\":3,\"size_x\":6,\"size_y\":4,\"type\":\"visualization\"},{\"col\":7,\"id\":\"resp-geoip\",\"row\":3,\"size_x\":6,\"size_y\":4,\"type\":\"visualization\"}]",
+      "optionsJSON": "{\"darkTheme\":true}",
+      "uiStateJSON": "{}",
+      "version": 1,
+      "timeRestore": false,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"filter\":[{\"query\":{\"query_string\":{\"analyze_wildcard\":true,\"query\":\"*\"}}}]}"
+      }
+    }
+  },
+  {
     "_id": "notice",
     "_type": "dashboard",
     "_source": {
@@ -81,40 +64,6 @@
       "timeRestore": false,
       "kibanaSavedObjectMeta": {
         "searchSourceJSON": "{\"filter\":[{\"query\":{\"query_string\":{\"analyze_wildcard\":true,\"query\":\"*\"}}}]}"
-      }
-    }
-  },
-  {
-    "_id": "geoip",
-    "_type": "dashboard",
-    "_source": {
-      "title": "geoip",
-      "hits": 0,
-      "description": "",
-      "panelsJSON": "[{\"id\":\"resp-geoip\",\"type\":\"visualization\",\"size_x\":6,\"size_y\":6,\"col\":7,\"row\":1},{\"id\":\"orig-geoip\",\"type\":\"visualization\",\"size_x\":6,\"size_y\":6,\"col\":1,\"row\":1}]",
-      "optionsJSON": "{\"darkTheme\":true}",
-      "uiStateJSON": "{}",
-      "version": 1,
-      "timeRestore": false,
-      "kibanaSavedObjectMeta": {
-        "searchSourceJSON": "{\"filter\":[{\"query\":{\"query_string\":{\"analyze_wildcard\":true,\"query\":\"*\"}}}]}"
-      }
-    }
-  },
-  {
-    "_id": "dns",
-    "_type": "dashboard",
-    "_source": {
-      "title": "dns",
-      "hits": 0,
-      "description": "",
-      "panelsJSON": "[{\"id\":\"dns-query\",\"type\":\"visualization\",\"size_x\":6,\"size_y\":3,\"col\":1,\"row\":1},{\"id\":\"dns-answer\",\"type\":\"visualization\",\"size_x\":6,\"size_y\":3,\"col\":7,\"row\":1},{\"id\":\"dns-qtype\",\"type\":\"visualization\",\"size_x\":12,\"size_y\":3,\"col\":1,\"row\":4}]",
-      "optionsJSON": "{\"darkTheme\":true}",
-      "uiStateJSON": "{}",
-      "version": 1,
-      "timeRestore": false,
-      "kibanaSavedObjectMeta": {
-        "searchSourceJSON": "{\"filter\":[{\"query\":{\"query_string\":{\"query\":\"*\",\"analyze_wildcard\":true}}}]}"
       }
     }
   },
@@ -183,6 +132,57 @@
       "timeRestore": false,
       "kibanaSavedObjectMeta": {
         "searchSourceJSON": "{\"filter\":[{\"query\":{\"query_string\":{\"query\":\"*\",\"analyze_wildcard\":true}}}]}"
+      }
+    }
+  },
+  {
+    "_id": "dns",
+    "_type": "dashboard",
+    "_source": {
+      "title": "dns",
+      "hits": 0,
+      "description": "",
+      "panelsJSON": "[{\"id\":\"dns-query\",\"type\":\"visualization\",\"size_x\":6,\"size_y\":3,\"col\":1,\"row\":1},{\"id\":\"dns-answer\",\"type\":\"visualization\",\"size_x\":6,\"size_y\":3,\"col\":7,\"row\":1},{\"id\":\"dns-qtype\",\"type\":\"visualization\",\"size_x\":12,\"size_y\":3,\"col\":1,\"row\":4}]",
+      "optionsJSON": "{\"darkTheme\":true}",
+      "uiStateJSON": "{}",
+      "version": 1,
+      "timeRestore": false,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"filter\":[{\"query\":{\"query_string\":{\"query\":\"*\",\"analyze_wildcard\":true}}}]}"
+      }
+    }
+  },
+  {
+    "_id": "connection",
+    "_type": "dashboard",
+    "_source": {
+      "title": "connection",
+      "hits": 0,
+      "description": "",
+      "panelsJSON": "[{\"col\":1,\"id\":\"service-bytes\",\"panelIndex\":1,\"row\":1,\"size_x\":12,\"size_y\":2,\"type\":\"visualization\"},{\"col\":1,\"id\":\"proto-bytes\",\"panelIndex\":2,\"row\":3,\"size_x\":12,\"size_y\":2,\"type\":\"visualization\"},{\"col\":1,\"id\":\"unknown-service-proto-bytes\",\"panelIndex\":3,\"row\":7,\"size_x\":12,\"size_y\":2,\"type\":\"visualization\"},{\"col\":1,\"id\":\"service-duration\",\"panelIndex\":4,\"row\":9,\"size_x\":12,\"size_y\":2,\"type\":\"visualization\"},{\"col\":1,\"id\":\"connection-state\",\"panelIndex\":5,\"row\":5,\"size_x\":12,\"size_y\":2,\"type\":\"visualization\"}]",
+      "optionsJSON": "{\"darkTheme\":true}",
+      "uiStateJSON": "{}",
+      "version": 1,
+      "timeRestore": false,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"filter\":[{\"query\":{\"query_string\":{\"analyze_wildcard\":true,\"query\":\"*\"}}}]}"
+      }
+    }
+  },
+  {
+    "_id": "extracted-location",
+    "_type": "dashboard",
+    "_source": {
+      "title": "extracted location",
+      "hits": 0,
+      "description": "",
+      "panelsJSON": "[{\"id\":\"extracted-location\",\"type\":\"visualization\",\"panelIndex\":1,\"size_x\":12,\"size_y\":6,\"col\":1,\"row\":1}]",
+      "optionsJSON": "{\"darkTheme\":true}",
+      "uiStateJSON": "{}",
+      "version": 1,
+      "timeRestore": false,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"filter\":[{\"query\":{\"query_string\":{\"analyze_wildcard\":true,\"query\":\"*\"}}}]}"
       }
     }
   }
