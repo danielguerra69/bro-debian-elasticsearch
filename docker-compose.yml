@@ -64,8 +64,13 @@ kibana:
 #
 # BRO
 
+<<<<<<< HEAD
 bro-xinitd:
  image: danielguerra/bro-debian-elasticsearch
+=======
+bro-xinitd-forensic:
+ image: danielguerra/bro-debian-elasticsearch:test
+>>>>>>> test
  command: /role/xinetd-forensic ${DOCKERHOST}
  hostname: bro-xinetd-forensic
  links:
@@ -76,7 +81,13 @@ bro-xinitd:
 
 # mapping
 bro-mapping:
- image: danielguerra/bro-debian-elasticsearch
+ image: danielguerra/bro-debian-elasticsearch:test
  command: /scripts/bro-mapping.sh
+ links:
+  - "elasticsearch-master:elasticsearch"
+
+# kibana config
+kibana-config:
+ image: danielguerra/bro-kibana-config
  links:
   - "elasticsearch-master:elasticsearch"
