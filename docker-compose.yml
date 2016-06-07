@@ -83,7 +83,6 @@ bro-mapping:
 
 # kibana config
 kibana-config:
- image: danielguerra/bro-debian-elasticsearch:test
- command: /scripts/kibana-config.sh
+ image: danielguerra/bro-kibana-config
  links:
-  - "kibana:kibana"
+  - "elasticsearch-master:elasticsearch"
