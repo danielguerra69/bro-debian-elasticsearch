@@ -32,10 +32,12 @@ The simplest way to start all nodes is using docker-compose
 wget https://raw.githubusercontent.com/danielguerra69/bro-debian-elasticsearch/master/docker-compose.yml
 export DOCKERHOST=<dockerhost-ip>
 export COMPOSE_API_VERSION=1.18
+docker-compose pull
 docker-compose up
 ```
 This compose file starts a role/xinetd-forensic which currently supports pcap and extracted file access from kibana.
-* [![Bro Kibana screenshot](https://badge.imagelayers.io/rabbitmq.svg)](https://raw.githubusercontent.com/danielguerra69/bro-debian-elasticsearch/master/bro-kibana.gif 'bro-kibana screenshot') 
+
+[Screenshot !](https://raw.githubusercontent.com/danielguerra69/bro-debian-elasticsearch/master/bro-kibana.gif)
 
 ### Developers
 
