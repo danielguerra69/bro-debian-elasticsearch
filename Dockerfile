@@ -133,6 +133,9 @@ ADD /role /role
 # add php scripts
 ADD /php/index.php /var/www/html/index.php
 
+# add supervisor config
+ADD supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+
 #create output dirs
 RUN mkdir /bro /bro/pcap /var/www/html/extract_files
 
