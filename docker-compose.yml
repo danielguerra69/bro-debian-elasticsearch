@@ -69,7 +69,7 @@ bro-xinitd:
  image: danielguerra/bro-debian-elasticsearch
 =======
 bro-xinitd-forensic:
- image: danielguerra/bro-debian-elasticsearch:test
+ image: danielguerra/bro-debian-elasticsearch
 >>>>>>> test
  command: /role/xinetd-forensic ${DOCKERHOST}
  hostname: bro-xinetd-forensic
@@ -81,7 +81,7 @@ bro-xinitd-forensic:
 
 # mapping
 bro-mapping:
- image: danielguerra/bro-debian-elasticsearch:test
+ image: danielguerra/bro-debian-elasticsearch
  command: /scripts/bro-mapping.sh
  links:
   - "elasticsearch-master:elasticsearch"
