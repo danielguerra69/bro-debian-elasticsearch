@@ -36,6 +36,15 @@ docker-compose pull
 docker-compose up
 ```
 This compose file starts a role/xinetd-forensic which currently supports pcap and extracted file access from kibana.
+It listens to port 1969 for pcap files.
+```bash
+nc <dockerhost-ip> 1969 < my.pcap
+tcpdump -i eth0 -s 0 -w - not host <dockerhost-ip> | nc <dockerhost-ip> 1969
+```
+Kibana is viewed in your browser.
+http://<dockerhost-ip>:5601/
+
+The pcap and extracted data can be reached over tcp port 80
 
 [Screenshot !](https://raw.githubusercontent.com/danielguerra69/bro-debian-elasticsearch/master/bro-kibana.gif)
 
@@ -193,7 +202,7 @@ cat <pcap-file> | amqp-publish   --url=amqp://<user>:<pass>@<amqp-ip> --exchange
 Start a bro-xinetd, do a (replace <container-to-dump> with your container name and <bro-xinetd-ip> with the bro xinetd ip)
 ```bash
 docker run --rm  --net=container:<container-to-dump> crccheck/tcpdump -i eth0 -w - | nc <bro-xinetd-ip> 1969 &
-docker run --rm  --net=container:<container-to-dump> danielguerra/bro-debian-elasticsearch:develop dump-elasticsearch
+docker run --rm  --net=container:<container-to-dump> danielguerra/bro-debian-elasticsearch:develop /role/dump-elasticsearch
 
 ```
 
