@@ -6,8 +6,33 @@ MAINTAINER danielguerra, https://github.com/danielguerra
 ADD /bro-patch /bro-patch
 
 # build bro + tools
-RUN cd /tmp \
-&& git clone --recursive git://git.bro.org/bro \
+RUN buildDeps='build-essential \
+autoconf \
+install-info \
+libgoogle-perftools-dev \
+libcurl3-dev \
+libgeoip-dev \
+libpcap-dev \
+libssl-dev \
+python-dev \
+zlib1g-dev \
+libedit-dev \
+doxygen \
+git-core \
+cmake \
+make \
+g++ \
+gcc \
+libpcre3-dev \
+python-setuptools \
+libsnappy-dev \
+libbz2-dev \
+devscripts \
+libjemalloc-dev \
+libjemalloc1-dbg ' \
+&& set -x \
+&& cd /tmp \
+&& git clone --recursive git://github.com/danielguerra69/bro\
 && patch /tmp/bro/aux/plugins/elasticsearch/src/ElasticSearch.cc  /bro-patch/ElasticSearch.cc.patch \
 && patch /tmp/bro/src/threading/formatters/JSON.h /bro-patch/JSON.h.patch \
 && patch /tmp/bro/src/threading/formatters/JSON.cc /bro-patch/JSON.cc.patch \
@@ -29,7 +54,10 @@ RUN cd /tmp \
 && cd /tmp \
 && git clone --recursive https://github.com/jonschipp/mal-dnssearch.git \
 && cd /tmp/mal-dnssearch \
-&& make
+&& make \
+&& apt-get remove -y $buildDeps \
+&& apt-get clean \
+&& rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # add maintance shell scripts
 ADD /scripts /scripts

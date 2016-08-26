@@ -34,10 +34,6 @@
 # Load the scan detection script.
 @load misc/scan
 
-# Log some information about web applications being used by users
-# on your network.
-@load misc/app-stats
-
 # Detect traceroute being run on the network.
 @load misc/detect-traceroute
 
@@ -101,3 +97,6 @@
 # Uncomment the following line to enable detection of the heartbleed attack. Enabling
 # this might impact performance a bit.
 @load policy/protocols/ssl/heartbleed
+
+#add mac addresses to conn log
+@load policy/protocols/conn/mac-logging
