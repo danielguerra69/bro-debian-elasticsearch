@@ -1,5 +1,5 @@
 # This script loads tcprs reordering
-@load ./tcprs
+#@load ./tcprs
 
 # This script add lat long to ip numbers in orig_loc and dest_loc
 @load ./geoip
@@ -103,4 +103,4 @@
 @load policy/protocols/ssl/heartbleed
 
 #add mac addresses to conn log
-@load policy/protocols/conn/mac-logging
+#@load policy/protocols/conn/mac-logging
