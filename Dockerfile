@@ -32,7 +32,9 @@ libjemalloc-dev \
 libjemalloc1-dbg ' \
 && set -x \
 && cd /tmp \
-&& git clone --recursive git://github.com/danielguerra69/bro\
+&& wget https://www.bro.org/downloads/bro-2.4.1.tar.gz \
+&& tar xvfz bro-2.4.1.tar.gz \
+&& mv bro-2.4.1 bro \
 && patch /tmp/bro/aux/plugins/elasticsearch/src/ElasticSearch.cc  /bro-patch/ElasticSearch.cc.patch \
 && patch /tmp/bro/src/threading/formatters/JSON.h /bro-patch/JSON.h.patch \
 && patch /tmp/bro/src/threading/formatters/JSON.cc /bro-patch/JSON.cc.patch \
@@ -44,10 +46,6 @@ libjemalloc1-dbg ' \
 && sed -i "s/2secs/60secs/g" /tmp/bro/aux/plugins/elasticsearch/scripts/init.bro \
 && sed -i "s/const max_batch_size = 1000/const max_batch_size = 500/g" /tmp/bro/aux/plugins/elasticsearch/scripts/init.bro \
 && cd /tmp/bro/aux/plugins/elasticsearch \
-&& ./configure \
-&& make \
-&& make install \
-&& cd /tmp/bro/aux/plugins/tcprs \
 && ./configure \
 && make \
 && make install \

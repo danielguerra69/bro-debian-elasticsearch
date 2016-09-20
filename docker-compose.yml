@@ -2,6 +2,7 @@
 # set DOCKERHOST with export DOCKERHOST=192.168.1.2
 #
 # VOLUMES
+
 elastic-data-master:
  image: tianon/true
  volumes:
@@ -20,6 +21,7 @@ elastic-data-node02:
 
 #
 # ELASTICSEARCH
+
 elasticsearch-master:
  image: elasticsearch
  command: -Des.network.bind_host=elasticsearch-master --cluster.name=bro --node.name=elasticsearch-master --discovery.zen.ping.multicast.enabled=false --network.host=elasticsearch-master
@@ -50,6 +52,7 @@ elasticsearch-node02:
 
 #
 # KIBANA
+
 kibana:
  image: kibana
  hostname: kibana
@@ -60,10 +63,9 @@ kibana:
 
 #
 # BRO
-bro-xinitd:
- image: danielguerra/bro-debian-elasticsearch
+
 bro-xinitd-forensic:
- image: danielguerra/bro-debian-elasticsearch
+ image: danielguerra/bro-debian-elasticsearch:test
  command: /role/xinetd-forensic ${DOCKERHOST}
  hostname: bro-xinetd-forensic
  links:
@@ -74,7 +76,7 @@ bro-xinitd-forensic:
 
 # mapping
 bro-mapping:
- image: danielguerra/bro-debian-elasticsearch
+ image: danielguerra/bro-debian-elasticsearch:test
  command: /scripts/bro-mapping.sh
  links:
   - "elasticsearch-master:elasticsearch"
