@@ -97,11 +97,6 @@ RUN echo "bro             1969/tcp                        # bro pcap feed" >> /e
 
 #fresh intel
 RUN /scripts/update-intel.sh
-#set the expose ports
-EXPOSE 22
-EXPOSE 1969
-EXPOSE 47761
-EXPOSE 47762
 
 #set default dir
 WORKDIR /tmp
@@ -140,5 +135,7 @@ ADD supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 #create output dirs
 RUN mkdir /bro /bro/pcap /var/www/html/extract_files
+#set the expose ports
+EXPOSE 22 1969 80
 
 CMD ["/role/cmd-bare"]
