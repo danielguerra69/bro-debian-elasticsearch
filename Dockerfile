@@ -56,6 +56,10 @@ libjemalloc1-dbg ' \
 && ./configure \
 && make \
 && make install \
+&& cd /tmp/bro/aux/plugins/tcprs \
+&& ./configure \
+&& make \
+&& make install \
 && cd /tmp \
 && git clone --recursive https://github.com/jonschipp/mal-dnssearch.git \
 && cd /tmp/mal-dnssearch \
