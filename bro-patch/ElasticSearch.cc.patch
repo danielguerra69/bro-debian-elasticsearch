@@ -1,3 +1,7 @@
+7c7
+< #include "bro-config.h"
+---
+> #include "config.h"
 66c66
 < 	json = new threading::formatter::JSON(this, threading::formatter::JSON::TS_MILLIS);
 ---
