@@ -35,6 +35,13 @@ libjemalloc1-dbg ' \
 && wget https://www.bro.org/downloads/bro-2.4.1.tar.gz \
 && tar xvfz bro-2.4.1.tar.gz \
 && mv bro-2.4.1 bro \
+&& wget https://github.com/bro/bro-plugins/archive/v0.3.tar.gz \
+&& tar xvfz v0.3.tar.gz \
+&& cd /tmp/bro/aux/plugins/ \
+&& rm -rf * \
+&& cp -R /tmp/bro-plugins-0.3/* . \
+&& mv elasticsearch-deprecated elasticsearch \
+&& wget https://raw.githubusercontent.com/bro/bro-plugins/master/elasticsearch-deprecated/src/ElasticSearch.cc
 && patch /tmp/bro/aux/plugins/elasticsearch/src/ElasticSearch.cc  /bro-patch/ElasticSearch.cc.patch \
 && patch /tmp/bro/src/threading/formatters/JSON.h /bro-patch/JSON.h.patch \
 && patch /tmp/bro/src/threading/formatters/JSON.cc /bro-patch/JSON.cc.patch \

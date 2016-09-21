@@ -103,4 +103,4 @@
 @load policy/protocols/ssl/heartbleed
 
 #add mac addresses to conn log
-@load policy/protocols/conn/mac-logging
+#@load policy/protocols/conn/mac-logging
