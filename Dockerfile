@@ -41,7 +41,6 @@ libjemalloc1-dbg ' \
 && rm -rf * \
 && cp -R /tmp/bro-plugins-0.3/* . \
 && mv elasticsearch-deprecated elasticsearch \
-&& wget https://raw.githubusercontent.com/bro/bro-plugins/master/elasticsearch-deprecated/src/ElasticSearch.cc
 && patch /tmp/bro/aux/plugins/elasticsearch/src/ElasticSearch.cc  /bro-patch/ElasticSearch.cc.patch \
 && patch /tmp/bro/src/threading/formatters/JSON.h /bro-patch/JSON.h.patch \
 && patch /tmp/bro/src/threading/formatters/JSON.cc /bro-patch/JSON.cc.patch \
