@@ -6,7 +6,6 @@ MAINTAINER danielguerra, https://github.com/danielguerra
 ADD /bro-patch /bro-patch
 
 # build bro + tools
-<<<<<<< HEAD
 RUN buildDeps='build-essential \
 autoconf \
 install-info \
@@ -33,20 +32,7 @@ libjemalloc-dev \
 libjemalloc1-dbg ' \
 && set -x \
 && cd /tmp \
-&& wget https://www.bro.org/downloads/bro-2.4.1.tar.gz \
-&& tar xvfz bro-2.4.1.tar.gz \
-&& mv bro-2.4.1 bro \
-&& wget https://github.com/bro/bro-plugins/archive/v0.3.tar.gz \
-&& tar xvfz v0.3.tar.gz \
-&& cd /tmp/bro/aux/plugins/elasticsearch \
-&& rm -rf * \
-&& cp -R /tmp/bro-plugins-0.3/elasticsearch-deprecated/* . \
-&& cd /tmp/bro/aux/plugins/ \
-&& cp -R /tmp/bro-plugins-0.3/tcprs /tmp/bro/aux/plugins \
-=======
-RUN cd /tmp \
 && git clone --recursive git://git.bro.org/bro \
->>>>>>> parent of 4a56e79... Merge branch 'master' into test
 && patch /tmp/bro/aux/plugins/elasticsearch/src/ElasticSearch.cc  /bro-patch/ElasticSearch.cc.patch \
 && patch /tmp/bro/src/threading/formatters/JSON.h /bro-patch/JSON.h.patch \
 && patch /tmp/bro/src/threading/formatters/JSON.cc /bro-patch/JSON.cc.patch \
@@ -61,10 +47,17 @@ RUN cd /tmp \
 && ./configure \
 && make \
 && make install \
+&& cd /tmp/bro/aux/plugins/tcprs \
+&& ./configure \
+&& make \
+&& make install \
 && cd /tmp \
 && git clone --recursive https://github.com/jonschipp/mal-dnssearch.git \
 && cd /tmp/mal-dnssearch \
-&& make
+&& make \
+&& apt-get remove -y $buildDeps \
+&& apt-get clean \
+&& rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # add maintance shell scripts
 ADD /scripts /scripts
@@ -106,6 +99,11 @@ RUN echo "bro             1969/tcp                        # bro pcap feed" >> /e
 
 #fresh intel
 RUN /scripts/update-intel.sh
+#set the expose ports
+EXPOSE 22
+EXPOSE 1969
+EXPOSE 47761
+EXPOSE 47762
 
 #set default dir
 WORKDIR /tmp
@@ -144,7 +142,5 @@ ADD supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 #create output dirs
 RUN mkdir /bro /bro/pcap /var/www/html/extract_files
-#set the expose ports
-EXPOSE 22 1969 80
 
 CMD ["/role/cmd-bare"]
