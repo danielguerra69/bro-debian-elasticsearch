@@ -54,7 +54,7 @@ libjemalloc1-dbg ' \
 && cd /tmp \
 && git clone --recursive https://github.com/jonschipp/mal-dnssearch.git \
 && cd /tmp/mal-dnssearch \
-&& make 
+&& make
 # add maintance shell scripts
 ADD /scripts /scripts
 
@@ -120,9 +120,6 @@ RUN sed -i "s/version:         count        \&log/ssh_version:         count    
 RUN sed -i "s/\$version =/\$ssh_version =/g" /usr/local/bro/share/bro/base/protocols/ssh/main.bro
 RUN sed -i "s/version: string \&log/snmp_version: string \&log/g" /usr/local/bro/share/bro/base/protocols/snmp/main.bro
 RUN sed -i "s/\$version=/\$snmp_version=/g" /usr/local/bro/share/bro/base/protocols/snmp/main.bro
-
-# fix error in kerberos
-RUN patch /usr/local/bro/share/bro/base/protocols/krb/main.bro /bro-patch/krb-main.patch
 
 # bro pcap-in tcp services
 ADD /xinetd /xinetd
