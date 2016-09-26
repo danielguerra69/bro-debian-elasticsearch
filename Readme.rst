@@ -30,23 +30,9 @@ Todo elasticsearch amqp consumer, amqpfs for extracted files.
 The simplest way to start all nodes is using docker-compose
 ```bash
 wget https://raw.githubusercontent.com/danielguerra69/bro-debian-elasticsearch/master/docker-compose.yml
-export DOCKERHOST=<dockerhost-ip>
-export COMPOSE_API_VERSION=1.18
-docker-compose pull
 docker-compose up
 ```
 This compose file starts a role/xinetd-forensic which currently supports pcap and extracted file access from kibana.
-It listens to port 1969 for pcap files.
-```bash
-nc <dockerhost-ip> 1969 < my.pcap
-tcpdump -i eth0 -s 0 -w - not host <dockerhost-ip> | nc <dockerhost-ip> 1969
-```
-Kibana is viewed in your browser.
-http://<dockerhost-ip>:5601/
-
-The pcap and extracted data can be reached over tcp port 80
-
-[Screenshot !](https://raw.githubusercontent.com/danielguerra69/bro-debian-elasticsearch/master/bro-kibana.gif)
 
 ### Developers
 
@@ -90,20 +76,20 @@ After you have a running elasticsearch-cluster you should start a commandline br
 ```bash
 docker run --link elasticsearch-master:elasticsearch --rm danielguerra/bro-debian-elasticsearch /scripts/bro-mapping.sh
 ```
+Then you are ready to go start reading data or dumping to the xinetd port
 
 ### kibana
 
-Configure kibana
-```bash
-docker run --rm --link elasticsearch-master:elasticsearch danielguerra/bro-kibana-config
-```
+(only do this when data was written to elasticsearch)
+Start the front-end you can point your browser at http://<dockerhost>:5601/
+Choose  Index contains time-based events .
+Use "bro-*" as index pattern and ts as timestamp.
 
-Start kibana
 ```bash
 docker run -d -p 5601:5601 --link=elasticsearch-node02:elasticsearch --hostname=kibana --name kibana kibana
 ```
-Point your browser http://<dockerhost>:5601
-
+ check my kibana config at
+ https://github.com/danielguerra69/bro-debian-elasticsearch/blob/master/scripts/kibana.json
 
 ### bro on the commandline
 
@@ -202,7 +188,7 @@ cat <pcap-file> | amqp-publish   --url=amqp://<user>:<pass>@<amqp-ip> --exchange
 Start a bro-xinetd, do a (replace <container-to-dump> with your container name and <bro-xinetd-ip> with the bro xinetd ip)
 ```bash
 docker run --rm  --net=container:<container-to-dump> crccheck/tcpdump -i eth0 -w - | nc <bro-xinetd-ip> 1969 &
-docker run --rm  --net=container:<container-to-dump> danielguerra/bro-debian-elasticsearch:develop /role/dump-elasticsearch
+docker run --rm  --net=container:<container-to-dump> danielguerra/bro-debian-elasticsearch:develop dump-elasticsearch
 
 ```
 
