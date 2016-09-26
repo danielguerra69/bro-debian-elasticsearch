@@ -34,8 +34,6 @@ libjemalloc1-dbg ' \
 && cd /tmp \
 && git clone --recursive git://git.bro.org/bro \
 && patch /tmp/bro/aux/plugins/elasticsearch/src/ElasticSearch.cc  /bro-patch/ElasticSearch.cc.patch \
-&& patch /tmp/bro/src/threading/formatters/JSON.h /bro-patch/JSON.h.patch \
-&& patch /tmp/bro/src/threading/formatters/JSON.cc /bro-patch/JSON.cc.patch \
 && cd /tmp/bro \
 && ./configure \
 && make \
@@ -125,8 +123,6 @@ RUN sed -i "s/\$version =/\$ssh_version =/g" /usr/local/bro/share/bro/base/proto
 RUN sed -i "s/version: string \&log/snmp_version: string \&log/g" /usr/local/bro/share/bro/base/protocols/snmp/main.bro
 RUN sed -i "s/\$version=/\$snmp_version=/g" /usr/local/bro/share/bro/base/protocols/snmp/main.bro
 
-# fix error in kerberos
-RUN patch /usr/local/bro/share/bro/base/protocols/krb/main.bro /bro-patch/krb-main.patch
 
 # bro pcap-in tcp services
 ADD /xinetd /xinetd
