@@ -1,1 +1,1 @@
-@load ./bro-extra.bro
+@load ./custom.bro
