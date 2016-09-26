@@ -3,11 +3,11 @@
 |  Bro IDS   |  Elasticsearch + Kibana | RabbitMQ   |
 | :--- | :--- | :--- |
 | ![Bro IDS](https://www.bro.org/images/bro-eyes.png) | ![Elasticsearch](https://www.runabove.com/images/apps/elasticsearch-and-kibana.png) | ![RabbitMQ](https://www.rabbitmq.com/img/rabbitmq_logo_strap.png) |
-|  2.4.1   |  2+ / 4+ | 3.5.7  |
+|  2.4.1   |  2.1.1 / 4.3.1  | 3.5.7  | 
 
 ### About
 
-Integrates Bro IDS git with Elasticsearch 2+ & Kibana 4+ Bro was compiled with broker,rocksdb and pybroker (full featured).Bro can write directly into Elasticsearch without logstash. The bro scripts have been modified in order to satisfy elasticsearch.
+Integrates Bro IDS git with Elasticsearch 2.1 & Kibana 4.3 Bro was compiled with broker,rocksdb and pybroker (full featured).Bro can write directly into Elasticsearch without logstash. The bro scripts have been modified in order to satisfy elasticsearch.
 The example below uses 3 elasticsearch nodes. The container bro-xinetd
 writes to the master. Kibana reads from node02. The commandline bro uses
 node01.
@@ -25,29 +25,6 @@ Todo elasticsearch amqp consumer, amqpfs for extracted files.
 
 * [![Latest](https://badge.imagelayers.io/danielguerra/bro-debian-elasticsearch.svg)](https://imagelayers.io/?images=danielguerra/bro-debian-elasticsearch:latest 'latest')
 
-### Docker-compose
-
-The simplest way to start all nodes is using docker-compose
-```bash
-wget https://raw.githubusercontent.com/danielguerra69/bro-debian-elasticsearch/master/docker-compose.yml
-export DOCKERHOST=<dockerhost-ip>
-export COMPOSE_API_VERSION=1.18
-docker-compose pull
-docker-compose up
-```
-This compose file starts a role/xinetd-forensic which currently supports pcap and extracted file access from kibana.
-It listens to port 1969 for pcap files.
-```bash
-nc <dockerhost-ip> 1969 < my.pcap
-tcpdump -i eth0 -s 0 -w - not host <dockerhost-ip> | nc <dockerhost-ip> 1969
-```
-Kibana is viewed in your browser.
-http://<dockerhost-ip>:5601/
-
-The pcap and extracted data can be reached over tcp port 80
-
-[Screenshot !](https://raw.githubusercontent.com/danielguerra69/bro-debian-elasticsearch/master/bro-kibana.gif)
-
 ### Developers
 
 Full version with all tools and sources to build this project.
@@ -56,7 +33,7 @@ Sources are in /tmp.
 docker pull danielguerra/bro-debian-elasticsearch:develop
 ```
 
-#### Installation
+#### Instalation
 
 Before you begin I recommend to start with pulling fresh images.
 ```bash
@@ -90,20 +67,20 @@ After you have a running elasticsearch-cluster you should start a commandline br
 ```bash
 docker run --link elasticsearch-master:elasticsearch --rm danielguerra/bro-debian-elasticsearch /scripts/bro-mapping.sh
 ```
+Then you are ready to go start reading data or dumping to the xinetd port
 
 ### kibana
 
-Configure kibana
-```bash
-docker run --rm --link elasticsearch-master:elasticsearch danielguerra/bro-kibana-config
-```
+(only do this when data was written to elasticsearch)
+Start the front-end you can point your browser at http://<dockerhost>:5601/
+Choose  Index contains time-based events .
+Use "bro-*" as index pattern and ts as timestamp.
 
-Start kibana
 ```bash
 docker run -d -p 5601:5601 --link=elasticsearch-node02:elasticsearch --hostname=kibana --name kibana kibana
 ```
-Point your browser http://<dockerhost>:5601
-
+ check my kibana config at
+ https://github.com/danielguerra69/bro-debian-elasticsearch/blob/master/scripts/kibana.json
 
 ### bro on the commandline
 
@@ -128,7 +105,7 @@ docker run -ti --link elasticsearch-node01:elasticsearch -v /Users/PCAP:/pcap --
 ```
 
 ### bro xinetd service
-when role/xinetd is used no local logs are written, all logs go to elasticsearch
+when role/xinetd is used no local logs are written
 ```bash
 docker run -d -p 1969:1969 --link elasticsearch-master:elasticsearch --name bro-xinetd --hostname bro-xinetd danielguerra/bro-debian-elasticsearch /role/xinetd-elasticsearch
 ```
@@ -139,12 +116,6 @@ tcpdump -i eth0 -s 0 -w /dev/stdout | nc dockerhost 1969
 or read a file file to your container
 ```bash
 nc dockerhost 1969 < mydump.pcap
-```
-
-### bro xinetd forensic
-when role/xinetd-forensic is used, pcap and extracted files are available from kibana.
-```bash
-docker run -d -p 1969:1969 -p 80:80 --link elasticsearch-master:elasticsearch --name bro-xinetd-forensic --hostname bro-xinetd-forensic danielguerra/bro-debian-elasticsearch /role/xinetd-forensic
 ```
 
 ### bro ssh server
@@ -202,7 +173,7 @@ cat <pcap-file> | amqp-publish   --url=amqp://<user>:<pass>@<amqp-ip> --exchange
 Start a bro-xinetd, do a (replace <container-to-dump> with your container name and <bro-xinetd-ip> with the bro xinetd ip)
 ```bash
 docker run --rm  --net=container:<container-to-dump> crccheck/tcpdump -i eth0 -w - | nc <bro-xinetd-ip> 1969 &
-docker run --rm  --net=container:<container-to-dump> danielguerra/bro-debian-elasticsearch:develop /role/dump-elasticsearch
+docker run --rm  --net=container:<container-to-dump> danielguerra/bro-debian-elasticsearch:develop dump-elasticsearch
 
 ```
 

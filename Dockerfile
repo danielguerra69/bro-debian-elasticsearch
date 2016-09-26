@@ -6,6 +6,7 @@ MAINTAINER danielguerra, https://github.com/danielguerra
 ADD /bro-patch /bro-patch
 
 # build bro + tools
+<<<<<<< HEAD
 RUN buildDeps='build-essential \
 autoconf \
 install-info \
@@ -42,6 +43,10 @@ libjemalloc1-dbg ' \
 && cp -R /tmp/bro-plugins-0.3/elasticsearch-deprecated/* . \
 && cd /tmp/bro/aux/plugins/ \
 && cp -R /tmp/bro-plugins-0.3/tcprs /tmp/bro/aux/plugins \
+=======
+RUN cd /tmp \
+&& git clone --recursive git://git.bro.org/bro \
+>>>>>>> parent of 4a56e79... Merge branch 'master' into test
 && patch /tmp/bro/aux/plugins/elasticsearch/src/ElasticSearch.cc  /bro-patch/ElasticSearch.cc.patch \
 && patch /tmp/bro/src/threading/formatters/JSON.h /bro-patch/JSON.h.patch \
 && patch /tmp/bro/src/threading/formatters/JSON.cc /bro-patch/JSON.cc.patch \
@@ -59,10 +64,7 @@ libjemalloc1-dbg ' \
 && cd /tmp \
 && git clone --recursive https://github.com/jonschipp/mal-dnssearch.git \
 && cd /tmp/mal-dnssearch \
-&& make \
-&& apt-get remove -y $buildDeps \
-&& apt-get clean \
-&& rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+&& make
 
 # add maintance shell scripts
 ADD /scripts /scripts
