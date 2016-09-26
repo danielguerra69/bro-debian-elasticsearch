@@ -1,5 +1,5 @@
 # This script loads tcprs reordering
-#@load ./tcprs
+@load ./tcprs
 
 # This script add lat long to ip numbers in orig_loc and dest_loc
 @load ./geoip
@@ -101,9 +101,6 @@
 # Uncomment the following line to enable detection of the heartbleed attack. Enabling
 # this might impact performance a bit.
 @load policy/protocols/ssl/heartbleed
-<<<<<<< HEAD:bro-extra/bro-extra.bro
 
 #add mac addresses to conn log
-#@load policy/protocols/conn/mac-logging
-=======
->>>>>>> parent of 4a56e79... Merge branch 'master' into test:bro-extra/custom.bro
+@load policy/protocols/conn/mac-logging
