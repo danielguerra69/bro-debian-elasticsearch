@@ -1,6 +1,5 @@
 #!/bin/bash
-# usage /role/amqp-amqp USER PASS HOST QUEUE USER PASS HOST EXCHANGE
-# the first group is for the consumer (queue contains pcap) the second group for the producer (bro's results)
+# usage /role/stdin-amqp USER PASS HOST EXCHANGE
 
 # set output to stdout
 sed -i "s/const output_to_stdout = F \&redef/const output_to_stdout = T \&redef/g" /usr/local/bro/share/bro/base/frameworks/logging/writers/ascii.bro
@@ -11,9 +10,5 @@ sed -i "s/const json_timestamps: JSON::TimestampFormat = JSON::TS_MILLIS \&redef
 #log passwords
 sed -i "s/default_capture_password = F/default_capture_password = T/" /usr/local/bro/share/bro/base/protocols/ftp/info.bro
 sed -i "s/default_capture_password = F/default_capture_password = T/" /usr/local/bro/share/bro/base/protocols/http/main.bro
-
 # run the pipe of consumer to bro to publisher
-while [ 1 ]
-do
-  /usr/bin/amqp-get --url=amqp://$1:$2@$3 --queue=$4 | /usr/local/bro/bin/bro -r - | /usr/bin/amqp-publish -p -l --url=amqp://$5:$6@$7 --exchange=$8
-done
+/usr/local/bro/bin/bro -r - | /usr/bin/amqp-publish -p -l --url=amqp://$1:$2@$2 --exchange=$4
