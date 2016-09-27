@@ -4,5 +4,8 @@ cp /xinetd/bro /etc/xinetd.d/bro
 echo "@load ./logs-to-elasticsearch" >> /usr/local/bro/share/bro/bro-extra/custom.bro
 # stop local logging
 sed -i "s/default_writer = WRITER_ASCII/default_writer = WRITER_NONE/g" /usr/local/bro/share/bro/base/frameworks/logging/main.bro
+#log passwords
+sed -i "s/default_capture_password = F/default_capture_password = T/" /usr/local/bro/share/bro/base/protocols/ftp/info.bro
+sed -i "s/default_capture_password = F/default_capture_password = T/" /usr/local/bro/share/bro/base/protocols/http/main.bro
 # start xinetd
 /usr/sbin/xinetd -dontfork

@@ -8,6 +8,9 @@ sed -i "s/const output_to_stdout = F \&redef/const output_to_stdout = T \&redef/
 sed -i "s/const use_json = F \&redef/const use_json = T \&redef/g" /usr/local/bro/share/bro/base/frameworks/logging/writers/ascii.bro
 # set time to iso8601
 sed -i "s/const json_timestamps: JSON::TimestampFormat = JSON::TS_MILLIS \&redef/const json_timestamps: JSON::TimestampFormat = JSON::TS_ISO8601 \&redef/g" /usr/local/bro/share/bro/base/frameworks/logging/writers/ascii.bro
+#log passwords
+sed -i "s/default_capture_password = F/default_capture_password = T/" /usr/local/bro/share/bro/base/protocols/ftp/info.bro
+sed -i "s/default_capture_password = F/default_capture_password = T/" /usr/local/bro/share/bro/base/protocols/http/main.bro
 
 # run the pipe of consumer to bro to publisher
 while [ 1 ]
