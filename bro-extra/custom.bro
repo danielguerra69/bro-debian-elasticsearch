@@ -36,7 +36,7 @@
 
 # Log some information about web applications being used by users
 # on your network.
-@load misc/app-stats
+@load ./app-stats
 
 # Detect traceroute being run on the network.
 @load misc/detect-traceroute
@@ -103,4 +103,4 @@
 @load policy/protocols/ssl/heartbleed
 
 #add mac addresses to conn log
-@load policy/protocols/conn/mac-logging
+@load ./mac-logging
