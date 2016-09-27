@@ -1,7 +1,10 @@
 #!/bin/bash
 # This script sets all logs to elasticsearch
-echo "@load ./logs-to-elasticsearch" >> /usr/local/bro/share/bro/bro-extra/custom.bro
+echo "@load ./logs-to-elasticsearch" >> /usr/local/bro/share/bro/bro-extra/bro-extra.bro
 # stop local logging
 sed -i "s/default_writer = WRITER_ASCII/default_writer = WRITER_NONE/g" /usr/local/bro/share/bro/base/frameworks/logging/main.bro
+#log passwords
+sed -i "s/default_capture_password = F/default_capture_password = T/" /usr/local/bro/share/bro/base/protocols/ftp/info.bro
+sed -i "s/default_capture_password = F/default_capture_password = T/" /usr/local/bro/share/bro/base/protocols/http/main.bro
 #start bro
 bro -i eth0
