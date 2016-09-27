@@ -34,6 +34,8 @@ libjemalloc1-dbg ' \
 && cd /tmp \
 && git clone --recursive git://git.bro.org/bro \
 && patch /tmp/bro/aux/plugins/elasticsearch/src/ElasticSearch.cc  /bro-patch/ElasticSearch.cc.patch \
+&& patch /tmp/bro/src/threading/formatters/JSON.h /bro-patch/JSON.h.patch \
+&& patch /tmp/bro/src/threading/formatters/JSON.cc /bro-patch/JSON.cc.patch \
 && cd /tmp/bro \
 && ./configure \
 && make \
