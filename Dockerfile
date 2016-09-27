@@ -125,6 +125,8 @@ RUN sed -i "s/\$version =/\$ssh_version =/g" /usr/local/bro/share/bro/base/proto
 RUN sed -i "s/version: string \&log/snmp_version: string \&log/g" /usr/local/bro/share/bro/base/protocols/snmp/main.bro
 RUN sed -i "s/\$version=/\$snmp_version=/g" /usr/local/bro/share/bro/base/protocols/snmp/main.bro
 
+# fix error in kerberos
+RUN patch /usr/local/bro/share/bro/base/protocols/krb/main.bro /bro-patch/krb-main.patch
 
 # bro pcap-in tcp services
 ADD /xinetd /xinetd

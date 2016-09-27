@@ -1,0 +1,12 @@
+#!/bin/bash
+# usage /role/stdin-amqp USER PASS HOST EXCHANGE
+
+# set output to stdout
+sed -i "s/const output_to_stdout = F \&redef/const output_to_stdout = T \&redef/g" /usr/local/bro/share/bro/base/frameworks/logging/writers/ascii.bro
+# set output to json
+sed -i "s/const use_json = F \&redef/const use_json = T \&redef/g" /usr/local/bro/share/bro/base/frameworks/logging/writers/ascii.bro
+# set time to iso8601
+sed -i "s/const json_timestamps: JSON::TimestampFormat = JSON::TS_MILLIS \&redef/const json_timestamps: JSON::TimestampFormat = JSON::TS_ISO8601 \&redef/g" /usr/local/bro/share/bro/base/frameworks/logging/writers/ascii.bro
+
+# run the pipe of consumer to bro to publisher
+/usr/local/bro/bin/bro -r - | /usr/bin/amqp-publish -p -l --url=amqp://$1:$2@$2 --exchange=$4
