@@ -3,27 +3,16 @@
 |  Bro IDS   |  Elasticsearch + Kibana | RabbitMQ   |
 | :--- | :--- | :--- |
 | ![Bro IDS](https://www.bro.org/images/bro-eyes.png) | ![Elasticsearch](https://www.runabove.com/images/apps/elasticsearch-and-kibana.png) | ![RabbitMQ](https://www.rabbitmq.com/img/rabbitmq_logo_strap.png) |
-|  2.4.1   |  2+ / 4+ | 3.5.7  |
+|  2.5beta   |  2.4 + 4.6 |  |
 
 ### About
 
-Integrates Bro IDS git with Elasticsearch 2+ & Kibana 4+ Bro was compiled with broker,rocksdb and pybroker (full featured).Bro can write directly into Elasticsearch without logstash. The bro scripts have been modified in order to satisfy elasticsearch.
+Integrates Bro IDS git 2.5beta with Elasticsearch 2.4 & Kibana 4.6
+Bro can write directly into Elasticsearch without logstash. The bro scripts have been modified in order to satisfy elasticsearch.
 The example below uses 3 elasticsearch nodes. The container bro-xinetd
 writes to the master. Kibana reads from node02. The commandline bro uses
 node01.
 Added amqp (rabbitmq) consume/publish roles with the debian amqp-tools.
-Todo elasticsearch amqp consumer, amqpfs for extracted files.
-
-### Dependencies
-
-* [![jessie](https://badge.imagelayers.io/debian.svg)](https://imagelayers.io/?images=debian:jessie 'jessie') debian:jessie
-* [![2.1](https://badge.imagelayers.io/elasticsearch.svg)](https://imagelayers.io/?images=elasticsearch:2.1 '2.1') elasticsearch 2.1
-* [![4.3](https://badge.imagelayers.io/kibana.svg)](https://imagelayers.io/?images=kibana:4.3 '4.3') kibana 4.3
-* [![3.5.6-management](https://badge.imagelayers.io/rabbitmq.svg)](https://imagelayers.io/?images=rabbitmq:3.5.6-management '3.5.6-management') rabbitmq 3.5.6-management
-
-### Image Size
-
-* [![Latest](https://badge.imagelayers.io/danielguerra/bro-debian-elasticsearch.svg)](https://imagelayers.io/?images=danielguerra/bro-debian-elasticsearch:latest 'latest')
 
 ### Docker-compose
 
@@ -31,7 +20,6 @@ The simplest way to start all nodes is using docker-compose
 ```bash
 wget https://raw.githubusercontent.com/danielguerra69/bro-debian-elasticsearch/master/docker-compose.yml
 export DOCKERHOST=<dockerhost-ip>
-export COMPOSE_API_VERSION=1.18
 docker-compose pull
 docker-compose up
 ```
@@ -61,8 +49,8 @@ docker pull danielguerra/bro-debian-elasticsearch:develop
 Before you begin I recommend to start with pulling fresh images.
 ```bash
 docker pull danielguerra/bro-debian-elasticsearch
-docker pull elasticsearch:2.1 (or latest)
-docker pull kibana:4.3 (or latest)
+docker pull elasticsearch (or latest)
+docker pull kibana (or latest)
 docker pull rabbitmq:3.5.6-management
 ```
 ### elastic data
@@ -104,7 +92,6 @@ docker run -d -p 5601:5601 --link=elasticsearch-node02:elasticsearch --hostname=
 ```
 Point your browser http://<dockerhost>:5601
 
-
 ### bro on the commandline
 
 commandline and local file log
@@ -144,7 +131,7 @@ nc dockerhost 1969 < mydump.pcap
 ### bro xinetd forensic
 when role/xinetd-forensic is used, pcap and extracted files are available from kibana.
 ```bash
-docker run -d -p 1969:1969 -p 80:80 --link elasticsearch-master:elasticsearch --name bro-xinetd-forensic --hostname bro-xinetd-forensic danielguerra/bro-debian-elasticsearch /role/xinetd-forensic
+docker run -d -p 1969:1969 -p 8080:80 --link elasticsearch-master:elasticsearch --name bro-xinetd-forensic --hostname bro-xinetd-forensic danielguerra/bro-debian-elasticsearch /role/xinetd-forensic
 ```
 
 ### bro ssh server
