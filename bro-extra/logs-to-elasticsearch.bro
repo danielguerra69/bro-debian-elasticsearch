@@ -15,6 +15,9 @@ export {
 	## be sent.  The :bro:id:`LogElasticSearch::excluded_log_ids` option
 	## will remain in effect as well.
 	const send_logs: set[Log::ID] &redef;
+
+	## Set the separator
+	redef Log::default_scope_sep = "_";
 }
 
 event bro_init() &priority=-5
