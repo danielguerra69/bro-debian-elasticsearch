@@ -17,9 +17,11 @@ Added amqp (rabbitmq) consume/publish roles with the debian amqp-tools.
 ### Docker-compose
 
 The simplest way to start all nodes is using docker-compose
+The DOCKERHOST is the ip and port the user sees in kibana !
+The port from the compose file is 8080.
 ```bash
+export DOCKERHOST="<ip>:8080"
 wget https://raw.githubusercontent.com/danielguerra69/bro-debian-elasticsearch/master/docker-compose.yml
-export DOCKERHOST=<dockerhost-ip>
 docker-compose pull
 docker-compose up
 ```
