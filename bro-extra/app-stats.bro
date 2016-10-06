@@ -37,12 +37,6 @@ export {
 
 global add_sumstats: hook(id: conn_id, hostname: string, size: count);
 
-global dns_answers: table[addr] of string;
-
-global ssl_hosts: table[addr] of string;
-
-global http_hosts: table[addr] of string;
-
 event bro_init() &priority=3
         {
         Log::create_stream(AppStats::LOG, [$columns=Info, $path="app_stats"]);
@@ -65,43 +59,23 @@ event bro_init() &priority=3
                                 }]);
           }
 
-  event dns_A_reply(c: connection, msg: dns_msg, ans: dns_answer, a: addr)
-          {
-            if ( ans?$query )
-              dns_answers[a]=ans$query;
-          }
-
-  event dns_A6_reply(c: connection, msg: dns_msg, ans: dns_answer, a: addr)
-          {
-            if ( ans?$query )
-              dns_answers[a]=ans$query;
-          }
 
 
-  event ssl_established(c: connection)
-          {
-            if ( c?$ssl  )
-              {
-                if ( c$ssl?$server_name )
-                      ssl_hosts[c$id$resp_h] = c$ssl$server_name;
-              }
-          }
-
-  event HTTP::log_http(rec: HTTP::Info)
-          {
-          if ( rec?$host )
-              http_hosts[rec$id$resp_h]=rec$host;
-          }
+  #event HTTP::log_http(rec: HTTP::Info)
+  #        {
+  #        if ( rec?$host )
+  #            http_hosts[rec$id$resp_h]=rec$host;
+  #        }
 
   event connection_state_remove (c: connection)
           {
 
-            if ( c$id$resp_h in dns_answers )
-                c$conn$resp_hostname=dns_answers[c$id$resp_h];
-            else if ( c$id$resp_h in ssl_hosts )
-                c$conn$resp_hostname=ssl_hosts[c$id$resp_h];
-            else if ( c$id$resp_h in http_hosts )
-                c$conn$resp_hostname=http_hosts[c$id$resp_h];
+            if ( c?$dns && c$dns?$query )
+                c$conn$resp_hostname=c$dns$query ;
+            else if ( c?$ssl && c$ssl?$server_name )
+                c$conn$resp_hostname=c$ssl$server_name;
+            else if ( c?$http && c$http?$host )
+                c$conn$resp_hostname=c$http$host;
             else
               return;
 
