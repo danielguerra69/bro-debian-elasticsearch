@@ -1,18 +1,12 @@
 module AppStats;
 
 export {
-	const hostnamestats_list: table[string] of string = {
-	    [".facebook.com"] = "Facebook",
-			[".fbcdn.net"] = "Facebook",
-	    [".gmail.com"] = "Gmail",
-	    [".youtube.com"] = "Youtube",
-			[".googlevideo.com"] = "Youtube",
-	    [".google.com"] = "Google",
-	    [".netflix.com"] = "Netflix"
+	const appstats_list: table[string] of pattern = {
+	    ["Facebook"] = /.facebook.com$|.fbcdn.net$/,
+	    ["Gmail"] = /.gmail.com$/,
+	    ["Youtube"] = /.youtube.com$|.googlevideo.com$/,
+	    ["Google"] =  /.google.com$/,
+	    ["Netflix"] = /.netflix.com$/,
+			["Tor"] = /^www.[0-9a-zA-Z]+.(net|com)$/
   } &redef;
-
-  const certstats_list: table[string] of string = {
-    ["^CN=www.[0-9a-zA-Z]+.(net|com)$"] = "Tor"
-  } &redef;
-
 }

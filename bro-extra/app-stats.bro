@@ -3,8 +3,8 @@
 
 @load base/protocols/http
 @load base/protocols/ssl
-@load base/frameworks/sumstats
 @load base/protocols/dns
+@load base/frameworks/sumstats
 @load ./app-stats-list
 
 module AppStats;
@@ -84,17 +84,6 @@ event bro_init() &priority=3
               {
                 if ( c$ssl?$server_name )
                       ssl_hosts[c$id$resp_h] = c$ssl$server_name;
-                if ( c$ssl?$subject )
-                  {
-                    for ( i in certstats_list )
-                      {
-                        if ( i in c$ssl$subject && c$resp$size > 20 )
-                          {
-                            SumStats::observe("apps.bytes", [$str=certstats_list[i]], [$num=c$resp$size]);
-                            SumStats::observe("apps.hits",  [$str=certstats_list[i]], [$str=cat(c$id$resp_h)]);
-                          }
-                      }
-                  }
               }
           }
 
@@ -116,17 +105,17 @@ event bro_init() &priority=3
             else
               return;
 
-            hook add_sumstats(c$id, c$conn$resp_hostname, c$resp$size);
+            hook add_sumstats(c$id, c$conn$resp_hostname, c$resp$size+c$orig$size);
           }
 
   hook add_sumstats(id: conn_id, hostname: string, size: count)
         {
-        for ( i in hostnamestats_list )
+        for ( i in appstats_list )
           {
-          if ( i in hostname && size > 20 )
+          if ( appstats_list[i] in hostname && size > 20 )
                   {
-                  SumStats::observe("apps.bytes", [$str=cat(hostnamestats_list[i])], [$num=size]);
-                  SumStats::observe("apps.hits",  [$str=hostnamestats_list[i]], [$str=cat(id$resp_h)]);
+                  SumStats::observe("apps.bytes", [$str=cat(i)], [$num=size]);
+                  SumStats::observe("apps.hits",  [$str=cat(i)], [$str=cat(id$resp_h)]);
                   }
           }
         }
