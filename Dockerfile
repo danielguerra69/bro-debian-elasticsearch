@@ -35,7 +35,7 @@ libjemalloc1-dbg ' \
 && git clone --recursive git://git.bro.org/bro \
 && patch /tmp/bro/aux/plugins/elasticsearch/src/ElasticSearch.cc  /bro-patch/ElasticSearch.cc.patch \
 && cd /tmp/bro \
-&& ./configure \
+&& ./configure --enable-broker\
 && make \
 && make install \
 && sed -i "s/127.0.0.1/elasticsearch/g" /tmp/bro/aux/plugins/elasticsearch/scripts/init.bro \
