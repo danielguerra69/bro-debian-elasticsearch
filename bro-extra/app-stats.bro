@@ -3,7 +3,9 @@
 
 @load base/protocols/http
 @load base/protocols/ssl
+@load base/protocols/dns
 @load base/frameworks/sumstats
+@load ./app-stats-list
 
 module AppStats;
 
@@ -25,16 +27,17 @@ export {
                 bytes:      count  &log;
         };
 
+        redef record Conn::Info += {
+                ## add response hostname to connection
+                resp_hostname: string &optional &log;
+        };
         ## The frequency of logging the stats collected by this script.
         const break_interval = 15mins &redef;
 }
 
-redef record connection += {
-        resp_hostname: string &optional;
-};
-
 global add_sumstats: hook(id: conn_id, hostname: string, size: count);
 
+global add_urlsumstats: hook(id: conn_id, hostname: string, size: count);
 
 event bro_init() &priority=3
         {
@@ -58,31 +61,45 @@ event bro_init() &priority=3
                                 }]);
           }
 
-  event ssl_established(c: connection)
+  event connection_state_remove (c: connection)
           {
-          if ( c?$ssl && c$ssl?$server_name )
-                  c$resp_hostname = c$ssl$server_name;
+            #check uri if there is one
+            if ( c?$http && c$http?$uri )
+              hook add_urlsumstats(c$id, c$http$uri, c$resp$size+c$orig$size);
+
+            # names first try dns otherwise ssl server or http  and set resp_hostname
+            if ( c?$dns && c$dns?$query )
+                c$conn$resp_hostname=c$dns$query ;
+            else if ( c?$ssl && c$ssl?$server_name )
+                c$conn$resp_hostname=c$ssl$server_name;
+            else if ( c?$http && c$http?$host )
+                        c$conn$resp_hostname=c$http$host;
+            else
+              return;
+            # check if there is a name
+            hook add_sumstats(c$id, c$conn$resp_hostname, c$resp$size+c$orig$size);
           }
-
-  event connection_finished(c: connection)
-          {
-          if ( c?$resp_hostname )
-                  hook add_sumstats(c$id, c$resp_hostname, c$resp$size);
-          }
-
-  event HTTP::log_http(rec: HTTP::Info)
-          {
-          if( rec?$host )
-                  hook add_sumstats(rec$id, rec$host, rec$response_body_len);
-          }
-
-
 
   hook add_sumstats(id: conn_id, hostname: string, size: count)
         {
-        if ( /\.(facebook\.com|fbcdn\.net)$/ in hostname && size > 20 )
-                {
-                SumStats::observe("apps.bytes", [$str="facebook"], [$num=size]);
-                SumStats::observe("apps.hits",  [$str="facebook"], [$str=cat(id$orig_h)]);
-                }
+        for ( i in appstats_list )
+          {
+          if ( appstats_list[i] in hostname && size > 20 )
+                  {
+                  SumStats::observe("apps.bytes", [$str=cat(i)], [$num=size]);
+                  SumStats::observe("apps.hits",  [$str=cat(i)], [$str=cat(id$resp_h)]);
+                  }
+          }
+        }
+
+  hook add_urlsumstats(id: conn_id, uri: string, size: count)
+        {
+        for ( i in urlappstats_list )
+          {
+          if ( urlappstats_list[i] in uri && size > 20 )
+                  {
+                  SumStats::observe("apps.bytes", [$str=cat(i)], [$num=size]);
+                  SumStats::observe("apps.hits",  [$str=cat(i)], [$str=cat(id$resp_h)]);
+                  }
+          }
         }

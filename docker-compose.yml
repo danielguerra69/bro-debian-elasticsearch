@@ -60,17 +60,15 @@ kibana:
 
 #
 # BRO
-bro-xinitd:
- image: danielguerra/bro-debian-elasticsearch
 bro-xinitd-forensic:
  image: danielguerra/bro-debian-elasticsearch
- command: /role/xinetd-forensic ${DOCKERHOST}
+ command: /role/xinetd-forensic $DOCKERHOST
  hostname: bro-xinetd-forensic
  links:
   - "elasticsearch-master:elasticsearch"
  ports:
   - "1969:1969"
-  - "80:80"
+  - "8080:80"
 
 # mapping
 bro-mapping:
