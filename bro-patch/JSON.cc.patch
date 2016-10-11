@@ -1,7 +1,0 @@
-45d44
-< 
-64c63,64
-< 		desc->Add(name);
----
-> 		string writename = strreplace(name, ".", "_");
-> 		desc->Add(writename);

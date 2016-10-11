@@ -3,12 +3,14 @@
 |  Bro IDS   |  Elasticsearch + Kibana | RabbitMQ   |
 | :--- | :--- | :--- |
 | ![Bro IDS](https://www.bro.org/images/bro-eyes.png) | ![Elasticsearch](https://www.runabove.com/images/apps/elasticsearch-and-kibana.png) | ![RabbitMQ](https://www.rabbitmq.com/img/rabbitmq_logo_strap.png) |
-|  2.5beta   |  2.4 + 4.6 |  |
+|  2.5-beta   |  2.4 + 4.6 | 3.5.7  |
 
 ### About
 
-Integrates Bro IDS git 2.5beta with Elasticsearch 2.4 & Kibana 4.6
-Bro can write directly into Elasticsearch without logstash. The bro scripts have been modified in order to satisfy elasticsearch.
+Integrates Bro IDS git 2.5-beta with Elasticsearch 2.4 & Kibana 4.6.
+The native bro broker is enabled.
+Bro can write directly into Elasticsearch without logstash.
+The bro scripts have been modified in order to satisfy elasticsearch.
 The example below uses 3 elasticsearch nodes. The container bro-xinetd
 writes to the master. Kibana reads from node02. The commandline bro uses
 node01.
