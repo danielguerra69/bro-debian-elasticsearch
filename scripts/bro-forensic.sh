@@ -14,4 +14,4 @@ sed -i "s/DOCKERHOST/${DOCKERHOST}/g" /usr/local/bro/share/bro/bro-extra/conn_pc
 # set file permissions for apache
 chown www-data:www-data ${PCAPFILE}
 #cmd
-bro -r - -w ${PCAPFILE}
+bro -C -r - -w ${PCAPFILE}
