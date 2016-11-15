@@ -8,7 +8,7 @@
 ### About
 
 Integrates Bro IDS git 2.5-beta with Elasticsearch 2.4 & Kibana 4.6.
-The native bro broker is enabled.
+Bro was compiled with broker,rocksdb and pybroker (full featured).
 Bro can write directly into Elasticsearch without logstash.
 The bro scripts have been modified in order to satisfy elasticsearch.
 The example below uses 3 elasticsearch nodes. The container bro-xinetd
