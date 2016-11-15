@@ -1,5 +1,5 @@
 #!/bin/bash
-# Usage bro-forensic.sh  DOCKERHOST
+# Usage bro-forensic-crc.sh  DOCKERHOST
 
 #file extraction
 export DOCKERHOST=$1
@@ -15,4 +15,4 @@ sed -i "s/DOCKERHOST/${DOCKERHOST}/g" /usr/local/bro/share/bro/bro-extra/conn_pc
 chown www-data:www-data ${PCAPFILE}
 chmod a+r ${PCAPFILE}
 #cmd
-bro -r - -w ${PCAPFILE}
+bro -C -r - -w ${PCAPFILE}

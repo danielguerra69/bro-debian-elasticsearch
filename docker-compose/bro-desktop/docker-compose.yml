@@ -1,0 +1,108 @@
+# Compose Bro-Desktop
+#
+version: '2'
+
+services:
+
+# ELASTICSEARCH nodes
+ elasticsearch-master:
+  image: danielguerra/alpine-elasticsearch
+  command: -Des.network.bind_host=elasticsearch-master --cluster.name=bro --node.name=elasticsearch-master --discovery.zen.ping.multicast.enabled=false --network.host=elasticsearch-master
+  hostname: elasticsearch-master
+  volumes:
+   - elastic-data-master:/usr/share/elasticsearch/data
+
+ elasticsearch-node01:
+  image: danielguerra/alpine-elasticsearch
+  command: -Des.network.bind_host=elasticsearch-node01 --cluster.name=bro --node.name=elasticsearch-node01 --discovery.zen.ping.unicast.hosts=master:9300  --network.host=elasticsearch-node01
+  hostname: elasticsearch-node01
+  links:
+   - "elasticsearch-master:master"
+  volumes:
+   - elastic-data-node01:/usr/share/elasticsearch/data
+
+ elasticsearch-node02:
+  image: danielguerra/alpine-elasticsearch
+  command: -Des.network.bind_host=elasticsearch-node02 --cluster.name=bro --node.name=elasticsearch-node02 --discovery.zen.ping.unicast.hosts=master:9300  --network.host=elasticsearch-node02
+  hostname: elasticsearch-node02
+  links:
+   - "elasticsearch-master:master"
+  volumes:
+   - elastic-data-node02:/usr/share/elasticsearch/data
+
+# nginx
+ nginx:
+  image: danielguerra/bro-elasticsearch-nginx
+  hostname: nginx
+  links:
+   - "elasticsearch-master:master"
+   - "elasticsearch-node01:node01"
+   - "elasticsearch-node02:node02"
+
+# KIBANA
+ kibana:
+  image: danielguerra/alpine-kibana
+  hostname: kibana
+  links:
+   - "nginx:elasticsearch"
+
+# BRO
+ bro:
+  image: danielguerra/bro-debian-elasticsearch
+  command: /role/xinetd-forensic bro:80
+  hostname: bro
+  volumes:
+   - pcap-data:/bro/pcap/
+   - extracted-data:/var/www/html/extract_files/
+  links:
+   - "nginx:elasticsearch"
+
+# mapping
+ bro-mapping:
+  image: danielguerra/bro-debian-elasticsearch
+  command: /scripts/bro-mapping.sh
+  links:
+   - "nginx:elasticsearch"
+
+# kibana config
+ kibana-config:
+  image: danielguerra/bro-kibana-config
+  links:
+   - "elasticsearch-master:elasticsearch"
+
+#desktop
+ desktop:
+  image: danielguerra/alpine-xfce4-xrdp
+  hostname: desktop
+  volumes:
+   - ssh-keys:/home/alpine/.ssh
+   - pcap-data:/home/alpine/pcap
+  links:
+   - "kibana:kibana"
+   - "bro:bro"
+   - "grafana:grafana"
+  ports:
+   - "7777:22"
+
+#grafana
+ grafana:
+  image: grafana/grafana
+  hostname: grafanana
+  environment:
+   - GF_SERVER_ROOT_URL "http://127.0.0.1:3000"
+   - GF_SECURITY_ADMIN_PASSWORD "mypass"
+  links:
+   - elasticsearch-master
+   - elasticsearch-node01
+   - elasticsearch-node02
+   - kibana
+   - bro
+   - nginx
+
+volumes:
+ ssh-keys:
+ pcap-data:
+ extracted-data:
+ elastic-data-master:
+ elastic-data-node01:
+ elastic-data-node02:

@@ -1,6 +1,6 @@
-# Compose Bro-debian-elasicsearch cluster
-# set DOCKERHOST with export DOCKERHOST=192.168.1.2
+# Compose Bro-alpine-elasicsearch cluster
 #
+
 # VOLUMES
 elastic-data-master:
  image: tianon/true
@@ -17,19 +17,12 @@ elastic-data-node02:
  volumes:
     - /usr/share/elasticsearch/data
 
-# nginx
-nginx:
-  image: danielguerra/bro-elasticsearch-nginx
-  hostname: nginx
-  links:
-   - "elasticsearch-master:master"
-   - "elasticsearch-node01:node01"
-   - "elasticsearch-node02:node02"
-  ports:
-    - "9200:9200"
-    - "9300:9300"
+pcap-data:
+  image: tianon/true
+  volumes:
+    - /data/pcap
 
-# ELASTICSEARCH
+# ELASTICSEARCH nodes
 elasticsearch-master:
  image: danielguerra/alpine-elasticsearch
  command: -Des.network.bind_host=elasticsearch-master --cluster.name=bro --node.name=elasticsearch-master --discovery.zen.ping.multicast.enabled=false --network.host=elasticsearch-master
@@ -55,9 +48,20 @@ elasticsearch-node02:
  volumes_from:
    - "elastic-data-node02"
 
+nginx:
+  image: danielguerra/bro-elasticsearch-nginx
+  hostname: nginx
+  links:
+   - "elasticsearch-master:master"
+   - "elasticsearch-node01:node01"
+   - "elasticsearch-node02:node02"
+  ports:
+    - "9200:9200"
+    - "9300:9300"
+
 # KIBANA
 kibana:
- image: kibana:4.6
+ image: danielguerra/alpine-kibana
  hostname: kibana
  ports:
   - "5601:5601"
@@ -65,25 +69,16 @@ kibana:
   - "nginx:elasticsearch"
 
 # BRO
-bro-xinitd-forensic:
- image: danielguerra/bro-debian-elasticsearch
- command: /role/xinetd-forensic $DOCKERHOST
- hostname: bro-xinetd-forensic
+bro:
+ image: danielguerra/bro-alpine-elasticsearch
+ hostname: bro
  links:
   - "nginx:elasticsearch"
- ports:
-  - "1969:1969"
-  - "8080:80"
-
-# mapping
-bro-mapping:
- image: danielguerra/bro-debian-elasticsearch
- command: /scripts/bro-mapping.sh
- links:
-  - "nginx:elasticsearch"
+ volumes_from:
+  - "pcap-data"
 
 # kibana config
-kibana-config:
- image: danielguerra/bro-kibana-config
- links:
-  - "elasticsearch-master:elasticsearch"
+#kibana-config:
+# image: danielguerra/bro-kibana-config
+# links:
+#  - "elasticsearch-master:elasticsearch"

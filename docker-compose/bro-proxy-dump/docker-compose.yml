@@ -1,6 +1,50 @@
-# Compose Bro-debian-elasicsearch cluster
-# set DOCKERHOST with export DOCKERHOST=192.168.1.2
+# Compose Bro-alpine-elasicsearch cluster
 #
+# tor proxy
+tor-proxy:
+  image: danielguerra/alpine-tor
+  hostname: tor-proxy
+  dns:
+   -  127.0.0.1
+  ports:
+   - "9500:9500"
+   - "53/udp:53/udp"
+
+#privoxy
+privoxy:
+  image: vimagick/privoxy
+  hostname: privoxy
+  ports:
+    - "8118:8118"
+  volumes:
+    - "/root/config:/etc/privoxy/config"
+  cap_add:
+    - NET_ADMIN
+
+#fiddler
+fiddler:
+  image: danielguerra/alpine-fiddler
+  hostname: fiddler
+  volumes:
+   - "/root:/root"
+  ports:
+    - "8888:8888"
+    - "2222:22"
+
+
+# firefox
+firefox:
+  image: danielguerra/alpine-firefox
+  hostname: firefox
+  dns:
+   - "172.17.0.1"
+  environment:
+   - ALL_PROXY=http://172.17.0.1:8118
+  volumes:
+   - "/root:/root"
+  ports:
+   - "4848:22"
+
 # VOLUMES
 elastic-data-master:
  image: tianon/true
@@ -17,25 +61,17 @@ elastic-data-node02:
  volumes:
     - /usr/share/elasticsearch/data
 
-# nginx
-nginx:
-  image: danielguerra/bro-elasticsearch-nginx
-  hostname: nginx
-  links:
-   - "elasticsearch-master:master"
-   - "elasticsearch-node01:node01"
-   - "elasticsearch-node02:node02"
-  ports:
-    - "9200:9200"
-    - "9300:9300"
-
-# ELASTICSEARCH
+# ELASTICSEARCH nodes
 elasticsearch-master:
  image: danielguerra/alpine-elasticsearch
  command: -Des.network.bind_host=elasticsearch-master --cluster.name=bro --node.name=elasticsearch-master --discovery.zen.ping.multicast.enabled=false --network.host=elasticsearch-master
  hostname: elasticsearch-master
+
  volumes_from:
    - "elastic-data-master"
+ ports:
+   - "9200:9200"
+   - "9300:9300"
 
 elasticsearch-node01:
  image: danielguerra/alpine-elasticsearch
@@ -51,36 +87,28 @@ elasticsearch-node02:
  command: -Des.network.bind_host=elasticsearch-node02 --cluster.name=bro --node.name=elasticsearch-node02 --discovery.zen.ping.unicast.hosts=master:9300  --network.host=elasticsearch-node02
  hostname: elasticsearch-node02
  links:
+  - "tor-proxy:proxy"
   - "elasticsearch-master:master"
  volumes_from:
    - "elastic-data-node02"
 
 # KIBANA
 kibana:
- image: kibana:4.6
+ image: kibana
  hostname: kibana
  ports:
   - "5601:5601"
  links:
-  - "nginx:elasticsearch"
+  - "elasticsearch-master:elasticsearch"
 
 # BRO
-bro-xinitd-forensic:
- image: danielguerra/bro-debian-elasticsearch
- command: /role/xinetd-forensic $DOCKERHOST
- hostname: bro-xinetd-forensic
+bro:
+ image: danielguerra/bro-alpine-elasticsearch
+ command: bro -r -
  links:
-  - "nginx:elasticsearch"
- ports:
-  - "1969:1969"
-  - "8080:80"
-
-# mapping
-bro-mapping:
- image: danielguerra/bro-debian-elasticsearch
- command: /scripts/bro-mapping.sh
- links:
-  - "nginx:elasticsearch"
+  - "elasticsearch-master:elasticsearch"
+ volumes:
+  - "/pcap:/data/pcap"
 
 # kibana config
 kibana-config:

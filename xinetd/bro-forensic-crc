@@ -1,0 +1,10 @@
+service bro
+{
+        socket_type     = stream
+        wait            = no
+        user            = root
+        group           = root
+        server          = /scripts/bro-forensic-crc.sh
+        server_args	    = FORENSICCONF
+        instances       = 300
+}
