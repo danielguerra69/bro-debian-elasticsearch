@@ -1,0 +1,1 @@
+docker run --rm  --net=container:root_tor-proxy_1 crccheck/tcpdump -i eth0 -w - | docker-compose run bro

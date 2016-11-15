@@ -1,0 +1,20 @@
+#!/bin/bash
+# Usage /role/xinetd-forensic-crc dockerhost
+cp /xinetd/bro-forensic-crc /etc/xinetd.d/bro
+# set the forensic config ip of the dockerhost
+sed -i "s/server_args	    = FORENSICCONF/server_args	    = $1/" /etc/xinetd.d/bro
+# This script sets all logs to elasticsearch
+echo "@load ./logs-to-elasticsearch" >> /usr/local/bro/share/bro/bro-extra/bro-extra.bro
+#This script adds pcap url per socket in conn logs
+echo "@load ./conn_pcap.bro" >>  /usr/local/bro/share/bro/bro-extra/bro-extra.bro
+# enable extraction
+echo "@load policy/frameworks/files/extract-all-files" >>  /usr/local/bro/share/bro/bro-extra/bro-extra.bro
+# This script sets file extraction from known protocols and adds an uri to the extracted files
+echo "@load base/files/extract" >> /usr/local/bro/share/bro/bro-extra/bro-extra.bro
+# stop local logging
+sed -i "s/default_writer = WRITER_ASCII/default_writer = WRITER_NONE/g" /usr/local/bro/share/bro/base/frameworks/logging/main.bro
+#log passwords
+sed -i "s/default_capture_password = F/default_capture_password = T/" /usr/local/bro/share/bro/base/protocols/ftp/info.bro
+sed -i "s/default_capture_password = F/default_capture_password = T/" /usr/local/bro/share/bro/base/protocols/http/main.bro
+#start supervisor daemon
+/usr/bin/supervisord -c /etc/supervisor/conf.d/supervisord.conf

@@ -13,5 +13,6 @@ sed -i "s:PCAPFILE:${PCAPFILE}:" /usr/local/bro/share/bro/bro-extra/conn_pcap.br
 sed -i "s/DOCKERHOST/${DOCKERHOST}/g" /usr/local/bro/share/bro/bro-extra/conn_pcap.bro
 # set file permissions for apache
 chown www-data:www-data ${PCAPFILE}
+chmod a+r ${PCAPFILE}
 #cmd
 bro -r - -w ${PCAPFILE}
