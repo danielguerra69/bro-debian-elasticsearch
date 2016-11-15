@@ -15,4 +15,4 @@ sed -i "s/DOCKERHOST/${DOCKERHOST}/g" /usr/local/bro/share/bro/bro-extra/conn_pc
 chown www-data:www-data ${PCAPFILE}
 chmod a+r ${PCAPFILE}
 #cmd
-bro -r - -w ${PCAPFILE}
+bro -C -r - -w ${PCAPFILE}
