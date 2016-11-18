@@ -1,5 +1,5 @@
 # Compose Bro-debian-elasicsearch cluster
-# set DOCKERHOST with export DOCKERHOST=192.168.1.2
+# set DOCKERHOST with export DOCKERHOST=192.168.1.2:8080
 #
 # VOLUMES
 elastic-data-master:
