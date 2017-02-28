@@ -69,11 +69,6 @@ RUN cd /usr/local/bro/share/bro/  \
 && git clone --recursive https://github.com/sheharbano/botflex.git botflex
 # && echo "@load botflex/detection/correlation/correlation.bro" >> base/init-default.bro
 
-# add dr watson
-RUN cd /usr/local/bro/share/bro/  \
-&& git clone --recursive https://github.com/broala/bro-drwatson.git drwatson
-#&& echo "@load drwatson" >> base/init-default.bro
-
 # add shellshock
 RUN cd /usr/local/bro/share/bro/  \
 && git clone --recursive https://github.com/broala/bro-shellshock.git shellshock \
