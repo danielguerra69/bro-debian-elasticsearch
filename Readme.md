@@ -3,11 +3,19 @@
 |  Bro IDS   |  Elasticsearch + Kibana | RabbitMQ   |
 | :--- | :--- | :--- |
 | ![Bro IDS](https://www.bro.org/images/bro-eyes.png) | ![Elasticsearch](https://www.runabove.com/images/apps/elasticsearch-and-kibana.png) | ![RabbitMQ](https://www.rabbitmq.com/img/rabbitmq_logo_strap.png) |
+<<<<<<< HEAD:Readme.rst
 |  2.5-beta   |  2.4 + 4.6 | 3.5.7  |
 
 ### About
 
 Integrates Bro IDS git 2.5-beta with Elasticsearch 2.4 & Kibana 4.6.
+=======
+|  2.5   |  2.4 + 4.6 | 3.5.7  |
+
+### About
+
+Integrates Bro IDS git 2.5 with Elasticsearch 2.4 & Kibana 4.6.
+>>>>>>> master:Readme.md
 Bro was compiled with broker,rocksdb and pybroker (full featured).
 Bro can write directly into Elasticsearch without logstash.
 The bro scripts have been modified in order to satisfy elasticsearch.
@@ -36,9 +44,10 @@ tcpdump -i eth0 -s 0 -w - not host <dockerhost-ip> | nc <dockerhost-ip> 1969
 Kibana is viewed in your browser.
 http://<dockerhost-ip>:5601/
 
-The pcap and extracted data can be reached over tcp port 80
+The pcap and extracted data can be reached over tcp port 8080
 
 [Screenshot !](https://raw.githubusercontent.com/danielguerra69/bro-debian-elasticsearch/master/bro-kibana.gif)
+
 
 ### Developers
 

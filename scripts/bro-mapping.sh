@@ -28,7 +28,7 @@ curl -XPUT elasticsearch:9200/_template/fixstrings_bro -d '{
           }
         }
       },
-        "conn" : {
+      "conn" : {
           "properties" : {
             "orig_location" : {
               "type" : "geo_point"

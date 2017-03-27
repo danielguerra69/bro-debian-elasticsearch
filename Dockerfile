@@ -45,10 +45,11 @@ libjemalloc1-dbg ' \
 && ./configure \
 && make \
 && make install \
-&& cd /tmp/bro/aux/plugins/tcprs \
-&& ./configure \
-&& make \
-&& make install \
+## has been removed from the bro repo
+#&& cd /tmp/bro/aux/plugins/tcprs \
+#&& ./configure \
+#&& make \
+#&& make install \
 && cd /tmp \
 && git clone --recursive https://github.com/jonschipp/mal-dnssearch.git \
 && cd /tmp/mal-dnssearch \
@@ -60,33 +61,6 @@ ADD /scripts /scripts
 ADD /bro-extra /usr/local/bro/share/bro/bro-extra
 RUN echo "@load bro-extra" >> /usr/local/bro/share/bro/base/init-default.bro
 
-# add botflex
-RUN cd /usr/local/bro/share/bro/  \
-&& git clone --recursive https://github.com/sheharbano/botflex.git botflex
-# && echo "@load botflex/detection/correlation/correlation.bro" >> base/init-default.bro
-
-# add dr watson
-RUN cd /usr/local/bro/share/bro/  \
-&& git clone --recursive https://github.com/broala/bro-drwatson.git drwatson
-#&& echo "@load drwatson" >> base/init-default.bro
-
-# add shellshock
-RUN cd /usr/local/bro/share/bro/  \
-&& git clone --recursive https://github.com/broala/bro-shellshock.git shellshock \
-&& echo "@load shellshock" >> base/init-default.bro
-
-# add bro-scripts
-RUN cd /usr/local/bro/share/bro/  \
-&& git clone --recursive https://github.com/reservoirlabs/bro-scripts.git bro-scripts
-# && echo "@load bro-scripts/clickbot" >> local.bro \
-#&& echo "@load bro-scripts/supercomputing/producer-consumer-ratio" >> local.bro \
-#&& echo "@load bro-scripts/supercomputing/protocol-stats" >> local.bro \
-#&& echo "@load bro-scripts/supercomputing/http-exe-bad-attributes" >> local.bro \
-#&& echo "@load bro-scripts/supercomputing/smtp-url" >> local.bro \
-#&& echo "@load bro-scripts/supercomputing/top-metrics" >> base/init-default.bro \
-#&& echo "@load bro-scripts/supercomputing/unique-hosts" >> base/init-default.bro \
-#&& echo "@load bro-scripts/supercomputing/unique-macs" >> base/init-default.bro\
-#&& echo "@load bro-scripts/track-dhcp/track-dhcp" >> base/init-default.bro
 
 # add bro service
 RUN echo "bro             1969/tcp                        # bro pcap feed" >> /etc/services
